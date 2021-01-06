@@ -11,7 +11,7 @@
 | deadline           | datetime | null: false              |
 | age                | integer  | null: false              |
 | category_id        | integer  | null: false              |
-| occupation         | string   | null: false              |
+| occupation_id      | integer  | null: false              |
 
 
 
@@ -22,6 +22,7 @@
 - has_many :likes
 - has_many :schedules
 - belongs_to_active_hash :category
+- belongs_to_active_hash :occupation
 
 
 ## stacks テーブル
