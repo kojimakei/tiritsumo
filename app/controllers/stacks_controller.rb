@@ -8,6 +8,10 @@ class StacksController < ApplicationController
     @stack = Stack.new
   end
 
+  def show
+    @stack = Stack.find(params[:id])
+  end
+
   def create
     @stack = Stack.new(stack_params)
     if @stack.save
