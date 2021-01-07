@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_052453) do
   create_table "stacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "date", null: false
     t.text "text", null: false
-    t.integer "work_time", null: false
+    t.integer "work_time_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
