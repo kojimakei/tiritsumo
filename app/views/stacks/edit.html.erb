@@ -1,0 +1,17 @@
+<%= render "shared/header" %>
+
+<div class="contents row">
+  <div class="container">
+    <h3>今日の積み上げ</h3>
+    <%= form_with(model: @stack, local: true) do |f| %>
+<%# 入力に不備があった場合、エラーメッセージを表示する %>
+    <%= render 'shared/error_messages', model: f.object %>
+
+      <%= f.date_field :date %>
+      <%= f.text_field :text, placeholder: "積み上げ内容" %>
+      <%# ↓実装するか検討中↓ %>
+      <%# <%= f.collection_select(:work_time_id, WorkTime.all, :id, :name, {}, {class:"genre-select"}) %> 
+      <%= f.submit "積み上げ内容の変更" %>
+    <% end %>
+  </div>
+</div>
