@@ -31,7 +31,7 @@
 | ---------------- | ----------- | ------------------------------ |
 | date             | datetime    | null: false                    |
 | text             | text        | null: false                    |
-| work_time        | integer     | null: false                    |
+| work_time_id     | integer     |                                |
 | user             | references  | null: false, foreign_key: true |
 
 ### Association
@@ -58,6 +58,7 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
+| date         | datetime   | null: false                    |
 | begin_time   | datetime   | null: false                    |
 | finish_time  | datetime   | null: false                    |
 | plan         | text       | null: false                    |
