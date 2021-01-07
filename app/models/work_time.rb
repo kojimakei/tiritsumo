@@ -29,6 +29,3 @@ class WorkTime < ActiveHash::Base
   include ActiveHash::Associations
   has_many :stacks
 end
-
-
-  
