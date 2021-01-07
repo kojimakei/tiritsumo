@@ -11,7 +11,6 @@ class StacksController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
@@ -37,9 +36,12 @@ class StacksController < ApplicationController
   end
 
   def destroy
+    @stack.destroy if current_user.id == @stack.user_id
+    redirect_to root_path
   end
 
   private
+
   def stack_params
     params.require(:stack).permit(:text, :date, :work_time_id).merge(user_id: current_user.id)
   end
@@ -48,4 +50,3 @@ class StacksController < ApplicationController
     @stack = Stack.find(params[:id])
   end
 end
-
