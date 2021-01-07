@@ -1,0 +1,14 @@
+<%= render "shared/header" %>
+
+<li class="stack">
+ <%= link_to stack_path(@stack.id) do %>
+ <p><%= @stack.user.nickname %></p>
+ <p><%= @stack.text %></p>
+ <p>Posted <%=time_ago_in_words(@stack.created_at)%> ago.</p>
+ 
+      <% if user_signed_in? && (current_user.id == @stack.user_id) %>
+        <%= link_to '商品の編集', edit_stack_path(@stack.id), method: :get, class: "item-red-btn" %>
+        <%= link_to '削除', stack_path(@stack.id), method: :delete, class:'item-destroy' %>  
+ <% end %>
+  <% end %>
+</li>

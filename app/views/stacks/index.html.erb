@@ -1,12 +1,14 @@
 <%= render "shared/header" %>
 
-<div class="stacks">
+<ul class="stacks">
 <% @stacks.each do |stack| %>
 <%# 積み上げの投稿を1つづつに分ける %>
-<div class="stack">
- <p><%=stack.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒")%></p>
+<li class="stack">
+ <%= link_to stack_path(stack.id) do %>
  <p><%=stack.user.nickname %></p>
  <p><%=stack.text %></p>
-</div>
+  <p>Posted <%=time_ago_in_words(stack.created_at)%> ago.</p>
+ <% end %>
+</li>
 <% end %>
-</div>
+</ul>
