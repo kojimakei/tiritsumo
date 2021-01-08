@@ -13,6 +13,7 @@ class StacksController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @stack.comments.includes(:user)
+    @like = Like.new
   end
 
   def edit
