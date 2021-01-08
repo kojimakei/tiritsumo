@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root to: 'stacks#index'
   resources :stacks do
     resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
+
+
 
   # ゲストユーザーを削除できないようにする
   devise_for :users, controllers: {

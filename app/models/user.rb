@@ -5,6 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :stacks
   has_many :comments
+  has_many :likes,    dependent: :destroy
+  has_many :liked_stacks, through: :likes, source: :stack
+  def already_liked?(stack)
+    self.likes.exists?(stack_id: stack.id)
+  end
+
   with_options presence: true do
     validates :email
     validates :nickname
