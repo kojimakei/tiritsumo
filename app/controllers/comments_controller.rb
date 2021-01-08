@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     else
       @stack = @comment.stack
       @comments = @stack.comments
-      render "stacks/show"
+      render 'stacks/show'
     end
   end
 
@@ -19,8 +19,8 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:text).merge(user_id: current_user.id, stack_id: params[:stack_id])
   end
 end
-
