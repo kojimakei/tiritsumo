@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_222322) do
+ActiveRecord::Schema.define(version: 2021_01_08_091750) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2021_01_07_222322) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stack_id"], name: "index_comments_on_stack_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "stack_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stack_id"], name: "index_likes_on_stack_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "stacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -52,5 +61,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_222322) do
 
   add_foreign_key "comments", "stacks"
   add_foreign_key "comments", "users"
+  add_foreign_key "likes", "stacks"
+  add_foreign_key "likes", "users"
   add_foreign_key "stacks", "users"
 end
