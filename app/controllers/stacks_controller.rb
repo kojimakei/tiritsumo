@@ -11,6 +11,8 @@ class StacksController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @stack.comments.includes(:user)
   end
 
   def edit
