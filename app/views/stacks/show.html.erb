@@ -5,10 +5,36 @@
  <p><%= @stack.user.nickname %></p>
  <p><%= @stack.text %></p>
  <p>Posted <%=time_ago_in_words(@stack.created_at)%> ago.</p>
- 
-      <% if user_signed_in? && (current_user.id == @stack.user_id) %>
-        <%= link_to '商品の編集', edit_stack_path(@stack.id), method: :get, class: "item-red-btn" %>
-        <%= link_to '削除', stack_path(@stack.id), method: :delete, class:'item-destroy' %>  
- <% end %>
+  <% if user_signed_in? && (current_user.id == @stack.user_id) %>
+    <%= link_to '編集', edit_stack_path(@stack.id), method: :get %>
+    <%= link_to '削除', stack_path(@stack.id), method: :delete %>  
   <% end %>
+<% end %> 
+
+<%# コメント投稿＆一覧表示 %>
+ <p class="container">
+   <% if user_signed_in? %>
+     <%= form_with(model: [@stack, @comment], local: true) do |f| %>
+       <%= render 'shared/error_messages', model: f.object %>
+       <%= f.text_area :text, placeholder: "コメントする", rows: "2" %>
+       <%= f.submit "送信" %>
+     <% end %>
+   <% end %>
+   <p class="comments">
+    <h4>＜コメント一覧＞</h4>
+      <% @comments.each do |comment| %>
+        <p>
+          <strong><%= link_to comment.user.nickname %>：</strong>
+          <%= comment.text %>
+          <% if user_signed_in? && (current_user.id == comment.user_id) %>
+          <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %></strong>
+          <% end%>
+        </p>
+      <% end %>
+    </p>    
+  </p>
+ 
+
 </li>
+
+
