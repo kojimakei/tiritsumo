@@ -31,10 +31,20 @@
           <% end%>
         </p>
       <% end %>
-    </p>    
-  </p>
- 
+    </p>   
 
+<%# いいね機能 %>
+<h3>いいね件数: <%= @stack.likes.count %></h3>
+<% if user_signed_in? && current_user.already_liked?(@stack) %>
+  <%= button_to 'いいねを取り消す', stack_like_path(@stack), method: :delete %>
+<% else %>
+  <%= button_to 'いいね', stack_likes_path(@stack) %>
+<% end %>
+<h2>いいねしたユーザー</h2>
+<% @stack.liked_users.each do |user| %>
+  <li><%= user.nickname %> さん</li>
+<% end %>
+  </p>
 </li>
 
 
