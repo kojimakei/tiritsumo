@@ -27,7 +27,7 @@
           <strong><%= link_to comment.user.nickname %>：</strong>
           <%= comment.text %>
           <% if current_user.id == comment.user_id %>
-          <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %>：</strong>
+          <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %></strong>
           <% end%>
         </p>
       <% end %>

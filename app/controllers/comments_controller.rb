@@ -13,9 +13,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:stack_id])
     @comment.destroy
-    render "stacks/show"
+    redirect_to stack_path(@comment.stack)
   end
 
   private
