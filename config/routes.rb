@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions:      'users/sessions',
+  }
+  
   root to: 'stacks#index'
   resources :stacks do
     resources :comments, only: [:create, :destroy]
@@ -9,10 +13,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:edit, :show, :update]
 
-  # ゲストユーザーを削除できないようにする
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+
 
   # 簡単ログイン機能のルーティン
   devise_scope :user do
