@@ -16,7 +16,7 @@
     <% if user_signed_in? %>
       <li><%= link_to '予定を入れる', "#", class: "user-nickname" %></li> 
       <li><%= link_to '積み上げる', new_stack_path, class: "user-nickname" %></li> 
-      <li><%= link_to 'マイページ', "#", class: "user-nickname" %></li> 
+      <li><%= link_to 'マイページ', user_path(current_user.id), class: "user-nickname" %></li> 
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
       <% else %>
       <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>

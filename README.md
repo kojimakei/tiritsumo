@@ -9,9 +9,9 @@
 | encrypted_password | string   | null: false              |
 | goal               | string   | null: false              |
 | deadline           | datetime | null: false              |
-| age                | integer  | null: false              |
-| category_id        | integer  | null: false              |
-| occupation_id      | integer  | null: false              |
+| age_id             | integer  |                          |
+| category_id        | integer  |                          |
+| occupation_id      | integer  |                          |
 
 
 

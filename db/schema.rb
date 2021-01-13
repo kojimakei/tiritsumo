@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_091750) do
+ActiveRecord::Schema.define(version: 2021_01_13_030922) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
@@ -45,16 +45,16 @@ ActiveRecord::Schema.define(version: 2021_01_08_091750) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "nickname", null: false
-    t.string "goal"
-    t.datetime "deadline"
-    t.integer "age"
-    t.integer "category_id"
-    t.integer "occupation_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "goal", null: false
+    t.datetime "deadline", null: false
+    t.integer "age_id"
+    t.integer "category_id"
+    t.integer "occupation_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
