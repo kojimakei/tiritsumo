@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
-
+    resources :users, only: [:edit, :show, :update]
 
   # ゲストユーザーを削除できないようにする
   devise_for :users, controllers: {
