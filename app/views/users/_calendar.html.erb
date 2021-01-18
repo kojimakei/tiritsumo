@@ -1,0 +1,10 @@
+<div class="content__block--calender">
+  <%= month_calendar events: events do |date, events| %>
+    <%= date.day %>
+      <% events.each do |event| %>
+        <div class="calendar">
+            <%= event.text%>
+        </div>
+     <% end %>
+   <% end %>
+</div>
