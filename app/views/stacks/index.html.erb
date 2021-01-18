@@ -7,7 +7,7 @@
  <%= link_to stack_path(stack.id) do %>
  <p><%=stack.user.nickname %></p>
  <p><%=stack.text %></p>
-  <p>Posted <%=time_ago_in_words(stack.created_at)%> ago.</p>
+  <p><%=time_ago_in_words(stack.created_at)%>前のちりつも</p>
  <% end %>
 </li>
 <% end %>
