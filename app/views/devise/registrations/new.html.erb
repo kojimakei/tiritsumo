@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :名前 %><br />
+    <%= f.label :ニックネーム %><br />
     <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
   </div>
 
@@ -14,9 +14,25 @@
   </div>  
 
   <div class="field">
-    <%= f.label :達成期日 %><br />
+    <%= f.label :目標達成期日 %><br />
     <%= f.date_field :deadline, autofocus: true, autocomplete: "nickname" %>
   </div>
+
+  <div class="field">
+    <%= f.label :目標のジャンル %><br />
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {},{class:"select-box"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :年齢 %><br />
+  <%= f.collection_select(:age_id, Age.all, :id, :name, {},{class:"select-box"}) %>
+  </div>  
+
+  <div class="field">
+    <%= f.label :職業 %><br />
+    <%= f.collection_select(:occupation_id, Occupation.all, :id, :name, {},{class:"select-box"}) %>
+  </div>  
+
 
 
   <div class="field">

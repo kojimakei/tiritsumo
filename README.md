@@ -61,7 +61,7 @@
 | date         | datetime   | null: false                    |
 | begin_time   | datetime   | null: false                    |
 | finish_time  | datetime   | null: false                    |
-| plan         | text       | null: false                    |
+| plan         | string     | null: false                    |
 | user         | references | null: false, foreign_key: true |
 
 ### Association

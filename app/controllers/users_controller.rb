@@ -4,8 +4,10 @@ class UsersController < ApplicationController
   
   def show
     @stacks = @user.stacks
+    @month  = Date.today.month
     @today = Date.current.strftime('%Y年 %m月 %d日')
     @today_stacks = @stacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    @schedules = @user.schedules
   end
 
   def edit
@@ -30,5 +32,6 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
 
 end

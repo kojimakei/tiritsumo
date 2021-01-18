@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_030922) do
+ActiveRecord::Schema.define(version: 2021_01_13_222845) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text", null: false
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 2021_01_13_030922) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stack_id"], name: "index_likes_on_stack_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.datetime "begin_time", null: false
+    t.datetime "finish_time", null: false
+    t.string "plan", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "stacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -63,5 +74,6 @@ ActiveRecord::Schema.define(version: 2021_01_13_030922) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "stacks"
   add_foreign_key "likes", "users"
+  add_foreign_key "schedules", "users"
   add_foreign_key "stacks", "users"
 end

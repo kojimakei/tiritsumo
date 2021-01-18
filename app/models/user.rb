@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :likes,    dependent: :destroy
   has_many :liked_stacks, through: :likes, source: :stack
+  has_many :schedules
   def already_liked?(stack)
     self.likes.exists?(stack_id: stack.id)
   end

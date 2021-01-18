@@ -1,7 +1,7 @@
 class Stack < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -10,5 +10,9 @@ class Stack < ApplicationRecord
   with_options presence: true do
     validates :text
     validates :date
+  end
+
+  def start_time
+    date
   end
 end

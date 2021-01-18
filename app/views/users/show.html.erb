@@ -3,20 +3,24 @@
  <%# ユーザーページ一覧 %>
  <div class="top-page">
 
- <%# 今日の積み上げ一覧 %>
+ <%# 今日のちりつも一覧 %>
   <div class="must-list">
-  <h3><%= @today%> のちりつも</h3>
+  <h1><%= @today%>のちりつも</h1>
     <ul class="must">
      <% @today_stacks.each do |today_stack|%>
      <li><%= today_stack.text%></li>
     </ul>
-
     <%end%>
   </div>
 
-  <%# 今日のスケジュール %>
-  <div class="schedule">
-  </div>
+  <%# 今週のスケジュール %>
+  <%# <div class="schedule">
+ <%= render 'schedules/index' %>
+  <%# </div> %>
+
+    <%# 今月のちりつも %>
+    <h1><%= @month%>月のちりつも</h1>
+ <%= render 'calendar', events: @stacks %>
 
 <%# その他項目 %>
   <ul>
@@ -24,7 +28,6 @@
   <%=link_to "プロフィールを編集する",edit_user_path(@user) %></li>
   <%else%>
   <%end%>
-  <li></li>
-  <li></li>
   </ul>
+
 </div>
