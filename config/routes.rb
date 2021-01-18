@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
-    resources :users, only: [:edit, :show, :update]
+  resources :users, only: [:edit, :show, :update] do
+    resources :schedules, only: %i[index show create edit update destroy]
+  end
 
 
 
