@@ -15,12 +15,15 @@
     <h3>今日のちりつも</h3>
      <% @today_stacks.each do |today_stack|%>
      <div class="check">
+     <% if today_stack.date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") %>
        <li><%= today_stack.text%></li>   
-     <%# ※とりあえず入れたチェックボックス  %>
+        <%# ※とりあえず入れたチェックボックス  %>
        <div class="form-check">
          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
          <label class="form-check-label" for="flexCheckDefault"></label>
        </div>      
+       <%end%>
+
     </div> 
      <%end%>
     </div>

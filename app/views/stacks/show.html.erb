@@ -25,7 +25,7 @@
     <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント</h4>
       <% @comments.each do |comment| %>
         <p>
-          <strong><%= link_to comment.user.nickname %>：</strong>
+          <strong><%= comment.user.nickname %>：</strong>
           <%= comment.text %>
           <% if user_signed_in? && (current_user.id == comment.user_id) %>
           <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %></strong>
