@@ -15,3 +15,38 @@
  *= require_tree .
  *= require_self
  */
+
+// ※ヘッダーの編集
+.nav-item{
+  margin-left: 80px;
+}
+
+
+ header {
+   margin-bottom: 50px;
+ }
+
+ .user-image{
+    border-radius: 50%;  
+ }
+
+
+ .nav-item {
+   color: red;
+ }
+
+ .maxWidth {
+  max-width:1170px;
+  }
+
+  // h3 {
+  //   margin-bottom: 10px;
+  //   text-align: center;
+  // }
+
+
+  .icon::before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900;
+    content: "\f007";
+  }
