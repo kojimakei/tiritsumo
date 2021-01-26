@@ -3,9 +3,7 @@ class SchedulesController < ApplicationController
   before_action :set_schedules, only: [:show, :edit, :update, :destroy]
 
   def index
-    @schedules = Schedule.includes(:user)
-    # render 'schedules',formats: :json , handlers: 'jbuilder'
-    @schedules = current_user.schedules
+    @schedules = Schedule.where(user_id: current_user.id)
     @schedule = Schedule.new
     @user = current_user
   end

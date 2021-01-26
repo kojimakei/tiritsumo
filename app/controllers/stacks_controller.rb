@@ -23,7 +23,7 @@ class StacksController < ApplicationController
   def create
     @stack = Stack.new(stack_params)
     if @stack.save
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else
       render :new
     end

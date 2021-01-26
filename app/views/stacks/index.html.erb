@@ -1,17 +1,24 @@
-<%= render "shared/header" %>
+<div class="container">
+  <%# 積み上げの投稿を1つづつに分ける %>
+  <% @stacks.each do |stack| %>
+  <div class="row  justify-content-center">  
+    <div class="col-lg-1">
+      <p class="image"><%= link_to image_tag(stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'), user_path(stack.user.id) if stack.user.image.attached? %></p>
+    </div>    
+    <div class="col-lg-3">
+      <p class="nickname"><%=stack.user.nickname %></p>
+      <h4><%=stack.text %></h4>
+    </div>
 
-<ul class="stacks">
-<% @stacks.each do |stack| %>
-<%# 積み上げの投稿を1つづつに分ける %>
-<li class="stack">
- <%= link_to stack_path(stack.id) do %>
- <p><%=stack.user.nickname %></p>
- <p><%=stack.text %></p>
-  <p><%=time_ago_in_words(stack.created_at)%>前のちりつも</p>
- <% end %>
-</li>
-<% end %>
-</ul>
+    <div class="col-lg-2, align-self-end">
+      <p>
+        <%=time_ago_in_words(stack.created_at)%>前のちりつも
+        <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>   
+        <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).count %></i>
+        <i class="far fa-comment-alt fa-lgfo"></i>
+      </p>    
+    </div>
 
-
-
+  </div>
+  <%end%>
+</div>
