@@ -15,7 +15,7 @@
         <%=time_ago_in_words(stack.created_at)%>前のちりつも
         <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>   
         <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).count %></i>
-        <i class="far fa-comment-alt fa-lgfo"></i>
+        <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).count %></i>
       </p>    
     </div>
 
