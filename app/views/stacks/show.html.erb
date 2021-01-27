@@ -1,50 +1,99 @@
-<%= render "shared/header" %>
+<%# ※投稿内容 %>
+<div class="container">
+<%# ※上部（アイコン、削除、編集ボタン） %>
+  <div class="row">  
+      <div class="col-lg-1">
+        <p class="image"><%= link_to image_tag(@stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'),user_path(@stack.user.id) if @stack.user.image.attached? %></p>
+        <p class="nickname"><%=@stack.user.nickname %></p>
+      </div>
+      <div class="col-lg-1 offset-10">
+        <% if user_signed_in? && (current_user.id == @stack.user_id) %>
+          <%= link_to edit_stack_path(@stack.id), method: :get do %>
+          <i class="fas fa-edit" style="font-size: 30px"></i>
+        <%end%>  
+          <%= link_to stack_path(@stack.id), method: :delete do %>
+          <i class="fas fa-trash-alt" style="font-size: 30px"></i>
+          <%end%>
+        <% end %>     
+    </div>  
+  </div>  
 
-<li class="stack">
- <%= link_to stack_path(@stack.id) do %>
- <p><%= @stack.user.nickname %></p>
- <p><%= @stack.text %></p>
- <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>
-  <% if user_signed_in? && (current_user.id == @stack.user_id) %>
-    <%= link_to '編集', edit_stack_path(@stack.id), method: :get %>
-    <%= link_to '削除', stack_path(@stack.id), method: :delete %>  
-  <% end %>
-<% end %> 
+
+<%# ※中部（積み上げないよう） %>
+  <div class="row  justify-content-center">  
+    <div class="col-lg-12, algin-self-center">
+      <h3><%=@stack.text %></h3>
+    </div>
+  </div>
+
+  <div class="row  justify-content-end">  
+    <div class="col-lg-2, align-self-end">
+      <% if user_signed_in? && current_user.already_liked?(@stack) %>
+        <%= link_to stack_like_path(@stack), method: :delete, remote: true do %>
+          <i class="fas fa-heart unlike-btn"></i>
+          <%= @stack.likes.count %>
+        <%end%>
+      <% else %>
+        <%= link_to stack_likes_path(@stack), method: :post, remote: true do %>
+          <i class="far fa-heart like-btn"></i>
+          <%= @stack.likes.count %>
+        <%end%>
+      <% end %>    
+      <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>    
+    </div>  
+  </div>
 
 <%# コメント投稿＆一覧表示 %>
- <p class="container">
-   <% if user_signed_in? %>
-     <%= form_with(model: [@stack, @comment], local: true) do |f| %>
-       <%= render 'shared/error_messages', model: f.object %>
-       <%= f.text_area :text, placeholder: "コメントする", rows: "2" %>
-       <%= f.submit "送信" %>
-     <% end %>
-   <% end %>
-   <p class="comments">
-    <h4>＜コメント一覧＞</h4>
+  <div class="row justify-content-center">
+    <div class="col align-self-center">
+    <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント</h4>
       <% @comments.each do |comment| %>
         <p>
-          <strong><%= link_to comment.user.nickname %>：</strong>
+          <strong><%= comment.user.nickname %>：</strong>
           <%= comment.text %>
           <% if user_signed_in? && (current_user.id == comment.user_id) %>
           <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %></strong>
           <% end%>
         </p>
       <% end %>
-    </p>   
+    </div>   
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col align-self-center">
+    <% if user_signed_in? %>
+      <%= form_with(model: [@stack, @comment], local: true) do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
+        <form>
+          <div class="form-group">
+            <%= f.text_field :text, placeholder: "コメントする", class: 'form-control' %>
+          </div>
+          <button type="submit" class="btn btn-success btn-block mb-4">
+            <%= f.submit "送信", class:"btn btn-success"%>            
+          </button>
+        </form>
+     <% end %>
+    <% end %>
+    </div>
+  </div>
 
 <%# いいね機能 %>
-<h3>いいね件数: <%= @stack.likes.count %></h3>
+
 <% if user_signed_in? && current_user.already_liked?(@stack) %>
-  <%= button_to 'いいねを取り消す', stack_like_path(@stack), method: :delete %>
+  <%= link_to stack_like_path(@stack), method: :delete, remote: true do %>
+  <i class="fas fa-heart unlike-btn"></i>
+  <%= @stack.likes.count %>
+  <%end%>
+
 <% else %>
-  <%= button_to 'いいね', stack_likes_path(@stack) %>
+  <%= link_to stack_likes_path(@stack), method: :post, remote: true do %>
+  <i class="far fa-heart like-btn"></i>
+  <%= @stack.likes.count %>
+  <%end%>
 <% end %>
-<h2>いいねしたユーザー</h2>
 <% @stack.liked_users.each do |user| %>
   <li><%= user.nickname %> さん</li>
 <% end %>
-  </p>
-</li>
+</div>  
 
 

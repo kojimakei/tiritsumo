@@ -1,3 +1,60 @@
 // Place all the styles related to the stacks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.row{
+  margin-bottom: 50px;
+  // border-bottom: solid 0.001px #DCDCDC	;
+}
+
+// ※アイコン周り
+.col-lg-2{
+// border-right: solid 0.001px #DCDCDC	;
+display: flex;
+justify-content:end;
+}
+
+
+.m{
+  margin-top: 10px;
+}
+
+.task{
+  height: 500px;
+  border: solid 0.001px #DCDCDC	;
+  padding: 10px;
+}
+
+.check{
+  display: flex;
+  .form-check{
+    margin-left: 20px;
+  }
+}
+
+.col-md-8{
+  border: solid 0.001px #DCDCDC	;
+  margin-bottom: 50px;
+}
+
+.col-md-12{
+  border: solid 0.001px #DCDCDC	;
+}
+
+
+// ※アイコン
+.fa-heart{
+  color: red;
+}
+
+.fa-trash-alt{
+  color: black;
+}
+
+.fa-edit{
+  color: black;
+}
+
+.header{
+  background-color: red;
+}

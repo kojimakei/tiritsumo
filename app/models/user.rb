@@ -17,6 +17,7 @@ class User < ApplicationRecord
   belongs_to :age
   belongs_to :occupation
   belongs_to :category
+  has_one_attached :image
 
 
   # ※※※※※バリデーション※※※※※

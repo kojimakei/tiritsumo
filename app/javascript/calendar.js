@@ -9,6 +9,12 @@ document.addEventListener('turbolinks:load', function() {
   var calendar = new Calendar(calendarEl, {
     plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
     initialView: 'timeGridWeek',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+
     events: [
       {
           id: '1',
@@ -29,7 +35,8 @@ document.addEventListener('turbolinks:load', function() {
           start: '2021-01-18T15:00:00',
           end: '2021-01-18T19:00:00', 
           url: '#'
-      }
+      },
+        
   ],
 
     // ※日本語表記に変更※

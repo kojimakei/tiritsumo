@@ -1,9 +1,9 @@
 <div class="content__block--calender">
-  <%= month_calendar events: events do |date, events| %>
+  <%= month_calendar events: @stacks do |date, stacks| %>
     <%= date.day %>
-      <% events.each do |event| %>
+      <% stacks.each do |stack| %>
         <div class="calendar">
-            <%= event.text%>
+            <%= stack.text%>
         </div>
      <% end %>
    <% end %>

@@ -1,3 +1,6 @@
+<h3>ユーザー情報変更</h3>  
+
+
     <%= form_with model:@user, local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -5,6 +8,11 @@
   <div class="field">
     <%= f.label :ニックネーム %><br />
     <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :画像 %><br />
+    <%= f.file_field :image, autofocus: true, autocomplete: "image" %>
   </div>
 
   <div class="field">
