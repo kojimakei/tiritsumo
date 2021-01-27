@@ -32,26 +32,15 @@
 | date             | datetime    | null: false                    |
 | text             | text        | null: false                    |
 | work_time_id     | integer     |                                |
+| achieved         | boolean     |                                |
 | user             | references  | null: false, foreign_key: true |
+
 
 ### Association
 
 - belongs_to :user
 - has_many :comments
 - has_many :likes
-- has_one :achievement
-
-
-## achievements テーブル
-
-| Column           | Type        | Options                        |
-| ---------------- | ----------- | ------------------------------ |
-| achieved         | boolean     | null: false                    |
-| stack            | references  | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :stack
 
 
 ## schedules テーブル
