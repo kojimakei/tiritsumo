@@ -19,10 +19,6 @@ justify-content:end;
   margin-top: 10px;
 }
 
-.fa-heart{
-  color: red;
-}
-
 .task{
   height: 500px;
   border: solid 0.001px #DCDCDC	;
@@ -45,3 +41,20 @@ justify-content:end;
   border: solid 0.001px #DCDCDC	;
 }
 
+
+// ※アイコン
+.fa-heart{
+  color: red;
+}
+
+.fa-trash-alt{
+  color: black;
+}
+
+.fa-edit{
+  color: black;
+}
+
+.header{
+  background-color: red;
+}
