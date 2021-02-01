@@ -19,17 +19,15 @@ justify-content:end;
   margin-top: 10px;
 }
 
-.task{
+.tasks{
   height: 500px;
   border: solid 0.001px #DCDCDC	;
   padding: 10px;
 }
 
-.check{
+.checklist{
   display: flex;
-  .form-check{
-    margin-left: 20px;
-  }
+  justify-content: space-between;
 }
 
 .col-md-8{
@@ -57,4 +55,8 @@ justify-content:end;
 
 .header{
   background-color: red;
+}
+
+div[data-check="true"] {
+  text-decoration: line-through;
 }

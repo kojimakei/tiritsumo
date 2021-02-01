@@ -11,15 +11,18 @@
   <div class="row">
   <%# ※左の4つぶん %>
     <div class="col-md-4">
-      <div class="task">
-    <h3>今日のちりつも</h3>
-     <% @today_stacks.each do |today_stack|%>
-     <div class="check">
-     <% if today_stack.date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") %>
-       <li><%= today_stack.text%></li>   
-        <%# ※とりあえず入れたチェックボックス  %>
-       <%end%>
-
+      <div class="tasks">
+      <h3>今日のちりつも</h3>
+      <% @today_stacks.each do |today_stack|%>
+        <div class="checklist" data-id=<%= today_stack.id %> data-check=<%= today_stack.achieved %>>
+        <% if today_stack.date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") %>
+          <li><%= today_stack.text%></li>
+          <%if today_stack.achieved == true%>
+          <div class="check"><i class="far fa-check-square"></i></div>
+          <%else%>
+          <div><i class="far fa-square"></i></div>
+          <%end%>
+        <%end%>
     </div> 
      <%end%>
     </div>
@@ -29,6 +32,7 @@
       <h3>今週の予定</h3>
 
       <div id='calendar'><div>
+      
     </div>
 </div>
 </div>

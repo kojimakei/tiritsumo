@@ -15,7 +15,7 @@
           <i class="fas fa-trash-alt" style="font-size: 30px"></i>
           <%end%>
         <% end %>     
-    </div>  
+      </div>  
   </div>  
 
 
@@ -26,20 +26,12 @@
     </div>
   </div>
 
-  <div class="row  justify-content-end">  
-    <div class="col-lg-2, align-self-end">
-      <% if user_signed_in? && current_user.already_liked?(@stack) %>
-        <%= link_to stack_like_path(@stack), method: :delete, remote: true do %>
-          <i class="fas fa-heart unlike-btn"></i>
-          <%= @stack.likes.count %>
-        <%end%>
-      <% else %>
-        <%= link_to stack_likes_path(@stack), method: :post, remote: true do %>
-          <i class="far fa-heart like-btn"></i>
-          <%= @stack.likes.count %>
-        <%end%>
-      <% end %>    
-      <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>    
+<%# いいね、投稿時間表記 %>
+  <div class="row  justify-content-end"> 
+    <div class="col-lg-2, align-self-end">  
+    <div class="likes_<%= @stack.id %>">
+      <%= render partial: 'likes/likes', locals: { stack: @stack} %>
+    </div>
     </div>  
   </div>
 
@@ -76,24 +68,6 @@
     <% end %>
     </div>
   </div>
-
-<%# いいね機能 %>
-
-<% if user_signed_in? && current_user.already_liked?(@stack) %>
-  <%= link_to stack_like_path(@stack), method: :delete, remote: true do %>
-  <i class="fas fa-heart unlike-btn"></i>
-  <%= @stack.likes.count %>
-  <%end%>
-
-<% else %>
-  <%= link_to stack_likes_path(@stack), method: :post, remote: true do %>
-  <i class="far fa-heart like-btn"></i>
-  <%= @stack.likes.count %>
-  <%end%>
-<% end %>
-<% @stack.liked_users.each do |user| %>
-  <li><%= user.nickname %> さん</li>
-<% end %>
 </div>  
 
 
