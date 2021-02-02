@@ -32,7 +32,7 @@ class StacksController < ApplicationController
   def update
     @stack = Stack.find(params[:id])
     if @stack.update(stack_params)
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else
       render :edit
     end
