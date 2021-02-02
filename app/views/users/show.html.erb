@@ -11,34 +11,65 @@
   <div class="row">
   <%# ※左の4つぶん %>
     <div class="col-md-4">
-      <div class="task">
-    <h3>今日のちりつも</h3>
-     <% @today_stacks.each do |today_stack|%>
-     <div class="check">
-     <% if today_stack.date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") %>
-       <li><%= today_stack.text%></li>   
-        <%# ※とりあえず入れたチェックボックス  %>
-       <div class="form-check">
-         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-         <label class="form-check-label" for="flexCheckDefault"></label>
-       </div>      
-       <%end%>
-
-    </div> 
-     <%end%>
+      <div class="tasks">
+        <h3>今日のちりつも</h3>
+        <table width="100%">
+          <thead>
+            <tr>
+              <th class='text-center'>ちりつも内容</th>
+              <th class='text-center'>取り組み時間</th>
+              <th class='text-center'>達成可否</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @today_stacks.each do |today_stack|%>
+              <tr>
+                <td class='text-center'>
+                  <div>
+                    <% if today_stack.date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") %>
+                      <%= today_stack.text%>
+                    <%end%>
+                    <%= link_to edit_stack_path(today_stack.id), method: :get do %>
+                      <i class="fas fa-edit"></i>
+                    <%end%>  
+                  </div>
+                </td>
+                <td class='text-center'>
+                  <%# 取り組み時間が記入している場合は表示 %>
+                  <%unless today_stack.work_time_id.present? %>
+                    0時間
+                  <%else%>
+                    <%= today_stack.work_time.name %> 時間
+                  <%end%>
+                </td>
+                <td class='text-center'>
+                  <%if today_stack.achieved == true%>
+                    <div class="check"><i class="far fa-circle"></i></div>
+                  <%else%>
+                    <div class="check"><i class="fas fa-times"></i></div>
+                  <%end%>
+                </td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
     </div>
-    </div>
 
+<%# fullcalendar今週の予定 %>   
     <div class="col-md-8">
       <h3>今週の予定</h3>
+        <div id='calendar'><div>
+    </div>  
+  </div>
+</div>
 
-      <div id='calendar'><div>
+<div class="container-fluid border">
+  <div class="row">
+    <div class="col-md-3">
     </div>
+    <div class="col-md-9">
+        <%= render 'calendar', events: @stacks %>
+    </div>  
+  </div>
 </div>
-</div>
-
-<div class="container">
-  <div class="col-md-12">
-  <h1><%= @month%>月のちりつも</h1>
-  <%= render 'calendar', events: @stacks %>
-</div>  

@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   
   root to: 'stacks#index'
   resources :stacks do
-    resources :comments, only: [:create, :destroy]
-    resources :likes, only: [:create, :destroy]
+    # 達成可否判断ルーティング
+    member do
+      get 'achieved'
+    end
+    resources :comments, only: %i[create destroy]
+    resource :likes, only: %i[create destroy]
   end
 
   resources :users, only: [:edit, :show, :update] do

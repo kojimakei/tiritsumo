@@ -32,7 +32,7 @@ class StacksController < ApplicationController
   def update
     @stack = Stack.find(params[:id])
     if @stack.update(stack_params)
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else
       render :edit
     end
@@ -43,10 +43,23 @@ class StacksController < ApplicationController
     redirect_to root_path
   end
 
+
+  def achieved
+    stack = Stack.find(params[:id])
+    if stack.achieved
+      stack.update(achieved: false)
+      else
+        stack.update(achieved: true)
+      end
+      # 更新したレコードをitem変数に変更し直し
+      item = Stack.find(params[:id])
+      render json: {stack: item}
+  end
+
   private
 
   def stack_params
-    params.require(:stack).permit(:text, :date, :work_time_id).merge(user_id: current_user.id)
+    params.require(:stack).permit(:text, :date, :work_time_id, :achieved).merge(user_id: current_user.id)
   end
 
   def set_stacks
