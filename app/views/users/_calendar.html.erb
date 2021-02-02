@@ -3,9 +3,9 @@
     <%= date.day %>
       <% stacks.each do |stack| %>
         <div class="calendar">
-        <% if stack.achieved == true%>
+          <% if stack.achieved == true%>
             <%= stack.text%>
-            <%end%>
+          <%end%>
         </div>
      <% end %>
    <% end %>

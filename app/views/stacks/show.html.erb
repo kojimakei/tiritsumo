@@ -8,9 +8,6 @@
       </div>
       <div class="col-lg-1 offset-10">
         <% if user_signed_in? && (current_user.id == @stack.user_id) %>
-          <%= link_to edit_stack_path(@stack.id), method: :get do %>
-          <i class="fas fa-edit" style="font-size: 30px"></i>
-        <%end%>  
           <%= link_to stack_path(@stack.id), method: :delete do %>
           <i class="fas fa-trash-alt" style="font-size: 30px"></i>
           <%end%>

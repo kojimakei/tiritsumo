@@ -1,12 +1,32 @@
 <div class="container">
-  <h3>今日の積み上げ</h3>
-  <%= form_with(model: @stack, local: true) do |f| %>
-  <%# 入力に不備があった場合、エラーメッセージを表示する %>
-  <%= render 'shared/error_messages', model: f.object %>
-    <%= f.date_field :date %>
-    <%= f.text_field :text, placeholder: "積み上げ内容" %>
-    <%# ↓実装するか検討中↓ %>
-    <%# <%= f.collection_select(:work_time_id, WorkTime.all, :id, :name, {}, {class:"genre-select"}) %> 
-    <%= f.submit "積み上げ内容の変更" %>
-  <% end %>
+  <div class="row">
+    <div class="col">
+    <h3>今日の積み上げ</h3>
+      <%= form_with(model: @stack, local: true) do |f| %>
+      <%# 入力に不備があった場合、エラーメッセージを表示する %>
+      <%= render 'shared/error_messages', model: f.object %>
+        <form>
+          <div class="form-group">
+            <label>日付</label>
+              <%= f.date_field :date, class: 'form-control'%>
+          </div>
+          <div class="form-group">
+            <label>内容</label>
+              <%= f.text_field :text,class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <label>取り組み時間</label>
+              <%= f.collection_select(:work_time_id, WorkTime.all, :id, :name, {},{class:"form-control"}) %>時間
+          </div>
+          <div class="form-group">
+            <label>達成可否</label>
+              <%= f.check_box :achieved ,class: 'form-control' %>
+          </div>                    
+          <div class="form-group">
+            <%= f.submit "積み上げる" %>
+          </div>
+        </form>
+      <%end%>
+    </div>
+  </div>
 </div>
