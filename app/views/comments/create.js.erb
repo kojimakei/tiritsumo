@@ -1,0 +1,3 @@
+var element = document.getElementById("comments")
+element.innerHTML += '<%= j(render partial: "comments/comment", locals: {stack: @comment.stack, comment: @comment}) %>'
+document.querySelector("#comment_text").value = ""

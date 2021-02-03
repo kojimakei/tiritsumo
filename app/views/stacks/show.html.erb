@@ -35,23 +35,8 @@
 <%# コメント投稿＆一覧表示 %>
   <div class="row justify-content-center">
     <div class="col align-self-center">
-    <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント</h4>
-      <% @comments.each do |comment| %>
-        <p>
-          <strong><%= comment.user.nickname %>：</strong>
-          <%= comment.text %>
-          <% if user_signed_in? && (current_user.id == comment.user_id) %>
-          <strong><%= link_to "削除する", stack_comment_path(comment.id), method: :delete %></strong>
-          <% end%>
-        </p>
-      <% end %>
-    </div>   
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
     <% if user_signed_in? %>
-      <%= form_with(model: [@stack, @comment], local: true) do |f| %>
+      <%= form_with(model: [@stack, @comment], remote: true) do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
         <form>
           <div class="form-group">
@@ -61,10 +46,14 @@
             <%= f.submit "送信", class:"btn btn-success"%>            
           </button>
         </form>
-     <% end %>
+      <% end %>
     <% end %>
+    <div class="comments" id="comments">
+    <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント</h4>
+      <% @comments.each do |comment| %>
+        <%= render "comments/comment", stack: @stack, comment: comment %>
+      <% end %>
+    </div>       
     </div>
   </div>
-</div>  
-
 

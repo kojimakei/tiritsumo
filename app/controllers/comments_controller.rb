@@ -2,20 +2,13 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to stack_path(@comment.stack)
-    else
-      @stack = @comment.stack
-      @comments = @stack.comments
-      render 'stacks/show'
-    end
+    @comment = Comment.create(comment_params)
   end
 
   def destroy
-    @comment = Comment.find(params[:stack_id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to stack_path(@comment.stack)
+    
   end
 
   private
