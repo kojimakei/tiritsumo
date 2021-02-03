@@ -17,7 +17,7 @@ class StacksController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @stack.user_id
+    redirect_to user_path(@stack.user_id) unless current_user.id == @stack.user_id
   end
 
   def create
