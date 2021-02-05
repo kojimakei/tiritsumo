@@ -33,7 +33,11 @@
                 <li class="nav-item"><%= link_to '予定を入れる', "/users/#{current_user.id}/schedules", class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to '積み上げる', new_stack_path, class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %></li> 
-                <li class="nav-item"><%= link_to image_tag(current_user.image.variant(resize_to_fill: [55, 55]), class: 'user-image'), user_path(current_user.id) %></li> 
+                <% if current_user.image.attached? %>
+                  <li class="nav-item"><%= link_to image_tag(current_user.image.variant(resize_to_fill: [55, 55]), class: 'user-image'), user_path(current_user.id) %></li> 
+                <%else%>
+                  <li class="nav-item"><%= link_to current_user.nickname, user_path(current_user.id),style: "color:black", class: "nav-link" %></li>
+                <%end%>
                 <li class="nav-item m">目標: <%= current_user.goal%></li>
                 <li class="nav-item m">残り: <%= (current_user.deadline.to_date - Date.today).to_i %>日</li>              
               <% else %>
