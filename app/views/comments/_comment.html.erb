@@ -1,7 +1,7 @@
 <p id="comment_<%= comment.id %>">
-  <strong><%= link_to comment.user.nickname, user_path(comment.user.id) %>：</strong>
+  <strong><%= link_to comment.user.nickname, user_path(comment.user.id), style: "color:black" %>：</strong>
     <%= comment.text %>
     <% if user_signed_in? && (current_user.id == comment.user_id) %>
-      <strong><%= link_to "削除する", stack_comment_path(comment.stack_id, comment.id), method: :delete, class: "comment-delete",  remote: true %></strong>
+      <strong><%= link_to "削除する", stack_comment_path(comment.stack_id, comment.id), method: :delete, style: "color:black", class: "comment-delete",  remote: true %></strong>
     <% end%>
 </p>

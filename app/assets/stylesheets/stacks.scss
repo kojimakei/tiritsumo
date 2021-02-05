@@ -3,17 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .row{
-  margin-bottom: 50px;
-  // border-bottom: solid 0.001px #DCDCDC	;
+  margin-bottom: 20px;
 }
-
-// ※アイコン周り
-.col-lg-2{
-// border-right: solid 0.001px #DCDCDC	;
-display: flex;
-justify-content:end;
-}
-
 
 .m{
   margin-top: 10px;
@@ -24,11 +15,6 @@ justify-content:end;
   border: solid 0.001px #DCDCDC	;
   padding: 10px;
 }
-
-// .checklist{
-//   display: flex;
-//   justify-content: space-between;
-// }
 
 .col-md-8{
   border: solid 0.001px #DCDCDC	;
@@ -69,4 +55,9 @@ justify-content:end;
 // ※ちりつも達成可否判断
 div[data-check="true"] {
   text-decoration: line-through;
+}
+
+// ※ちりつも詳細のアイコンとニックネームを横並び
+.profile{
+  display: flex;
 }
