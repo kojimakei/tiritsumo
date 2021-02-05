@@ -44,6 +44,9 @@ class User < ApplicationRecord
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.nickname = '佐藤太郎'
+      user.category_id = 4
+      user.age_id = 5
+      user.occupation_id = 10
     end
   end
 end
