@@ -1,5 +1,6 @@
 <div class="container">
   <%# 積み上げの投稿を1つづつに分ける %>
+  <% if @stacks.exists?%>
   <% @stacks.each do |stack| %>
   <div class="row  justify-content-center">  
     <div class="card" style="width: 50rem;">
@@ -24,5 +25,6 @@
       </div>
     </div>
   </div>
+  <%end%>
   <%end%>
 </div>
