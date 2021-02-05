@@ -2,23 +2,27 @@
   <%# 積み上げの投稿を1つづつに分ける %>
   <% @stacks.each do |stack| %>
   <div class="row  justify-content-center">  
-    <div class="col-lg-1">
-      <p class="image"><%= link_to image_tag(stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'), user_path(stack.user.id) if stack.user.image.attached? %></p>
-    </div>    
-    <div class="col-lg-3">
-      <p class="nickname"><%=stack.user.nickname %></p>
-      <h4><%=stack.text %></h4>
+    <div class="card" style="width: 50rem;">
+      <div class="card-body">
+        <div class="card-title">
+          <div class="profile">
+            <p class="image"><%= link_to image_tag(stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'),user_path(stack.user.id) if stack.user.image.attached? %></p>
+            <p class="nickname"><%=stack.user.nickname %></p>
+          </div>  
+          <h4 class="text-center"><%=stack.text %></h4>
+          <div class="text-right">
+            <p>
+              <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>           
+            </p>   
+            <p>
+              <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).count %></i>
+              <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).count %></i>
+              <%=time_ago_in_words(stack.created_at)%>前のちりつも      
+            </p>             
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="col-lg-2, align-self-end">
-      <p>
-        <%=time_ago_in_words(stack.created_at)%>前のちりつも
-        <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>   
-        <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).count %></i>
-        <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).count %></i>
-      </p>    
-    </div>
-
   </div>
   <%end%>
 </div>
