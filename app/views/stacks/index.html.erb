@@ -1,9 +1,29 @@
 <div class="container">
+  <div class="row">
+    <div class="col s12 m12 l4">
+      <div class="card">
+        <div class="card-content">
+          <h6>ジャンル</h6>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h6>週間ちりつも数ランキング</h6>
+        </div>
+      </div>      
+      <div class="card">
+        <div class="card-content">
+          <h6>週間ちりつも時間ランキング</h6>
+        </div>
+      </div>            
+    </div>
+
+
+  <div class="col s12 m12 l8">  
   <%# 積み上げの投稿を1つづつに分ける %>
   <% if @stacks.exists?%>
-  <% @stacks.each do |stack| %>
-  <div class="row  justify-content-center">  
-    <div class="card" style="width: 50rem;">
+  <% @stacks.each do |stack| %>  
+    <div class="card">
       <div class="card-body">
         <div class="card-title">
           <div class="profile">
@@ -24,7 +44,9 @@
         </div>
       </div>
     </div>
+      <%end%>
+  <%end%>
   </div>
-  <%end%>
-  <%end%>
+
+</div>
 </div>
