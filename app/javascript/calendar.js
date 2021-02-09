@@ -46,6 +46,8 @@ document.addEventListener('turbolinks:load', function() {
     buttonText: {
       today: '今日',
       month: '月',
+      week: '週',
+      day: '日',
       list: 'リスト',     
     }, 
 
