@@ -9,8 +9,19 @@
 
 <div class="container-fluid">
   <div class="row">
-  <%# ※左の4つぶん %>
+  <%# 左側 ランキング、今日のちりつも、カレンダー %>
     <div class="col-md-4">
+      <div class="card">
+      <%# ランキング %>
+        <div class="card-content">
+          <h3>過去のちりつも</h3>
+            <p>●計画したちりつも：<%=@total_stacks%>件</p>
+            <p>●達成したちりつも：<%=@achieved_stacks%>件</p>
+            <p>●達成率：<%=@stack_rate%>％</p>
+            <p>●取り組み時間合計：<%=@stack_time%>時間</p>
+        </div>
+      </div>
+
       <div class="tasks">
         <h3>今日のちりつも</h3>
         <table width="100%">
@@ -38,19 +49,25 @@
                   <%# 取り組み時間が記入している場合は表示 %>
                   <%if today_stack.work_time_id.present? %>
                     <%= today_stack.work_time.name %> 時間
+                  <%elsif today_stack.work_time_id.nil? %>
+                    --
                   <%end%>
                 </td>
                 <td class='text-center'>
                   <%if today_stack.work_time_id.present? && today_stack.achieved == true%>
                     <div class="check"><i class="far fa-circle"></i></div>
-                  <%elsif today_stack.work_time_id.present?%>
+                  <%elsif today_stack.work_time_id.nil? || today_stack.achieved == false %>
                     <div class="check"><i class="fas fa-times"></i></div>
                   <%end%>
                 </td>
               </tr>
             <%end%>
-          </tbody>
+          </tbody>        
         </table>
+      </div>
+      <%# 過去のチリツモカレンダー %>
+      <div class="card">
+         <%= render 'calendar', events: @stacks %>
       </div>
     </div>
 
@@ -58,16 +75,6 @@
     <div class="col-md-8">
       <h3>今週の予定</h3>
         <div id='calendar'><div>
-    </div>  
-  </div>
-</div>
-
-<div class="container-fluid border">
-  <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-        <%= render 'calendar', events: @stacks %>
     </div>  
   </div>
 </div>
