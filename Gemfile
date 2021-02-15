@@ -64,3 +64,4 @@ gem 'rails-i18n'
 gem 'fullcalendar-rails'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+gem "chartkick"
