@@ -8,6 +8,13 @@ class UsersController < ApplicationController
     @today = Date.current.strftime('%Y年 %m月 %d日')
     @today_stacks = @stacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     @schedules = @user.schedules
+    @category_total = User.where(category_id: @user.category_id).size
+    @age_total = User.where(age_id: @user.age_id).size
+
+    @total_stacks = @stacks.size
+    @achieved_stacks = @stacks.where(achieved: 1).size
+    @stack_rate = ((@achieved_stacks.to_f/@total_stacks)*100).round(-1)
+    @stack_time = @stacks.all.sum(:work_time_id) / 2.0
   end
 
   def edit
@@ -21,6 +28,11 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def ranking
+    @stack_achieved = Stack.where(achieved: 1 )
+    @all_ranks = User.find(@stack_achieved.group(:user_id).order('count(user_id) desc').pluck(:user_id))
   end
 
   private

@@ -4,7 +4,9 @@
       <% stacks.each do |stack| %>
         <div class="calendar">
           <% if stack.achieved == true%>
-            <%= stack.text%>
+            <%= link_to stack_path(stack) do%>
+              <i class="fas fa-mountain"></i>
+            <%end%>          
           <%end%>
         </div>
      <% end %>

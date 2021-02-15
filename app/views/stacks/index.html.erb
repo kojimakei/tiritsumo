@@ -1,9 +1,51 @@
 <div class="container">
+  <div class="row">
+    <div class="col s12 m12 l4">
+      <div class="card">
+        <div class="card-content">
+          <h3>ちりつも数ランキング</h3>
+          <% @all_ranks.each.with_index(1) do |user, index| %>
+            <li id="rank<%= index %>" class="slider-item" style="list-style-type: none">
+              <h4>
+                <% if index == 1 %>
+                  <i class="fas fa-crown" style="color: #FFD700"></i><%= "第#{index}位" %>
+                <% elsif index == 2%>
+                  <i class="fas fa-crown" style="color: #AAAAAA"></i><%= "第#{index}位" %>
+                <% elsif index == 3%>
+                  <i class="fas fa-crown" style="color: #8B4513"></i><%= "第#{index}位" %>
+                <% end %>
+              </h4>
+              <p>
+                <%= link_to image_tag(user.image.variant(resize_to_fill: [50, 50]), class: 'user-image'),user_path(user.id) if user.image.attached? %><%=user.nickname%>
+                （<%= user.category.name%>）
+              </p>
+              <p>
+                ちりつも数合計：<%= user.stacks.size %>
+              </p>
+            </li>
+          <% end %>     
+        </div>
+        <%=link_to '3位以降を見る',ranking_users_path%>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>同カテゴリーちりつも数ランキング</h3>
+      
+        </div>
+      </div>      
+      <div class="card">
+        <div class="card-content">
+          <h6>週間ちりつも時間ランキング</h6>
+        </div>
+      </div>            
+    </div>
+
+
+  <div class="col s12 m12 l8">  
   <%# 積み上げの投稿を1つづつに分ける %>
   <% if @stacks.exists?%>
-  <% @stacks.each do |stack| %>
-  <div class="row  justify-content-center">  
-    <div class="card" style="width: 50rem;">
+  <% @stacks.each do |stack| %>  
+    <div class="card">
       <div class="card-body">
         <div class="card-title">
           <div class="profile">
@@ -13,18 +55,20 @@
           <h4 class="text-center"><%=stack.text %></h4>
           <div class="text-right">
             <p>
-              <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>           
+              <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>        
             </p>   
             <p>
-              <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).count %></i>
-              <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).count %></i>
+              <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).size %></i>
+              <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).size %></i>
               <%=time_ago_in_words(stack.created_at)%>前のちりつも      
             </p>             
           </div>
         </div>
       </div>
     </div>
+      <%end%>
+  <%end%>
   </div>
-  <%end%>
-  <%end%>
+
+</div>
 </div>
