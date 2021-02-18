@@ -45,3 +45,11 @@
     font-weight: 900;
     content: "\f007";
   }
+
+  // 背景イメージ
+  body {
+    background-image: image-url('snowmountain.png');
+    background-size: cover;
+    background-attachment: fixed;
+    height: auto;   
+  }
