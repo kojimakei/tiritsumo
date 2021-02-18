@@ -12,9 +12,10 @@ class UsersController < ApplicationController
     @age_total = User.where(age_id: @user.age_id).size
 
     @total_stacks = @stacks.size
-    @achieved_stacks = @stacks.where(achieved: 1).size
-    @stack_rate = ((@achieved_stacks.to_f/@total_stacks)*100).round(-1)
+    @achieved_stacks = @stacks.where(achieved: 1)
+    @stack_rate = ((@achieved_stacks.size.to_f/@total_stacks)*100).round(1)
     @stack_time = @stacks.all.sum(:work_time_id) / 2.0
+
   end
 
   def edit
@@ -31,8 +32,7 @@ class UsersController < ApplicationController
   end
 
   def ranking
-    @stack_achieved = Stack.where(achieved: 1 )
-    @all_ranks = User.find(@stack_achieved.group(:user_id).order('count(user_id) desc').pluck(:user_id))
+    @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').pluck(:user_id))
   end
 
   private
