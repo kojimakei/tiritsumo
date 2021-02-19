@@ -16,13 +16,12 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :show, :update] do
-    resources :schedules, only: %i[index show create edit update destroy]
     collection do
       get 'ranking'
     end
   end
 
-
+  resources :rooms
 
   # 簡単ログイン機能のルーティン
   devise_scope :user do
