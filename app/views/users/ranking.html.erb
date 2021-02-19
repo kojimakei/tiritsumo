@@ -19,7 +19,7 @@
                 （<%= user.category.name%>）
               </p>
               <p>
-                ちりつも数合計：<%= user.stacks.size %>
+                ちりつも数合計：<%= user.stacks.where(achieved: 1 ).size %>
               </p>
             </li>
           <% end %>     

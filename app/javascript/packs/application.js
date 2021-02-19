@@ -9,6 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 require("../calendar")
 require("../achieved")
+require("chartkick")
+require("chart.js")
 global.$ = jQuery;
 import 'bootstrap'  
 import '../stylesheets/application';
