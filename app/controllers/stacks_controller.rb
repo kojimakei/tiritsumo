@@ -4,7 +4,6 @@ class StacksController < ApplicationController
 
   def index
     @stacks = Stack.includes(:user).order('created_at DESC')
-    @stack_achieved = Stack.where(achieved: 1 )
     @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
   end
 
