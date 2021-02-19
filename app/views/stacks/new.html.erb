@@ -1,27 +1,28 @@
-
 <div class="container">
   <div class="row">
     <div class="col">
-  <h3>今日の積み上げ</h3>
-  <%= form_with(model: @stack, local: true) do |f| %>
-  <%# 入力に不備があった場合、エラーメッセージを表示する %>
-  <%= render 'shared/error_messages', model: f.object %>  
-    <form>
-        <div class="form-group">
-          <label>日付</label>
-          <%= f.date_field :date, class: 'form-control'%>
-        </div>
-        <div class="form-group">
-          <label>内容</label>
-          <%= f.text_field :text,class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.submit "積み上げる" %>
-        </div>
-    </form>
-    <%end%>
+      <div class="card">
+        <h3>今日の積み上げ</h3>
+          <%= form_with(model: @stack, local: true) do |f| %>
+          <%# 入力に不備があった場合、エラーメッセージを表示する %>
+          <%= render 'shared/error_messages', model: f.object %>  
+            <form>
+              <div class="form-group">
+                <label>日付</label>
+                <%= f.date_field :date, class: 'form-control'%>
+              </div>
+              <div class="form-group">
+                <label>内容</label>
+                <%= f.text_field :text,class: 'form-control' %>
+              </div>
+              <div class="form-group text-center">
+                <%= f.submit "積み上げる" %>
+              </div>
+            </form>
+          <%end%>
+      </div>
+    </div>
   </div>
-</div>
 </div>
 
 
