@@ -6,6 +6,7 @@
           <% if stack.achieved == true%>
             <%= link_to stack_path(stack) do%>
               <i class="fas fa-mountain"></i>
+              <%= stack.work_time_id / 2.0%>時間
             <%end%>          
           <%end%>
         </div>
