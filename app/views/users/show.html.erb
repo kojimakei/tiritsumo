@@ -1,29 +1,50 @@
-<%# その他項目 %>
-  <ul>
-  <li><% if user_signed_in? && current_user == @user %>
-  <%=link_to "プロフィールを編集する",edit_user_path(@user) %></li>
-  <%else%>
-  <%end%>
-  </ul>
-
-
 <div class="container-fluid">
   <div class="row">
-  <%# 左側 ランキング、今日のちりつも、カレンダー %>
+  <%# 左側 ユーザー情報詳細、今日のちりつも、過去のちりつも %>
     <div class="col-md-4">
-      <div class="card">
-      <%# ランキング %>
+      <div class="card  mb-3 p-3">
+      <%#　ユーザー情報詳細 %>
         <div class="card-content">
-          <h3>過去のちりつも</h3>
+          <div class="text-center"> 
+            <%= image_tag(@user.image.variant(resize_to_fill: [70, 70]), class: 'user-image') if @user.image.attached? %>
+            <p class="border-bottom"><%=@user.nickname %></p>
+          </div>
+
+          <div class="profile-parts">
+            <% if @user.category_id.present? %>
+              <span>ジャンル :</span><span><%= @user.category.name %></span></p>
+            <% end %>
+            <% if @user.goal.present? %>
+              <span>目標 :</span><span><%= @user.goal %></span></p>
+            <% end %>
+            <% if @user.deadline.present? %>
+              <span>期日 :</span><span><%= @user.deadline.strftime('%Y年 %m月 %d日') %>（残り<%= (@user.deadline.to_date - Date.today).to_i %>日）</span></p>
+            <% end %>     
+            <div class="text-right">
+              <% if user_signed_in? && current_user == @user %>
+                <%=link_to edit_user_path(@user) do %>
+                  <i class="fas fa-user-edit"></i>
+                <%end%>
+              <%end%>
+            </div>                     
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 p-3">
+      <%# 過去のちりつも %>
+        <div class="card-content">
+          <h3 class="border-bottom">過去のちりつも</h3>
             <p>●計画したちりつも：<%=@total_stacks%>件</p>
-            <p>●達成したちりつも：<%=@achieved_stacks%>件</p>
+            <p>●達成したちりつも：<%=@achieved_stacks.size%>件</p>
             <p>●達成率：<%=@stack_rate%>％</p>
             <p>●取り組み時間合計：<%=@stack_time%>時間</p>
         </div>
       </div>
 
-      <div class="tasks">
-        <h3>今日のちりつも</h3>
+      <%# 今日のちりつも %>
+      <div class="card mb-3 p-3">
+        <h3 class="border-bottom">今日のちりつも</h3>
         <table width="100%">
           <thead>
             <tr>
@@ -65,16 +86,34 @@
           </tbody>        
         </table>
       </div>
-      <%# 過去のチリツモカレンダー %>
+
+    <%# ちりつも合計時間チャート %>
+      <div class="card">
+        <%# カードヘッダータブ %>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a href="#chart1" class="nav-link active" data-toggle="tab">今月のちりつも</a>
+          </li>
+          <li class="nav-item">
+            <a href="#chart2" class="nav-link" data-toggle="tab">今年のちりつも</a>
+          </li>
+        </ul>
+        <%# カードコンテント（チャート） %>
+        <div class="tab-content">
+          <div id="chart1" class="tab-pane active">
+            <%= column_chart @achieved_stacks.group_by_day_of_month(:date, format: "%d").size, xtitle: "日付", ytitle: "ちりつも成功数", min: 0, max: 10%> 
+          </div>
+          <div id="chart2" class="tab-pane">
+            <%= column_chart @achieved_stacks.group_by_month_of_year(:date, format: "%d").size, xtitle: "月", ytitle: "ちりつも成功数",min: 0, max: 100 %> 
+          </div>          
+        </div>
+      </div>      
+    </div>
+
+<%# 過去のちりつもカレンダー %>   
+    <div class="col-md-8">
       <div class="card">
          <%= render 'calendar', events: @stacks %>
       </div>
-    </div>
-
-<%# fullcalendar今週の予定 %>   
-    <div class="col-md-8">
-      <h3>今週の予定</h3>
-        <div id='calendar'><div>
-    </div>  
   </div>
 </div>
