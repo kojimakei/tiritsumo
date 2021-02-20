@@ -2,10 +2,12 @@
   <div class="row">
     <%# ルーム新規作成 %>
     <div class="col-md-4">
-      <div class="card">
-          <%= link_to "ルーム作成", new_room_path%>
-        </div>
-      </div>
+      <%= form_with model: @room do |f| %>
+        <%= f.label :部屋名 %>
+        <%= f.text_field :name %>
+        <%= f.submit "ルーム作成"%>
+      <% end %>
+    </div>
     <%# ルーム一覧表示 %>
     <div class="col-md-8">
       <div class="card">
