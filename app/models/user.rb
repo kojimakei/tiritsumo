@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :schedules
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
+  has_many :chats
  
 
   def already_liked?(stack)
