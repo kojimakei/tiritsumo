@@ -17,9 +17,13 @@ class RoomsController < ApplicationController
     end
   end
 
+  def show
+    @room = Room.find(params[:id])
+  end
+
 
   private
   def room_params
-    params.require(:room).permit(:name).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, user_ids: [])
   end
 end
