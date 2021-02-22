@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :rooms
+  resources :rooms do
+    resources :chats, only: [:create]
+  end
 
   # 簡単ログイン機能のルーティン
   devise_scope :user do

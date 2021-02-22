@@ -2,11 +2,7 @@
   <div class="row">
     <%# ルーム新規作成 %>
     <div class="col-md-4">
-      <%= form_with model: @room do |f| %>
-        <%= f.label :部屋名 %>
-        <%= f.text_field :name %>
-        <%= f.submit "ルーム作成"%>
-      <% end %>
+      <%= link_to "ルーム作成", new_room_path %>
     </div>
     <%# ルーム一覧表示 %>
     <div class="col-md-8">

@@ -1,7 +1,5 @@
-<p><%= "ルーム名：#{@room.name}" %></p>
-
-<input type="text" data-behavior="room_speaker">
-
-<div id="chats">
-  <%= render "chat", collection: @chats %>
+<h3><%= @room.name%></h3>
+<div id="chat-container" data-room_id = "<%= @room.id %>">
+  <%= render @chats %>
 </div>
+<%= render 'footer' %>
