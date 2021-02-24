@@ -20,10 +20,9 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @chats = @room.chats.includes(:user)
-    @chat = current_user.chats.build
+    @chats = @room.chats.includes(:user).order(:id).last(100)
+    @chat = current_user.chats.new
   end
-
 
   private
   def room_params

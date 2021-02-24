@@ -1,5 +1,5 @@
-<div class="fixed-bottom" id="footer">  
-  <%= form_with model: [@room, @chat] do |f| %>
+<footer class="fixed-bottom" id="footer">  
+  <%= form_with model: [@room, @chat], local: false do |f| %>
 
     <div class="form-group">
       <%= f.text_area :message, class: 'form-control', rows: '1', maxlength: '500' %>
@@ -9,4 +9,4 @@
       <%= f.submit '送信', class: 'btn btn-primary btn-block disabled', id: 'chat-button' %>
     </div>
   <% end %>
-</div>
+</footer>

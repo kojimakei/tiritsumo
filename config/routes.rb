@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :chats, only: [:create]
   end
 
+
   # 簡単ログイン機能のルーティン
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'
