@@ -6,12 +6,13 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
-    @room.users << current_user
   end
 
   def create
-    @room = Room.new(room_params)
+    @user = current_user
+    @room = @user.rooms.new(room_params)
     if @room.save
+      current_user.user_rooms.create(room_id: @room.id)
       redirect_to rooms_path
     else
       render :new
@@ -20,12 +21,13 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @chats = @room.chats.includes(:user).order(:id).last(100)
+    @chats = @room.chats.includes(:user)
     @chat = current_user.chats.new
   end
 
   private
   def room_params
-    params.require(:room).permit(:name, user_ids:[])
+    params.require(:room).permit(:name)
   end
 end
+
