@@ -2,18 +2,32 @@
   <div class="row">
     <%# ルーム新規作成 %>
     <div class="col-md-4">
-      <%= link_to "ルーム作成", new_room_path %>
+      <%= link_to "ルーム作成", new_room_path, class: "link"%>
     </div>
     <%# ルーム一覧表示 %>
     <div class="col-md-8">
-      <div class="card">
-        <h3>ルーム一覧</h3>
-          <ul>
-            <% @rooms.each do |room| %>
-              <li><%= link_to room.name, room_path(room.id) %></li>
-            <% end %>
-          </ul>
-      </div>
+      <h3>ルーム一覧</h3>
+        <ul>
+          <% @rooms.each do |room| %>
+            <div class="card mb-3">
+              <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
+                <% if @user_rooms.where(user_id: current_user,room_id: room.id).exists?%>    
+                  <p class="alert alert-success text-right">このコミュニティに参加しています</p>
+                <%else%>
+                  <%= form_with(url: "/rooms/#{room.id}/join", local: true, method: :get) do |f| %>
+                    <%= f.submit "チャットに参加"%>                
+                  <%end%>
+                <%end%>              
+                <p>会話数 : <%=room.chats.size%></p>
+                <p>メンバー : <%=room.users.size%>人が参加中</p>      
+                <% if @user_rooms.where(user_id: current_user,room_id: room.id)== @user_rooms.where(user_id: current_user, room_id: room.id)%> 
+              <% room.users.each do |user|%>
+                <p>オーナー : <%=user.nickname%></p>
+              <%end%>                    
+              <%end%>                
+            </div>
+          <% end %>
+        </ul>
     </div>    
   </div>
 </div>
