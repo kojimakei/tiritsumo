@@ -21,7 +21,7 @@
                 <p>会話数 : <%=room.chats.size%></p>
                 <p>メンバー : <%=room.users.size%>人が参加中</p>          
                 <% if room.user_id == current_user.id%>
-                  <%= link_to "ルーム削除", room_path(room.id), medhod: :delete%>
+                  <%= link_to "ルーム削除", room_path(room.id), method: :delete%>
                 <%end%>        
             </div>
           <% end %>

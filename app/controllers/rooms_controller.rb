@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
   before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join]
-  before_action :owner_user, only: [:edit, :update, :delete, :destroy]
 
   def index
     @rooms = Room.all
@@ -27,6 +26,14 @@ class RoomsController < ApplicationController
     @chat = current_user.chats.new
   end
 
+  def destroy
+    @room.destroy
+    redirect_to rooms_path, notice: "グループを削除しました。"
+  end
+
+
+
+
   def join
     @room.users << current_user
     redirect_to rooms_path
@@ -41,8 +48,4 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
   end
 
-  def owner_user
-    @group = Room.find(params[:id])
-    redirect_to rooms_path unless @room.owner?(current_user) || current_user.admin?
-  end
 end
