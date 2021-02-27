@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    redirect_to rooms_path, notice: "グループを削除しました。"
+    redirect_to rooms_path
   end
 
 

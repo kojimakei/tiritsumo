@@ -2,11 +2,11 @@
   <div class="row">
     <%# ルーム新規作成 %>
     <div class="col-md-4">
-      <%= link_to "ルーム作成", new_room_path, class: "link"%>
+      <%= link_to "相談所作成", new_room_path, class: "link"%>
     </div>
     <%# ルーム一覧表示 %>
     <div class="col-md-8">
-      <h3>ルーム一覧</h3>
+      <h3>相談所一覧</h3>
         <ul>
           <% @rooms.each do |room| %>
             <div class="card mb-3">
@@ -15,13 +15,16 @@
                   <p class="alert alert-success text-right">このコミュニティに参加しています</p>
                 <%else%>
                   <%= form_with(url: "/rooms/#{room.id}/join", local: true, method: :get) do |f| %>
-                    <%= f.submit "チャットに参加"%>                
+                    <%= f.submit "相談所に参加"%>                
                   <%end%>
                 <%end%>              
                 <p>会話数 : <%=room.chats.size%></p>
-                <p>メンバー : <%=room.users.size%>人が参加中</p>          
+                <p>メンバー : <%=room.users.size%>人が参加中</p>      
                 <% if room.user_id == current_user.id%>
-                  <%= link_to "ルーム削除", room_path(room.id), method: :delete%>
+                  <p>あなたが相談所のオーナーです</p>
+                  <%= link_to room_path(room.id), method: :delete do%>
+                    <i class="fas fa-trash-alt" style="font-size: 30px"></i>
+                  <%end%>                  
                 <%end%>        
             </div>
           <% end %>
