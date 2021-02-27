@@ -12,8 +12,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @room = @user.rooms.new(room_params)
+    @room = Room.new(room_params)
     if @room.save
       current_user.user_rooms.create(room_id: @room.id)
       redirect_to rooms_path
@@ -35,7 +34,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name).merge(user_id: current_user.id)
   end
 
   def set_stacks

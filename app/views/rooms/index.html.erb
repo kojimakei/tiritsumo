@@ -19,12 +19,10 @@
                   <%end%>
                 <%end%>              
                 <p>会話数 : <%=room.chats.size%></p>
-                <p>メンバー : <%=room.users.size%>人が参加中</p>      
-                <% if @user_rooms.where(user_id: current_user,room_id: room.id)== @user_rooms.where(user_id: current_user, room_id: room.id)%> 
-              <% room.users.each do |user|%>
-                <p>オーナー : <%=user.nickname%></p>
-              <%end%>                    
-              <%end%>                
+                <p>メンバー : <%=room.users.size%>人が参加中</p>          
+                <% if room.user_id == current_user.id%>
+                  <%= link_to "ルーム削除", room_path(room.id), medhod: :delete%>
+                <%end%>        
             </div>
           <% end %>
         </ul>
