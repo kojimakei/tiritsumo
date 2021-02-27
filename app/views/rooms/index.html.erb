@@ -11,6 +11,11 @@
           <% @rooms.each do |room| %>
             <div class="card mb-3">
               <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
+                <% if room.image.attached?%>
+                  <p class="image"><%= image_tag(room.image.variant(resize_to_fill: [150, 150]), class: 'room-image') %></p>
+                <%else%>
+                  <p class="image"><%= image_tag "default-Room.png", size:  "150x150" %></p>
+                <%end%>
                 <% if @user_rooms.where(user_id: current_user,room_id: room.id).exists?%>    
                   <p class="alert alert-success text-right">このコミュニティに参加しています</p>
                 <%else%>
@@ -24,7 +29,10 @@
                   <p>あなたが相談所のオーナーです</p>
                   <%= link_to room_path(room.id), method: :delete do%>
                     <i class="fas fa-trash-alt" style="font-size: 30px"></i>
-                  <%end%>                  
+                  <%end%>    
+                  <%= link_to edit_room_path(room.id) do%>
+                    <i class="fas fa-edit" style="font-size: 30px"></i>
+                  <%end%>                                    
                 <%end%>        
             </div>
           <% end %>

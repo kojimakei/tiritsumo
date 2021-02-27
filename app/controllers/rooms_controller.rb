@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join,:exit]
 
   def index
     @rooms = Room.all
@@ -26,13 +26,21 @@ class RoomsController < ApplicationController
     @chat = current_user.chats.new
   end
 
+  def edit
+  end
+
+  def update
+    if @room.update(room_params)
+      redirect_to rooms_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @room.destroy
     redirect_to rooms_path
   end
-
-
-
 
   def join
     @room.users << current_user
@@ -41,7 +49,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, :image).merge(user_id: current_user.id)
   end
 
   def set_stacks
