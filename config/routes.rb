@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :user_rooms, only: [:destroy]
   # 簡単ログイン機能のルーティン
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#new_guest'

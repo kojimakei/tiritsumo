@@ -22,6 +22,7 @@ class RoomsController < ApplicationController
 
   def show
     @user_rooms = UserRoom.all
+    @user_room = UserRoom.find_by(user_id: current_user.id, room_id: params[:id])
     @chats = @room.chats.includes(:user)
     @chat = current_user.chats.new
   end

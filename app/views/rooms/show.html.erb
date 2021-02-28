@@ -1,11 +1,15 @@
 <h3 class="container-fluid sticky-top"><%= @room.name%></h3>
 
-<% unless @user_rooms.where(user_id: current_user, room_id: @room.id).exists? %>
+<%if current_user.id == @room.user_id%>
+  <p>あなたは相談所のオーナーです</p>
+<% elsif @user_rooms.where(room_id: @room.id, user_id: current_user ).exists? %>
+<%= form_with(url: user_room_path(@user_rooms.where(room_id: @user_room.room_id, user_id: current_user )), local: true, method: :delete) do |f| %>
+  <%= f.submit "脱退する"%>
+<%end%>
+<%else%>
 <%= form_with(url: join_room_path, local: true, method: :get) do |f| %>
   <%= f.submit "チャットに参加"%>
 <%end%>
-<%else%>
-  <p class="sanka">参加中</p>
   <%end%>
 
 <div id="chat-container" data-room_id = "<%= @room.id %>">

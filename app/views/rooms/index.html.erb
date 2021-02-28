@@ -26,7 +26,7 @@
                 <p>会話数 : <%=room.chats.size%></p>
                 <p>メンバー : <%=room.users.size%>人が参加中</p>      
                 <% if room.user_id == current_user.id%>
-                  <p>あなたが相談所のオーナーです</p>
+                  <p>あなたは相談所のオーナーです</p>
                   <%= link_to room_path(room.id), method: :delete do%>
                     <i class="fas fa-trash-alt" style="font-size: 30px"></i>
                   <%end%>    
