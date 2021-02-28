@@ -4,13 +4,14 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
+//↑ブラウザバック問題解決のため
 require("@rails/activestorage").start()
 require("channels")
-require("../calendar")
 require("../achieved")
 require("chartkick")
 require("chart.js")
+require("bootstrap/dist/js/bootstrap")
 global.$ = jQuery;
 import 'bootstrap'  
 import '../stylesheets/application';

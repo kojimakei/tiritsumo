@@ -31,7 +31,6 @@ class StacksController < ApplicationController
   end
 
   def update
-    @stack = Stack.find(params[:id])
     if @stack.update(stack_params)
       redirect_to user_path(current_user.id)
     else

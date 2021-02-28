@@ -1,0 +1,25 @@
+<div class="chat" id="chat-<%= chat.id %>">
+  <%# 自分の投稿は、画面右側に配置 %>
+  <% if chat.user_id == current_user.id%>
+    <div class="mycomment text-right">
+      <p><%= chat.message %></p>
+    </div>
+  <%else%>
+    <%# 自分以外の人の投稿は、画面左側に配置 %>
+  <div class="friendcomment">
+    <div class="faceicon">
+      <% if chat.user.image.attached?%>
+        <%= link_to user_path(chat.user_id), class: "link" do%>
+          <%= image_tag(chat.user.image.variant(resize_to_fill: [50, 50]), class: 'user-image') %> 
+          <%= chat.user.nickname %> 
+        <%end%>
+      <%end%>
+    </div>
+    <div class="chatting">
+      <div class="says">
+        <p><%= chat.message %></p>         
+      </div>    
+    </div>
+  </div>  
+  <%end%>
+</div>
