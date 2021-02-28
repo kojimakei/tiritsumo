@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   end
 
   resources :rooms do
+    collection do
+      get 'search'
+    end
     resources :chats, only: [:create]
     member do
       get 'join'

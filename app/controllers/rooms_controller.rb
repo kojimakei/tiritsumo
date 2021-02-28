@@ -48,6 +48,12 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    room = Room.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
   private
   def room_params
     params.require(:room).permit(:name, :image).merge(user_id: current_user.id)
