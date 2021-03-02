@@ -18,6 +18,10 @@ RSpec.describe User, type: :model do
         @user.email = 'test@gmail.com'
         expect(@user).to be_valid
       end
+      it 'imageが空でも保存できること' do
+        @user.image = nil
+        expect(@user).to be_valid
+      end
 
     end
 

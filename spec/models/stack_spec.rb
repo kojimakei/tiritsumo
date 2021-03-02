@@ -10,7 +10,14 @@ RSpec.describe Stack, type: :model do
       it '日付とテキストがあれば投稿できる' do
         expect(@stack).to be_valid
       end
-
+      it '取り組み時間が空でも保存できること' do
+        @stack.work_time_id = nil
+        expect(@stack).to be_valid
+      end
+      it '達成可否が空でも保存できること' do
+        @stack.achieved = nil
+        expect(@stack).to be_valid
+      end
     end
     context 'ツイートが投稿できない場合' do
       it 'テキストが空では投稿できない' do
