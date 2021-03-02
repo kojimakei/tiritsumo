@@ -7,7 +7,6 @@ class UsersController < ApplicationController
     @month  = Date.today.month
     @today = Date.current.strftime('%Y年 %m月 %d日')
     @today_stacks = @stacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-    @schedules = @user.schedules
     @category_total = User.where(category_id: @user.category_id).size
     @age_total = User.where(age_id: @user.age_id).size
 

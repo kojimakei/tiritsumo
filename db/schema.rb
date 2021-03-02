@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_082445) do
+ActiveRecord::Schema.define(version: 2021_03_02_015118) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -70,17 +70,6 @@ ActiveRecord::Schema.define(version: 2021_02_26_082445) do
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
-  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "date", null: false
-    t.datetime "begin_time", null: false
-    t.datetime "finish_time", null: false
-    t.string "plan", null: false
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_schedules_on_user_id"
-  end
-
   create_table "stacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "date", null: false
     t.text "text", null: false
@@ -126,7 +115,6 @@ ActiveRecord::Schema.define(version: 2021_02_26_082445) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "stacks"
   add_foreign_key "likes", "users"
-  add_foreign_key "schedules", "users"
   add_foreign_key "stacks", "users"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
