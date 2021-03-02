@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :comments
   has_many :likes,    dependent: :destroy
   # has_many :liked_stacks, through: :likes, source: :stack
-  has_many :schedules
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
   has_many :chats
