@@ -29,15 +29,23 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :email
     validates :nickname,length: { maximum: 10 }
-    validates :password
     validates :goal
     validates :deadline
   end
+
+  validates_format_of :password, with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
 
   validates :category_id,   numericality: { other_than: 1 }
   validates :occupation_id, numericality: { other_than: 1 }
   validates :age_id,        numericality: { other_than: 1 }
 
+
+  # deadlineカラムに過去の日付を選択できないように指定する
+  validate :date_before_start
+  def date_before_start
+    return if deadline.blank?
+    errors.add(:deadline, "は今日以降のものを選択してください") if deadline < Date.today
+  end
 
 
 
