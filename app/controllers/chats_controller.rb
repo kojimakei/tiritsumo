@@ -1,7 +1,7 @@
 class ChatsController < ApplicationController
   def create
     @room = Room.find(params[:room_id])
-    @chat = current_user.chats.create!(chat_params)
+    @chat = current_user.chats.includes(:room).create!(chat_params)
     ActionCable.server.broadcast "room_channel", chat: @chat.template
   end
 

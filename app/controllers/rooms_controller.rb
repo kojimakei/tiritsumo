@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join,:exit]
+  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join]
 
   def index
     @rooms = Room.all
@@ -46,6 +46,11 @@ class RoomsController < ApplicationController
   def join
     @room.users << current_user
     redirect_to rooms_path
+  end
+
+  def search
+    @rooms = Room.search(params[:keyword])
+    @user_rooms = UserRoom.all
   end
 
   private
