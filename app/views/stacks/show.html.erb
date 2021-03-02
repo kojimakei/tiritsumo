@@ -33,16 +33,12 @@
   <%# コメントform、コメント一覧 %>
     <div class="card hoberable">
       <div class="card-body">
-        <div class="comments" id="comments">
-          <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント一覧</h4>
-            <% @comments.each do |comment| %>
-              <%= render "comments/comment", stack: @stack, comment: comment %>
-            <% end %>
-        </div>   
         <div class="card-title">
           <% if user_signed_in? %>
             <%= form_with(model: [@stack, @comment], remote: true) do |f| %>
-            <%= render 'shared/error_messages', model: f.object %>
+            <div id="comments_error">
+              <%= render 'shared/error_messages', model: f.object %>
+            </div>
             <form>
               <div class="form-group">
                 <%= f.text_field :text, placeholder: "内容", class: 'form-control' %>
@@ -51,7 +47,13 @@
             </form>
             <% end %>
           <% end %>
-        </div>            
+        </div>  
+        <div class="comments" id="comments">
+          <h4><i class="far fa-comment-alt fa-lgfo"></i> コメント一覧</h4>
+            <% @comments.each do |comment| %>
+              <%= render "comments/comment", stack: @stack, comment: comment %>
+            <% end %>
+        </div>                     
         </div>
       </div>
     </div>
