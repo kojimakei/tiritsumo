@@ -28,7 +28,7 @@ class User < ApplicationRecord
   # ※※※※※バリデーション※※※※※
   with_options presence: true do
     validates :email
-    validates :nickname
+    validates :nickname,length: { maximum: 10 }
     validates :password
     validates :goal
     validates :deadline
