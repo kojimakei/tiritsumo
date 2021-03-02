@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join,:exit]
+  before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join]
 
   def index
     @rooms = Room.all
@@ -49,9 +49,8 @@ class RoomsController < ApplicationController
   end
 
   def search
-    return nil if params[:keyword] == ""
-    room = Room.where(['name LIKE ?', "%#{params[:keyword]}%"] )
-    render json:{ keyword: tag }
+    @rooms = Room.search(params[:keyword])
+    @user_rooms = UserRoom.all
   end
 
   private

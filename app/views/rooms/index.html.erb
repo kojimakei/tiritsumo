@@ -5,36 +5,17 @@
       <%= link_to "相談所作成", new_room_path, class: "link"%>
     </div>
     <%# ルーム一覧表示 %>
-    <div class="col-md-8">
+    <div class="col-md-8">   
+      <div class="card mb-3">
       <h3>相談所一覧</h3>
+      <%= form_with(url: search_rooms_path, local: true, method: :get, class: "search-form") do |form| %>
+        <%= form.text_field :keyword, placeholder: "相談所を検索する", class: "search-input" %>
+        <%= form.submit "検索", class: "search-btn" %>
+      <% end %>     
+      </div>  
         <ul>
           <% @rooms.each do |room| %>
-            <div class="card mb-3">
-              <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
-                <% if room.image.attached?%>
-                  <p class="image"><%= image_tag(room.image.variant(resize_to_fill: [150, 150]), class: 'room-image') %></p>
-                <%else%>
-                  <p class="image"><%= image_tag "default-Room.png", size:  "150x150" %></p>
-                <%end%>
-                <% if @user_rooms.where(user_id: current_user,room_id: room.id).exists?%>    
-                  <p class="alert alert-success text-right">このコミュニティに参加しています</p>
-                <%else%>
-                  <%= form_with(url: "/rooms/#{room.id}/join", local: true, method: :get) do |f| %>
-                    <%= f.submit "相談所に参加"%>                
-                  <%end%>
-                <%end%>              
-                <p>会話数 : <%=room.chats.size%></p>
-                <p>メンバー : <%=room.users.size%>人が参加中</p>      
-                <% if room.user_id == current_user.id%>
-                  <p>あなたは相談所のオーナーです</p>
-                  <%= link_to room_path(room.id), method: :delete do%>
-                    <i class="fas fa-trash-alt" style="font-size: 30px"></i>
-                  <%end%>    
-                  <%= link_to edit_room_path(room.id) do%>
-                    <i class="fas fa-edit" style="font-size: 30px"></i>
-                  <%end%>                                    
-                <%end%>        
-            </div>
+            <%= render partial: 'room', collection: @rooms  %>
           <% end %>
         </ul>
     </div>    

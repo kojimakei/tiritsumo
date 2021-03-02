@@ -6,4 +6,12 @@ class Room < ApplicationRecord
   has_one_attached :image
   # バリデーション
   validates :name, presence: true
+
+  def self.search(search)
+    if search != ""
+      Room.where('name LIKE(?)', "%#{search}%")
+    else
+      Room.all
+    end
+  end
 end
