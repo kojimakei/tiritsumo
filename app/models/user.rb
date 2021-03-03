@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :chats
 
   def already_liked?(stack)
-    likes.exists?(stack_id: stack.id)
+    likes.where(stack_id: stack.id).exists?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions

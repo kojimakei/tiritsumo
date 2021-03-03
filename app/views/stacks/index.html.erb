@@ -45,30 +45,11 @@
   <%# 積み上げの投稿を1つづつに分ける %>
   <% if @stacks.exists?%>
   <% @stacks.each do |stack| %>  
-    <div class="card mb-2">
-      <div class="card-body">
-        <div class="card-title">
-          <div class="profile">
-            <p class="image"><%= link_to image_tag(stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'),user_path(stack.user.id) if stack.user.image.attached? %></p>
-            <p class="nickname"><%=stack.user.nickname %></p>
-          </div>  
-          <h4 class="text-center"><%=stack.text %></h4>
-          <div class="text-right">
-            <p>
-              <%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %>        
-            </p>   
-            <p>
-              <i class="fas fa-heart fa-lgfo"><%= Like.where(stack_id: stack.id).size %></i>
-              <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).size %></i>
-              <%=time_ago_in_words(stack.created_at)%>前のちりつも      
-            </p>             
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render partial: 'index', locals: {stack: stack} %>
     <%end%>
     <%end%>
   </div>
 
 </div>
 </div>
+
