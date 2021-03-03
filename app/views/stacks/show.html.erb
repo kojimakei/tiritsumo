@@ -21,7 +21,7 @@
           </div>
           <div class="card-text">
             <div class="col-lg-2, align-self-end">  
-              <div class="likes_<%= @stack.id %>">
+              <div id="likes_<%= @stack.id %>">
                 <%= render partial: 'likes/likes', locals: { stack: @stack} %>
               </div>
             </div>  
