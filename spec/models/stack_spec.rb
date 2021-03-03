@@ -23,13 +23,13 @@ RSpec.describe Stack, type: :model do
       it 'テキストが空では投稿できない' do
         @stack.text = ''
         @stack.valid?
-        expect(@stack.errors.full_messages).to include("Textを入力してください")
-      end    
+        expect(@stack.errors.full_messages).to include('Textを入力してください')
+      end
       it '日付が空では投稿できない' do
         @stack.date = ''
         @stack.valid?
-        expect(@stack.errors.full_messages).to include("Dateを入力してください")
-      end     
+        expect(@stack.errors.full_messages).to include('Dateを入力してください')
+      end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @stack.user = nil
         @stack.valid?
@@ -38,13 +38,13 @@ RSpec.describe Stack, type: :model do
       it 'dateは本日より過去でなければ投稿できない' do
         @stack.date = '3000-01-01 15:00:00'
         @stack.valid?
-        expect(@stack.errors.full_messages).to include('Dateは過去の日付、もしくは本日の日付を選択してください')    
+        expect(@stack.errors.full_messages).to include('Dateは過去の日付、もしくは本日の日付を選択してください')
       end
       it 'テキストは20文字以下でなければ投稿できない' do
         @stack.text = 'aaaaaaaaaaaaaaaaaaaaa'
         @stack.valid?
-        expect(@stack.errors.full_messages).to include('Textは20文字以内で入力してください')    
-      end    
+        expect(@stack.errors.full_messages).to include('Textは20文字以内で入力してください')
+      end
     end
   end
 end

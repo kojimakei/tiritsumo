@@ -7,7 +7,7 @@ class Stack < ApplicationRecord
   belongs_to_active_hash :work_time
 
   with_options presence: true do
-    validates :text,length: { maximum: 20 }
+    validates :text, length: { maximum: 20 }
     validates :date
   end
 
@@ -15,10 +15,11 @@ class Stack < ApplicationRecord
   validate :date_before_finish
 
   def date_before_finish
-    return if date.blank? 
-    errors.add(:date, "は過去の日付、もしくは本日の日付を選択してください") if date > Date.today
+    return if date.blank?
+
+    errors.add(:date, 'は過去の日付、もしくは本日の日付を選択してください') if date > Date.today
   end
-  
+
   def start_time
     date
   end

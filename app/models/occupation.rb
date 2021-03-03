@@ -9,10 +9,9 @@ class Occupation < ActiveHash::Base
     { id: 7, name: 'パート・アルバイト' },
     { id: 8, name: '学生' },
     { id: 9, name: '専業主婦（夫）' },
-    { id: 10, name: '無職' },
+    { id: 10, name: '無職' }
   ]
 
   include ActiveHash::Associations
   has_many :users
-
 end

@@ -15,19 +15,19 @@ RSpec.describe Chat, type: :model do
       it 'messageが空では保存できないこと' do
         @chat.message = ''
         @chat.valid?
-        expect(@chat.errors.full_messages).to include("Messageを入力してください")
+        expect(@chat.errors.full_messages).to include('Messageを入力してください')
       end
       it 'roomが紐付いていないと保存できないこと' do
         @chat.room = nil
         @chat.valid?
         expect(@chat.errors.full_messages).to include('Roomを入力してください')
       end
-  
+
       it 'userが紐付いていないと保存できないこと' do
         @chat.user = nil
         @chat.valid?
         expect(@chat.errors.full_messages).to include('Userを入力してください')
-      end 
+      end
     end
   end
 end

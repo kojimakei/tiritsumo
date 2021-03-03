@@ -43,17 +43,16 @@ class StacksController < ApplicationController
     redirect_to root_path
   end
 
-
   def achieved
     stack = Stack.find(params[:id])
     if stack.achieved
       stack.update(achieved: false)
-      else
-        stack.update(achieved: true)
-      end
-      # 更新したレコードをitem変数に変更し直し
-      item = Stack.find(params[:id])
-      render json: {stack: item}
+    else
+      stack.update(achieved: true)
+    end
+    # 更新したレコードをitem変数に変更し直し
+    item = Stack.find(params[:id])
+    render json: { stack: item }
   end
 
   private

@@ -54,6 +54,7 @@ class RoomsController < ApplicationController
   end
 
   private
+
   def room_params
     params.require(:room).permit(:name, :image).merge(user_id: current_user.id)
   end
@@ -61,5 +62,4 @@ class RoomsController < ApplicationController
   def set_stacks
     @room = Room.find(params[:id])
   end
-
 end
