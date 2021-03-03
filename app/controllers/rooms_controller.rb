@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_stacks, only: [:show, :edit, :update, :destroy, :join]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @rooms = Room.all
@@ -45,7 +46,7 @@ class RoomsController < ApplicationController
 
   def join
     @room.users << current_user
-    redirect_to rooms_path
+    redirect_to room_path(@room)
   end
 
   def search
@@ -61,5 +62,16 @@ class RoomsController < ApplicationController
 
   def set_stacks
     @room = Room.find(params[:id])
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+end
+
+  def logged_in?
+  !current_user.nil?
   end
 end
