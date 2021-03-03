@@ -7,9 +7,9 @@ class Category < ActiveHash::Base
     { id: 5, name: '英語学習' },
     { id: 6, name: '大学受験' },
     { id: 7, name: 'ブログ執筆' },
-    { id: 8, name: 'その他' },
+    { id: 8, name: 'その他' }
   ]
 
   include ActiveHash::Associations
   has_many :users
-  end
+end

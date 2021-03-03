@@ -11,9 +11,9 @@ class Age < ActiveHash::Base
     { id: 9, name: '50〜54歳' },
     { id: 10, name: '55〜59歳' },
     { id: 11, name: '60〜64歳' },
-    { id: 12, name: '65〜69歳' },
+    { id: 12, name: '65〜69歳' }
   ]
 
   include ActiveHash::Associations
   has_many :users
-  end
+end

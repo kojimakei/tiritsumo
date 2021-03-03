@@ -1,22 +1,18 @@
 class User < ApplicationRecord
-
-
   # ※※※※※アソシエーション※※※※※
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :stacks
   has_many :comments
-  has_many :likes,    dependent: :destroy
+  has_many :likes, dependent: :destroy
   # has_many :liked_stacks, through: :likes, source: :stack
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
   has_many :chats
- 
 
   def already_liked?(stack)
-    self.likes.exists?(stack_id: stack.id)
+    likes.exists?(stack_id: stack.id)
   end
-
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :age
@@ -24,11 +20,10 @@ class User < ApplicationRecord
   belongs_to :category
   has_one_attached :image
 
-
   # ※※※※※バリデーション※※※※※
   with_options presence: true do
     validates :email
-    validates :nickname,length: { maximum: 10 }
+    validates :nickname, length: { maximum: 10 }
     validates :goal
     validates :deadline
   end
@@ -39,16 +34,13 @@ class User < ApplicationRecord
   validates :occupation_id, numericality: { other_than: 1 }
   validates :age_id,        numericality: { other_than: 1 }
 
-
   # deadlineカラムに過去の日付を選択できないように指定する
   validate :date_before_start
   def date_before_start
     return if deadline.blank?
-    errors.add(:deadline, "は今日以降のものを選択してください") if deadline < Date.today
+
+    errors.add(:deadline, 'は今日以降のものを選択してください') if deadline < Date.today
   end
-
-
-
 
   # ※※※※※ゲストログイン※※※※※
   def self.guest
