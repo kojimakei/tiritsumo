@@ -5,11 +5,11 @@
     <%= form_with model: @user, url:user_session_path, local: true do |f| %>
       <form>
         <div class="form-group">
-          <label>email</label>
+          <label for="user_email">email</label>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <label>password</label>
+          <label for="user_password">password</label>
           <%= f.password_field :password, class: 'form-control' %>
         </div>
 
