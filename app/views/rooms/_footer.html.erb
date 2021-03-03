@@ -1,5 +1,7 @@
 <div class="fixed-bottom" id="footer">  
   <%= form_with model: [@room, @chat], local: false do |f| %>
+    <input name="user_room[user_id][]" type="hidden" value=<%=current_user.id%>>
+    <input name="user_room[room_id][]" type="hidden" value=<%=@room.id%>>
 
     <div class="form-group">
       <%= f.text_area :message, class: 'form-control', rows: '1', maxlength: '500' %>
