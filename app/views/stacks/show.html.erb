@@ -20,15 +20,17 @@
             <h5><%=@stack.text %></h5>
           </div>
           <div class="card-text">
-            <div class="col-lg-2, align-self-end">  
+            <div class="col-lg-2, text-right">  
               <div id="likes_<%= @stack.id %>">
-                <%= render partial: 'likes/likes', locals: { stack: @stack} %>
+                <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
               </div>
+              <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>    
             </div>  
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   <%# コメントform、コメント一覧 %>
     <div class="card hoberable">
