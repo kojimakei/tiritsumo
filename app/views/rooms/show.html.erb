@@ -1,7 +1,7 @@
 <h3 class="container-fluid sticky-top"><%= @room.name%></h3>
 
 <%if current_user.id == @room.user_id%>
-  <p>あなたは相談所のオーナーです</p>
+  <p>あなたはルームのオーナーです</p>
 <% elsif @user_rooms.where(room_id: @room.id, user_id: current_user ).exists? %>
 <%= form_with(url: user_room_path(@user_room), local: true, method: :delete) do |f| %>
   <%= f.submit "脱退する"%>

@@ -29,10 +29,10 @@ function achieve() {
         // レスポンスされたデータを変数itemに代入している
         const item = XHR.response.stack;
         if (item.achieved === true) {
-          // 既読状態であれば、灰色に変わるcssを適用するためのカスタムデータを追加している
+          // 達成状態であれば、灰色に変わるcssを適用するためのカスタムデータを追加している
           stack.setAttribute("data-check", "true");
         } else if (item.achieved === false) {
-          // 未読状態であれば、カスタムデータを削除している
+          // 未達成状態であれば、カスタムデータを削除している
           stack.removeAttribute("data-check");
         }
       };

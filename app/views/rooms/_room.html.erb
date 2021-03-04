@@ -1,26 +1,44 @@
-<div class="card mb-3">
-  <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
-  <% if room.image.attached?%>
-    <p class="image"><%= image_tag(room.image.variant(resize_to_fill: [150, 150]), class: 'room-image') %></p>
-  <%else%>
-    <p class="image"><%= image_tag "default-Room.png", size:  "150x150" %></p>
-  <%end%>
-  <% if @user_rooms.where(user_id: current_user,room_id: room.id).exists?%>    
-    <p class="alert alert-success text-right">このコミュニティに参加しています</p>
-  <%else%>
-    <%= form_with(url: "/rooms/#{room.id}/join", local: true, method: :get) do |f| %>
-      <%= f.submit "相談所に参加"%>                
-    <%end%>
-  <%end%>              
-  <p>会話数 : <%=room.chats.size%></p>
-    <p>メンバー : <%=room.users.size%>人が参加中</p>      
-      <% if room.user_id == current_user.id%>
-        <p>あなたは相談所のオーナーです</p>
-          <%= link_to room_path(room.id), method: :delete do%>
+<div class="card mb-3" id="room_<%= room.id %>">
+  <div class="card-title">
+    <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
+  </div>
+  <div class="row no-gutters">
+    <%# ルーム画像の可否によってビューを分岐 %>
+    <div class="col-md-6">
+      <% if room.image.attached?%>
+        <p class="image"><%= image_tag(room.image.variant(resize_to_fill: [150, 150]), class: 'room-image') %></p>
+      <%else%>
+        <p class="image"><%= image_tag "default-Room.png", size:  "150x150" %></p>
+      <%end%>
+    </div>
+  
+    <%#ユーザーのログイン、ルーム参加可否によってビューを分岐 %>
+    <div class="col-md-6">
+      <%# ルーム作成者とログインユーザーが同一の場合 %>
+      <% if current_user.id == room.user_id && current_user.already_joined?(room)%>
+        <p class="alert alert-warning text-center">あなたはルームのオーナーです</p>
+        <p class="text-right">
+          <%= link_to room_path(room.id),remote: true,method: :delete do%>
             <i class="fas fa-trash-alt" style="font-size: 30px"></i>
           <%end%>    
           <%= link_to edit_room_path(room.id) do%>
             <i class="fas fa-edit" style="font-size: 30px"></i>
-          <%end%>                                    
-      <%end%>        
+          <%end%>       
+        </p>
+      <%# ユーザー（非ルーム作成者）がルームに参加している場合   %>
+      <%elsif user_signed_in? && current_user.already_joined?(room)%> 
+        <p class="text-center">会話数 : <%=room.chats.size%></p> 
+        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>   
+        <p class="alert alert-success text-center">このコミュニティに参加しています</p> 
+       
+      <%# ユーザーがサインインしており、ルームに参加していない場合 %>
+      <%elsif user_signed_in?%>
+        <p class="text-center">会話数 : <%=room.chats.size%></p> 
+        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>  
+      
+      <%else%>        
+      <p>※※ルームの閲覧にはログインが必要です※※</p>
+      <%end%>                           
+    </div>
+  </div>  
 </div>
