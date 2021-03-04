@@ -1,20 +1,35 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <%# ルーム新規作成 %>
-    <div class="col-md-4">
-      <%= link_to "ルーム作成", new_room_path, class: "link"%>
-    </div>
-    <%# ルーム一覧表示 %>
-    <div class="col-md-8">   
-      <div class="card mb-3">
-      <h3>ルーム一覧</h3>
+    <div class="col s2 m2 l2">
+      <div class="card mb-5">
+        <div class="card-content">
+          <h3>ルーム作成</h3>
+          <%= form_with model: @room,remote: true do |f| %>
+          <%= render 'shared/error_messages', model: f.object %>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            <%= f.label :部屋名 %>
+            <%= f.text_field :name %>
+            <%= f.submit "ルーム作成"%>
+          <% end %>
+        </div>
+      </div>
+      <%# ルーム検索フォーム %>
+      <div class="card">
+      <h3>ルーム検索</h3>
       <%= form_with(url: search_rooms_path, local: true, method: :get, class: "search-form") do |form| %>
         <%= form.text_field :keyword, placeholder: "相談所を検索する", class: "search-input" %>
         <%= form.submit "検索", class: "search-btn" %>
       <% end %>     
-      </div>  
+      </div>        
+    </div>
+
+    <%# ルーム一覧表示 %>
+    <div class="col s10 m10 l10">   
+      <h3>ルーム一覧</h3>
         <ul>
-            <%= render partial: 'room', collection: @rooms  %>
+        <div id="rooms"></div>
+          <%= render partial: 'room', collection: @rooms%>
         </ul>
     </div>    
   </div>

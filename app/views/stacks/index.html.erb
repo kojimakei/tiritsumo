@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col s12 m12 l4">
+    <div class="col s12 m4 l4">
       <div class="card">
         <div class="card-content">
           <h3>ちりつも数ランキング</h3>
@@ -44,12 +44,9 @@
   <div class="col s12 m12 l8">  
   <%# 積み上げの投稿を1つづつに分ける %>
   <% if @stacks.exists?%>
-  <% @stacks.each do |stack| %>  
-    <%= render partial: 'index', locals: {stack: stack} %>
-    <%end%>
+    <%= render partial: 'stack',collection: @stacks %>
     <%end%>
   </div>
 
 </div>
 </div>
-

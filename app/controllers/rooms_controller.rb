@@ -3,11 +3,8 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rooms = Room.all
+    @rooms = Room.all.order('created_at DESC')
     @user_rooms = UserRoom.all
-  end
-
-  def new
     @room = Room.new
   end
 
@@ -15,9 +12,8 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.save
       current_user.user_rooms.create(room_id: @room.id)
-      redirect_to rooms_path
     else
-      render :new
+      redirect_to rooms_path
     end
   end
 
@@ -41,7 +37,6 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    redirect_to rooms_path
   end
 
   def join
@@ -62,16 +57,5 @@ class RoomsController < ApplicationController
 
   def set_stacks
     @room = Room.find(params[:id])
-  end
-
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-end
-
-  def logged_in?
-  !current_user.nil?
   end
 end

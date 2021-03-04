@@ -14,6 +14,10 @@ class User < ApplicationRecord
     likes.where(stack_id: stack.id).exists?
   end
 
+  def already_joined?(room)
+    user_rooms.where(room_id: room.id).exists?
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :age
   belongs_to :occupation
