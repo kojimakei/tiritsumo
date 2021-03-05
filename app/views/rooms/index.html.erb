@@ -6,6 +6,7 @@
         <div class="card-content">
           <h3>ルーム作成</h3>
           <%= form_with model: @room,remote: true do |f| %>
+          <input name="[user_id]" type="hidden" value=<%=current_user.id%>>
             <div id="rooms_error">
               <%= render 'shared/error_messages', model: f.object %>
             </div>
