@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
 
   def index
     # ルームは1ページにつき最新10部屋まで
-    @rooms = Room.page(params[:page]).per(10).all.order('created_at DESC')
+    @rooms = Room.all.order('created_at DESC')
     @user_rooms = UserRoom.all
     @room = Room.new
   end
