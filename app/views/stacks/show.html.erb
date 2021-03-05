@@ -8,23 +8,25 @@
               <p class="image"><%= link_to image_tag(@stack.user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'),user_path(@stack.user.id) if @stack.user.image.attached? %></p>
               <p class="nickname"><%=@stack.user.nickname %></p>
             </div>
-            <div class="col-lg-1 offset-10">
-              <% if user_signed_in? && (current_user.id == @stack.user_id) %>
-                <%= link_to stack_path(@stack.id), method: :delete do %>
-                <i class="fas fa-trash-alt" style="font-size: 30px"></i>
-                <%end%>
-              <% end %>     
-            </div>  
           </div>
           <div class="card-text text-center">
             <h5><%=@stack.text %></h5>
           </div>
           <div class="card-text">
-            <div class="col-lg-2, text-right">  
-              <div id="likes_<%= @stack.id %>">
-                <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
-              </div>
-              <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>    
+            <div class="col-lg-2, text-right">
+              <div class="icons"> 
+                <div id="likes_<%= @stack.id %>">
+                  <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
+                </div>
+                <div> 
+                  <% if user_signed_in? && (current_user.id == @stack.user_id) %>
+                    <%= link_to stack_path(@stack.id), method: :delete do %>
+                      <i class="fas fa-trash-alt" style="font-size: 30px"></i>
+                    <%end%>
+                  <% end %>    
+                </div>              
+              </div>  
+              <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>  
             </div>  
           </div>
         </div>
