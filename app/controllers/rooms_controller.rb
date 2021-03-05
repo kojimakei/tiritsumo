@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    # ルームは1ページにつき最新10部屋まで
     @rooms = Room.all.order('created_at DESC')
     @user_rooms = UserRoom.all
     @room = Room.new
@@ -13,7 +14,7 @@ class RoomsController < ApplicationController
     if @room.save
       current_user.user_rooms.create(room_id: @room.id)
     else
-      redirect_to rooms_path
+      render 'error'
     end
   end
 

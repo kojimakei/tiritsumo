@@ -6,11 +6,13 @@
         <div class="card-content">
           <h3>ルーム作成</h3>
           <%= form_with model: @room,remote: true do |f| %>
-          <%= render 'shared/error_messages', model: f.object %>
+            <div id="rooms_error">
+              <%= render 'shared/error_messages', model: f.object %>
+            </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             <%= f.label :部屋名 %>
             <%= f.text_field :name %>
-            <%= f.submit "ルーム作成"%>
+            <%= f.submit "ルーム作成", id:"submit" %>
           <% end %>
         </div>
       </div>
@@ -28,7 +30,7 @@
     <div class="col s10 m10 l10">   
       <h3>ルーム一覧</h3>
         <ul>
-        <div id="rooms"></div>
+          <div id="rooms"></div>
           <%= render partial: 'room', collection: @rooms%>
         </ul>
     </div>    
