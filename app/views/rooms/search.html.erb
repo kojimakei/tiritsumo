@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col s2 m2 l2">
+    <div class="col-md-3">
       <%# ルーム検索フォーム %>
       <div class="card">
         <h3>ルーム検索</h3>
           <%= form_with(url: search_rooms_path, local: true, method: :get, class: "search-form") do |form| %>
           <%= form.text_field :keyword, placeholder: "相談所を検索する", class: "search-input" %>
-            <%= form.submit "検索", class: "search-btn" %>
+            <%= form.submit "検索",class: 'btn btn-success' %>
           <% end %>     
       </div>        
     </div>
     <%# ルーム一覧表示 %>
-    <div class="col s10 m10 l10">   
+    <div class="col-md-9">   
       <h3>ルーム一覧</h3>
         <ul>
           <div id="rooms"></div>
