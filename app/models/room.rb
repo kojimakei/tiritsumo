@@ -6,6 +6,8 @@ class Room < ApplicationRecord
   has_one_attached :image
   # バリデーション
   validates :name, presence: true
+  # ルーム作成時にはユーザーが必要
+  validates :user_id, presence: true
 
   def self.search(search)
     if search != ''

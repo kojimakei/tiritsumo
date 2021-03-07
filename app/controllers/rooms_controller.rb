@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      current_user.user_rooms.create(room_id: @room.id)
+      current_user.user_rooms.create(user_id:current_user.id, room_id: @room.id)
     else
       render 'error'
     end
