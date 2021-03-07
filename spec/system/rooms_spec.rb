@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ルーム作成', type: :system do
+RSpec.describe 'ルームの作成機能', type: :system do
   before do
     @user_room = FactoryBot.create(:user_room)
   end

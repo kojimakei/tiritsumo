@@ -44,7 +44,7 @@ RSpec.describe "ちりつも投稿", type: :system do
   end
 end
 
-
+# -------------------------編集--------------------------------------
 RSpec.describe 'ちりつも編集', type: :system do
   before do
     @stack1 = FactoryBot.create(:stack)
@@ -104,7 +104,7 @@ RSpec.describe 'ちりつも編集', type: :system do
   end
 end
 
-
+# -------------------------削除--------------------------------------
 RSpec.describe 'ちりつも削除', type: :system do
   before do
     @stack1 = FactoryBot.create(:stack)
