@@ -7,7 +7,7 @@ RSpec.describe 'チャット投稿機能', type: :system do
   end
 
   context '投稿に失敗したとき' do
-    it '送る値が空の為、メッセージの送信に失敗すること' do
+    it '送る値が空の為、メッセージの送信に失敗すること', js: true do
       # # サインインする
       sign_in(@user_room.user)
 
@@ -17,16 +17,18 @@ RSpec.describe 'チャット投稿機能', type: :system do
       # 作成したページに遷移する
       click_on(@user_room.room.name)
 
-       # DBに保存されていないことを確認する
-       click_button "送信"
-       wait_for_ajax do
-         change(Chat, :count).by(0)
-       end  
+      fill_in 'chat_message', with: ''
+      
     # 投稿一覧画面に遷移していることを確認する
     expect(current_path).to eq(room_path(@user_room))
 
-    # 送信した値がブラウザに表示されていることを確認する
+    # 送信した値がブラウザに表示されていないことを確認する
     expect(page).to have_no_content(message)
+
+    # DBに変化がないことを確認
+    wait_for_ajax do
+      change(Chat, :count).by(0)
+    end  
 
     end
   end
