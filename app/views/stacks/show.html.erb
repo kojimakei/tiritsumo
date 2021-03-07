@@ -14,19 +14,22 @@
           </div>
           <div class="card-text">
             <div class="col-lg-2, text-right">
-              <div class="icons"> 
-                <div id="likes_<%= @stack.id %>">
-                  <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
-                </div>
-                <div> 
+              <div id="likes_<%= @stack.id %>">
+                <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
+              </div>
+              <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>  
+              <div class="text-right"> 
+                <% if user_signed_in? && (current_user.id == @stack.user_id) %>
+                  <%= link_to edit_stack_path(@stack.id), method: :get do %>
+                    <i class="fas fa-edit" style="font-size: 30px"></i>
+                  <%end%>  
+                  <%end%>                 
                   <% if user_signed_in? && (current_user.id == @stack.user_id) %>
                     <%= link_to stack_path(@stack.id), method: :delete do %>
                       <i class="fas fa-trash-alt" style="font-size: 30px"></i>
                     <%end%>
-                  <% end %>    
-                </div>              
-              </div>  
-              <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>  
+                  <% end %>                      
+                </div>                
             </div>  
           </div>
         </div>
