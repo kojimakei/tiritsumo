@@ -52,7 +52,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :image).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, :image,:habit).merge(user_id: current_user.id)
   end
 
   def set_stacks

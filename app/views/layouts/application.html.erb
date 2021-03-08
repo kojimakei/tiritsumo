@@ -30,7 +30,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><%= link_to 'みんなのちりつも', stacks_path, class: "nav-link" %></li>
               <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to '相談所を見る', rooms_path, class: "nav-link" %></li> 
+                <li class="nav-item"><%= link_to 'ルームを見る', rooms_path, class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to '積み上げる', new_stack_path, class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %></li> 
                 <% if current_user.image.attached? %>

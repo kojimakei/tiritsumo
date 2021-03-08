@@ -14,6 +14,7 @@ RSpec.describe 'ルームの作成機能', type: :system do
 
     # 正しい部屋情報を入力する
     fill_in 'room_name', with: 'name'
+    fill_in 'room_habit', with: 'habit'
 
     # 部屋作成をクリックすると、ルームモデルのカウントが1上がる
       click_button "ルーム作成"
@@ -33,6 +34,7 @@ RSpec.describe 'ルームの作成機能', type: :system do
 
     # 部屋情報を空白で送信
     fill_in 'room_name', with: ''
+    fill_in 'room_habit', with: ''
     
     # 部屋作成をクリックすると、ルームモデルのカウントは変化なし
     click_button "ルーム作成"

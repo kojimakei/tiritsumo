@@ -1,5 +1,5 @@
 <div class="card mb-3" id="room_<%= room.id %>">
-  <div class="card-title">
+  <div class="card-title border-bottom pb-3 ">
     <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
   </div>
   <div class="row no-gutters">
@@ -17,8 +17,9 @@
       <%# ルーム作成者とログインユーザーが同一の場合 %>
       <% if current_user.id == room.user_id && current_user.already_joined?(room)%>
         <p class="alert alert-warning text-center">あなたはルームのオーナーです</p>
-        <p class="text-center">会話数 : <%=room.chats.size%></p> 
-        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>          
+        <p>会話数: <%=room.chats.size%></p> 
+        <p>メンバー : <%=room.users.size%>人が参加中</p>   
+        <p>習慣 : <%=room.habit%></p>       
         <p class="text-right">
           <%= link_to room_path(room.id),remote: true,method: :delete do%>
             <i class="fas fa-trash-alt" style="font-size: 30px"></i>
@@ -29,18 +30,20 @@
         </p>
       <%# ユーザー（非ルーム作成者）がルームに参加している場合   %>
       <%elsif user_signed_in? && current_user.already_joined?(room)%> 
-        <p class="alert alert-success text-center">このコミュニティに参加しています</p>       
-        <p class="text-center">会話数 : <%=room.chats.size%></p> 
-        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>          
+        <p class="alert alert-success text-center">コミュニティに参加しています</p>       
+        <p>会話数 : <%=room.chats.size%></p> 
+        <p>メンバー : <%=room.users.size%>人が参加中</p>
+        <p>習慣 : <%=room.habit%></p>           
       <%# ユーザーがサインインしており、ルームに参加していない場合 %>
       <%elsif user_signed_in?%>
-        <p class="text-center">会話数 : <%=room.chats.size%></p> 
-        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>  
-        <%= form_with(url: "/rooms/#{room.id}/join",local: true,method: :get) do |f| %>
+        <p>会話数 : <%=room.chats.size%></p> 
+        <p>メンバー : <%=room.users.size%>人が参加中</p> 
+        <p>習慣 : <%=room.habit%></p>          
+        <%= form_with(url: "/rooms/#{room.id}/join",local: true,method: :get, class:"text-right") do |f| %>
           <%= f.submit "チャットに参加",class: 'btn btn-success'%>
         <%end%>      
       <%else%>        
-      <p>※※ルームの閲覧にはログインが必要です※※</p>
+        <p>※※ルームの閲覧にはログインが必要です※※</p>
       <%end%>                           
     </div>
   </div>  
