@@ -3,7 +3,6 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    # ルームは1ページにつき最新10部屋まで
     @rooms = Room.all.order('created_at DESC')
     @user_rooms = UserRoom.all
     @room = Room.new
@@ -37,7 +36,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.destroy
+    @room.destroy if current_user.id == @room.user_id
   end
 
   def join

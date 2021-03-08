@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :destroy]
   before_action :set_stack, only: [:create, :destroy]
 
   def create
@@ -13,7 +13,7 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find_by(stack_id: params[:stack_id], user_id: current_user.id)
-    @like.destroy
+    @like.destroy if current_user.id == @like.user_id
     respond_to do |format|
       format.html
       format.js

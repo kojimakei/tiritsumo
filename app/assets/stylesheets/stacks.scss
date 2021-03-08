@@ -63,3 +63,16 @@ div[data-check="true"] {
 .profile{
   display: flex;
 }
+
+.profile{
+  display: flex;
+  justify-content: space-between;
+}
+
+.already{
+  background-color: #ffd803;
+  color: white;
+  border: solid 0.001px #DCDCDC	;
+  padding: 5px;
+  border-radius: 100px;
+}

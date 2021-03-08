@@ -19,12 +19,20 @@
 // ※ヘッダーの編集
 .nav-item{
   margin-left: 80px;
-  color: red;
+  color: #ff5470;
 }
 
+.nav-link{
+  color:beige;
+}
+
+.card{
+  background-color: #fffffe;
+}
 
  header {
    margin-bottom: 50px;
+   background-color: #2cb67d;
  }
 
  .user-image{
@@ -38,8 +46,6 @@
   h3 {
     text-align: center;
   }
-
-
   .icon::before {
     font-family: "Font Awesome 5 Free"; 
     font-weight: 900;
@@ -48,7 +54,7 @@
 
   // 背景イメージ
   body {
-    background-image: image-url('snowmountain.png');
+    background-color:#eff0f3;
     background-size: cover;
     background-attachment: fixed;
     height: auto;   

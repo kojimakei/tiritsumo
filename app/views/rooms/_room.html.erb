@@ -29,16 +29,15 @@
         </p>
       <%# ユーザー（非ルーム作成者）がルームに参加している場合   %>
       <%elsif user_signed_in? && current_user.already_joined?(room)%> 
+        <p class="alert alert-success text-center">このコミュニティに参加しています</p>       
         <p class="text-center">会話数 : <%=room.chats.size%></p> 
-        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>   
-        <p class="alert alert-success text-center">このコミュニティに参加しています</p> 
-       
+        <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>          
       <%# ユーザーがサインインしており、ルームに参加していない場合 %>
       <%elsif user_signed_in?%>
         <p class="text-center">会話数 : <%=room.chats.size%></p> 
         <p class="text-center">メンバー : <%=room.users.size%>人が参加中</p>  
         <%= form_with(url: "/rooms/#{room.id}/join",local: true,method: :get) do |f| %>
-          <%= f.submit "チャットに参加"%>
+          <%= f.submit "チャットに参加",class: 'btn btn-success'%>
         <%end%>      
       <%else%>        
       <p>※※ルームの閲覧にはログインが必要です※※</p>
