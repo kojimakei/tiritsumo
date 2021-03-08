@@ -20,7 +20,7 @@
   padding: 8px;
   max-width: 250px;
   border-radius: 12px;
-  background: #30e852;
+  background:#2cb67d;
   font-size: 15px;
 }
 .mycomment p:after {
@@ -29,7 +29,7 @@
   top: 3px;
   right: -19px;
   border: 8px solid transparent;
-  border-left: 18px solid #30e852;
+  border-left: 18px solid #2cb67d;
   -webkit-transform: rotate(-35deg);
   transform: rotate(-35deg);
 }
@@ -65,7 +65,7 @@
   padding: 10px;
   max-width: 250px;
   border-radius: 12px;
-  background: #edf1ee;
+  background: #eaddcf;
 }
 .says:after {
   content: "";
@@ -74,7 +74,7 @@
   top: 3px;
   left: -19px;
   border: 8px solid transparent;
-  border-right: 18px solid #edf1ee;
+  border-right: 18px solid  #eaddcf;
   -webkit-transform: rotate(35deg);
   transform: rotate(35deg);
 }

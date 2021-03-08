@@ -19,7 +19,7 @@
         <p class="alert alert-warning text-center">あなたはルームのオーナーです</p>
         <p>会話数: <%=room.chats.size%></p> 
         <p>メンバー : <%=room.users.size%>人が参加中</p>   
-        <p>習慣 : <%=room.habit%></p>       
+        <p>活動内容 : <%=room.habit%></p>       
         <p class="text-right">
           <%= link_to room_path(room.id),remote: true,method: :delete do%>
             <i class="fas fa-trash-alt" style="font-size: 30px"></i>
@@ -33,12 +33,12 @@
         <p class="alert alert-success text-center">コミュニティに参加しています</p>       
         <p>会話数 : <%=room.chats.size%></p> 
         <p>メンバー : <%=room.users.size%>人が参加中</p>
-        <p>習慣 : <%=room.habit%></p>           
+        <p>活動内容 : <%=room.habit%></p>           
       <%# ユーザーがサインインしており、ルームに参加していない場合 %>
       <%elsif user_signed_in?%>
         <p>会話数 : <%=room.chats.size%></p> 
         <p>メンバー : <%=room.users.size%>人が参加中</p> 
-        <p>習慣 : <%=room.habit%></p>          
+        <p>活動内容 : <%=room.habit%></p>          
         <%= form_with(url: "/rooms/#{room.id}/join",local: true,method: :get, class:"text-right") do |f| %>
           <%= f.submit "チャットに参加",class: 'btn btn-success'%>
         <%end%>      
