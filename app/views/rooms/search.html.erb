@@ -5,7 +5,7 @@
       <div class="card">
         <h3>ルーム検索</h3>
           <%= form_with(url: search_rooms_path, local: true, method: :get, class: "search-form") do |form| %>
-          <%= form.text_field :keyword, placeholder: "相談所を検索する", class: "search-input" %>
+          <%= form.text_field :keyword, placeholder: "相談所を検索する",class: 'form-control' %>
             <%= form.submit "検索",class: 'btn btn-success' %>
           <% end %>     
       </div>        
