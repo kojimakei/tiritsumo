@@ -1,5 +1,11 @@
 <div class="container-fluid">
   <div class="row">
+  <%# 新規投稿ペン %>  
+    <div class="article_form">
+      <a href="<%= new_stack_path %>">
+      <i class="fas fa-pen fa-4x pen"></i></a>
+    </div>  
+
   <%# 左側 ユーザー情報詳細、今日のちりつも、過去のちりつも %>
     <div class="col-md-4">
       <div class="card  mb-3 p-3">
@@ -42,7 +48,34 @@
         </div>
       </div>
 
+
+    <%# ちりつも合計時間チャート %>
+      <div class="card mb-3 p-3">
+        <%# カードヘッダータブ %>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a href="#chart1" class="nav-link active" data-toggle="tab">今月のちりつも</a>
+          </li>
+          <li class="nav-item">
+            <a href="#chart2" class="nav-link" data-toggle="tab">今年のちりつも</a>
+          </li>
+        </ul>
+        <%# カードコンテント（チャート） %>
+        <div class="tab-content">
+          <div id="chart1" class="tab-pane active">
+            <%= column_chart @achieved_stacks.group_by_day_of_month(:date, format: "%d").size, xtitle: "日付", ytitle: "ちりつも成功数", min: 0, max: 10%> 
+          </div>
+          <div id="chart2" class="tab-pane">
+            <%= column_chart @achieved_stacks.group_by_month_of_year(:date, format: "%d").size, xtitle: "月", ytitle: "ちりつも成功数",min: 0, max: 100 %> 
+          </div>          
+        </div>
+      </div>      
+    </div>
+
+    <%# 画面右側のカード %>
+    <div class="col-md-8">
       <%# 今日のちりつも %>
+      <%if @today_stacks.exists?%>
       <div class="card mb-3 p-3">
         <h3 class="border-bottom">今日のちりつも</h3>
         <table width="100%">
@@ -85,33 +118,14 @@
             <%end%>
           </tbody>        
         </table>
+      </div>   
+      <%else%>
+      <div class="card mb-3 p-3" style="height: 180px">
+        <h3 class="border-bottom">今日のちりつも</h3>
+          <h4 class="text-center">※※今日のちりつも予定はありません。※※</h4>
       </div>
-
-    <%# ちりつも合計時間チャート %>
-      <div class="card">
-        <%# カードヘッダータブ %>
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a href="#chart1" class="nav-link active" data-toggle="tab">今月のちりつも</a>
-          </li>
-          <li class="nav-item">
-            <a href="#chart2" class="nav-link" data-toggle="tab">今年のちりつも</a>
-          </li>
-        </ul>
-        <%# カードコンテント（チャート） %>
-        <div class="tab-content">
-          <div id="chart1" class="tab-pane active">
-            <%= column_chart @achieved_stacks.group_by_day_of_month(:date, format: "%d").size, xtitle: "日付", ytitle: "ちりつも成功数", min: 0, max: 10%> 
-          </div>
-          <div id="chart2" class="tab-pane">
-            <%= column_chart @achieved_stacks.group_by_month_of_year(:date, format: "%d").size, xtitle: "月", ytitle: "ちりつも成功数",min: 0, max: 100 %> 
-          </div>          
-        </div>
-      </div>      
-    </div>
-
-<%# 過去のちりつもカレンダー %>   
-    <div class="col-md-8">
+      <%end%>
+      <%# 過去のちりつもカレンダー %>    
       <div class="card">
          <%= render 'calendar', events: @stacks %>
       </div>
