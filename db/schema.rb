@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_005513) do
+ActiveRecord::Schema.define(version: 2021_03_09_084202) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 2021_03_08_005513) do
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
+  create_table "stack_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "stack_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stack_id"], name: "index_stack_tags_on_stack_id"
+    t.index ["tag_id"], name: "index_stack_tags_on_tag_id"
+  end
+
   create_table "stacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "date", null: false
     t.text "text", null: false
@@ -80,6 +89,12 @@ ActiveRecord::Schema.define(version: 2021_03_08_005513) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "achieved"
     t.index ["user_id"], name: "index_stacks_on_user_id"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "user_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -116,6 +131,8 @@ ActiveRecord::Schema.define(version: 2021_03_08_005513) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "stacks"
   add_foreign_key "likes", "users"
+  add_foreign_key "stack_tags", "stacks"
+  add_foreign_key "stack_tags", "tags"
   add_foreign_key "stacks", "users"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"

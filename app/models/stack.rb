@@ -2,6 +2,8 @@ class Stack < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :stack_tags
+  has_many :tags, through: :stack_tags
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :work_time
