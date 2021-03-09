@@ -64,3 +64,19 @@
   .error-message{
     color: green;
   }
+
+  .alert {
+    text-align: center;
+    color: black;
+  }
+  .alert-success {
+    background-color: #3da9fc;
+  }
+  
+  .alert-notice {
+    background-color: #ffd803;
+  }
+  
+  .alert-danger {
+    background-color:#f45d48;
+  }

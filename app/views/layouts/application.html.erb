@@ -49,7 +49,17 @@
           </div>
         </div>
       </nav>
+      <%# header下にflash表示 %>
+      <% flash.each do |message_type,message| %>
+        <div class="alert alert-<%= message_type%>" id="alert" >
+          <button type="button" class="close close-button" data-dismiss="alert">
+            &times;
+          </button>
+          <span class="alert-message"><%= message %></span>
+        </div>
+      <% end %>
     </header>
+
 
     <%= yield %>
 
