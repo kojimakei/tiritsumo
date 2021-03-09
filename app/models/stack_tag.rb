@@ -1,0 +1,2 @@
+class StackTag < ApplicationRecord
+end
