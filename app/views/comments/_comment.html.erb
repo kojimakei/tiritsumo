@@ -2,7 +2,7 @@
   <strong><%= link_to comment.user.nickname, user_path(comment.user.id), style: "color:black" %>：</strong>
      <strong><%= comment.text %></strong>
     <% if user_signed_in? && (current_user.id == comment.user_id) %>
-      <%= link_to stack_comment_path(comment.stack_id, comment.id), method: :delete, remote: true,class: "comment_delete" do%>
+      <%= link_to stack_comment_path(comment.stack_id, comment.id), method: :delete, remote: true,class: "comment_delete",data:{ confirm: "本当に削除しますか？" } do%>
         <i class="fas fa-trash-alt" style="font-size: 20px"></i>
         <%end%>
     <% end%>

@@ -24,7 +24,9 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       bypass_sign_in(@user)
       redirect_to user_path(current_user.id)
+      flash[:success] = '変更しました！'
     else
+      flash[:danger] = '変更に失敗しました'
       render :edit
     end
   end

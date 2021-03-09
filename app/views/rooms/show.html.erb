@@ -1,17 +1,37 @@
-<h3 class="container-fluid sticky-top"><%= @room.name%></h3>
-
-<%if current_user.id == @room.user_id%>
-  <p>あなたはルームのオーナーです</p>
-<% elsif @user_rooms.where(room_id: @room.id, user_id: current_user ).exists? %>
-<%= form_with(url: user_room_path(@user_room), local: true, method: :delete) do |f| %>
-  <%= f.submit "脱退する"%>
-<%end%>
-<%else%>
-<%= form_with(url: join_room_path, local: true, method: :get) do |f| %>
-  <%= f.submit "チャットに参加"%>
-<%end%>
-  <%end%>
-
+<div class="container-fluid sticky-top">
+  <div class="row">
+    <div class="col-md-11 mx-auto">
+      <div class="card" style="background-color: #f2eef5">
+        <h3><%= @room.name%></h3>
+          <div class="text-center">
+            <p> メンバー : <%=@room.users.size%>人が参加中</p>   
+            <p>活動内容 : <%=@room.habit%></p>
+          </div>           
+        <%if current_user.id == @room.user_id%>
+          <p class="text-center">あなたはルームのオーナーです</p>
+          <div>
+            <p class="text-right">
+              <i class="fas fa-trash-alt" style="font-size: 20px"></i> 
+              <%= link_to "削除", room_path(@room.id),local: true,method: :delete %> 
+            </p>   
+            <p class="text-right"> 
+              <i class="fas fa-edit" style="font-size: 20px"></i> 
+              <%= link_to "編集",edit_room_path(@room.id) %>
+            </p>   
+        </div>          
+        <% elsif @user_rooms.where(room_id: @room.id, user_id: current_user ).exists? %>
+          <%= form_with(url: user_room_path(@user_room), local: true, method: :delete,class: "text-center") do |f| %>
+            <%= f.submit "脱退する",class: 'btn btn-success'%>
+          <%end%>
+        <%else%>
+          <%= form_with(url: join_room_path, local: true, method: :get,class: "text-center") do |f|%>
+            <%= f.submit "チャットに参加",class: 'btn btn-success'%>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="chat-container" data-room_id = "<%= @room.id %>">
   <%= render @chats %>
 </div>

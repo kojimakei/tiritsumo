@@ -8,6 +8,7 @@ class Room < ApplicationRecord
   validates :name, presence: true
   # ルーム作成時にはユーザーが必要
   validates :user_id, presence: true
+  validates :habit, presence: true, length: { maximum: 50 }
 
   def self.search(search)
     if search != ''

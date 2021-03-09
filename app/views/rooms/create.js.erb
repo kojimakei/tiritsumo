@@ -1,3 +1,4 @@
 var element = document.getElementById("rooms");
 element.innerHTML += `<%= j(render "room", room: @room) %>`;
 document.querySelector("#room_name").value = "";
+document.querySelector("#room_habit").value = "";

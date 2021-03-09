@@ -37,6 +37,10 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy if current_user.id == @room.user_id
+    respond_to do |format|
+      format.html { redirect_to rooms_path}
+      format.js
+    end
   end
 
   def join
@@ -52,7 +56,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :image).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, :image,:habit).merge(user_id: current_user.id)
   end
 
   def set_stacks

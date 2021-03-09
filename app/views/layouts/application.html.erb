@@ -30,7 +30,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><%= link_to 'みんなのちりつも', stacks_path, class: "nav-link" %></li>
               <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to '相談所を見る', rooms_path, class: "nav-link" %></li> 
+                <li class="nav-item"><%= link_to 'ルームを見る', rooms_path, class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to '積み上げる', new_stack_path, class: "nav-link" %></li> 
                 <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %></li> 
                 <% if current_user.image.attached? %>
@@ -42,14 +42,24 @@
                 <li class="nav-item m">残り: <%= (current_user.deadline.to_date - Date.today).to_i %>日</li>              
               <% else %>
                 <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to '新規登録', new_user_registration_path, class: "nav-link" %></li>
               <% end %>
           </div>
           </div>
         </div>
       </nav>
+      <%# header下にflash表示 %>
+      <% flash.each do |message_type,message| %>
+        <div class="alert alert-<%= message_type%>" id="alert" >
+          <button type="button" class="close close-button" data-dismiss="alert">
+            &times;
+          </button>
+          <span class="alert-message"><%= message %></span>
+        </div>
+      <% end %>
     </header>
+
 
     <%= yield %>
 

@@ -34,7 +34,7 @@
                   <%end%>  
                   <%end%>                 
                   <% if user_signed_in? && (current_user.id == @stack.user_id) %>
-                    <%= link_to stack_path(@stack.id), method: :delete,class: "stack_delete" do %>
+                    <%= link_to stack_path(@stack.id), method: :delete,class: "stack_delete",data:{ confirm: "本当に削除しますか？" } do %>
                       <i class="fas fa-trash-alt" style="font-size: 30px"></i>
                     <%end%>
                   <% end %>                      
@@ -59,7 +59,9 @@
               <div class="form-group">
                 <%= f.text_field :text, placeholder: "内容", class: 'form-control' %>
               </div>
-                <%= f.submit "送信", class:"btn btn-success"%>            
+              <div>
+                <%= f.submit "送信", class:"btn btn-success btn-block"%>   
+              </div>         
             </form>
             <% end %>
           <% end %>

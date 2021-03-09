@@ -25,7 +25,9 @@ class StacksController < ApplicationController
     @stack = Stack.new(stack_params)
     if @stack.save
       redirect_to user_path(current_user.id)
+      flash[:success] = '投稿しました！'
     else
+      flash.now[:danger] = '投稿に失敗しました'
       render :new
     end
   end
@@ -33,7 +35,9 @@ class StacksController < ApplicationController
   def update
     if @stack.update(stack_params)
       redirect_to user_path(current_user.id)
+      flash[:success] = '更新しました！'
     else
+      flash.now[:danger] = '更新に失敗しました'
       render :edit
     end
   end

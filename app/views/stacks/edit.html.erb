@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-    <h3>今日の積み上げ</h3>
+    <div class="col-md-10 mx-auto">
+    <div class="card">
+    <h3>今日のちりつも</h3>
       <%= form_with(model: @stack, local: true) do |f| %>
       <%# 入力に不備があった場合、エラーメッセージを表示する %>
       <%= render 'shared/error_messages', model: f.object %>
@@ -22,11 +23,12 @@
             <label>達成可否</label>
               <%= f.check_box :achieved ,class: 'form-control' %>
           </div>                    
-          <div class="form-group">
-            <%= f.submit "積み上げる" %>
+          <div class="form-group text-center">
+            <%= f.submit "積み上げる",class: 'btn btn-success' %>
           </div>
         </form>
       <%end%>
+    </div>
     </div>
   </div>
 </div>
