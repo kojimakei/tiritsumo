@@ -10,7 +10,6 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require fullcalendar
  *= require simple_calendar
  *= require_tree .
  *= require_self
@@ -18,12 +17,14 @@
 
 // ※ヘッダーの編集
 .nav-item{
-  margin-left: 80px;
-  color: #ff5470;
-}
+    margin-left: 100px;
+    color: #ff5470;
+    display: flex;
+    align-items: center;
+  }
 
 .nav-link{
-  color:beige;
+  color:gray;
 }
 
 .card{
@@ -79,4 +80,9 @@
   
   .alert-danger {
     background-color:#f45d48;
+  }
+
+  .nav-link{
+    text-align: center;
+    
   }
