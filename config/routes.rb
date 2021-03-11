@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     member do
       get 'achieved'
     end
+    collection do
+      get 'search'
+    end
     resources :comments, only: %i[create destroy]
     resource :likes, only: %i[create destroy]
   end

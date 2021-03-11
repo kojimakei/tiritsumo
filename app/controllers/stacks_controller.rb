@@ -8,7 +8,7 @@ class StacksController < ApplicationController
   end
 
   def new
-    @stack = Stack.new
+    @stack_tag = StacksTag.new
   end
 
   def show
@@ -19,11 +19,14 @@ class StacksController < ApplicationController
 
   def edit
     redirect_to user_path(@stack.user_id) unless current_user.id == @stack.user_id
+    @stack_tag = StacksTag.new(stack: @stack)
   end
 
   def create
-    @stack = Stack.new(stack_params)
-    if @stack.save
+    @stack_tag = StacksTag.new(stack_params)
+    tag_list = params[:stack][:name].split(',')
+    if @stack_tag.valid? 
+      @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
       flash[:success] = '投稿しました！'
     else
@@ -33,7 +36,10 @@ class StacksController < ApplicationController
   end
 
   def update
-    if @stack.update(stack_params)
+    @stack_tag = StacksTag.new(stack_params, stack: @stack)
+    tag_list = params[:stack][:name].split(",")
+    if @stack_tag.valid?
+      @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
       flash[:success] = '更新しました！'
     else
@@ -59,10 +65,16 @@ class StacksController < ApplicationController
     render json: { stack: item }
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
+
   private
 
   def stack_params
-    params.require(:stack).permit(:text, :date, :work_time_id, :achieved).merge(user_id: current_user.id)
+    params.require(:stack).permit(:text, :date, :work_time_id, :achieved, :name,:tag_id).merge(user_id: current_user.id)
   end
 
   def set_stacks
