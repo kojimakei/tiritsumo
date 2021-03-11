@@ -15,10 +15,10 @@
             <label>内容</label>
             <%= f.text_field :text,class: 'form-control' %>
           </div>
-          <div class="orm-group col-md-8 mx-auto mb-4", id='tag-field'>
-            <label>タグ</label>
-            <%= f.text_field :name, class:"form-control" %>
-          </div>          
+          <div class="orm-group col-md-8 mx-auto mb-4">
+            <label>タグ ※コンマ区切りで記入してください</label>
+            <%= f.text_field :name, class:"form-control",placeholder:"例)筋トレ,腕立て伏せ,背筋" %>
+          </div>                     
           <div class="form-group col-md-8 mx-auto">
             <label>取り組み時間</label>
             <%= f.collection_select(:work_time_id, WorkTime.all, :id, :name, {},{class:"form-control"}) %>時間

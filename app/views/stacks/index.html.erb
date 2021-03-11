@@ -1,6 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5">
+      <div class="card mb-5">
+        <div class="card-content">
+          <h3>#人気タグ</h3>
+          <div class="tags">
+            <% @tag_lists.each do |list|%>
+              <a class="tag" href="<%=tag_stacks_path(tag_id: list.id)%>">
+                <%="##{list.name}"%><span class="tag-count">(<%= list.stacks.count%>件)</span>
+              </a>
+            <%end%>
+          </div>
+        </div>
+      </div>       
       <div class="card">
         <div class="card-content">
           <h3>ちりつも数ランキング</h3>
@@ -25,19 +37,10 @@
             </li>
           <% end %>     
         </div>
-        <%=link_to '3位以降を見る',ranking_users_path%>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <h3>同カテゴリーちりつも数ランキング</h3>
-      
-        </div>
-      </div>      
-      <div class="card">
-        <div class="card-content">
-          <h6>週間ちりつも時間ランキング</h6>
-        </div>
-      </div>            
+        <p class="text-right">
+          <%=link_to '3位以降を見る',ranking_users_path%>
+        </p>
+      </div>         
     </div>
 
 

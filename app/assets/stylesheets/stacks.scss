@@ -76,3 +76,21 @@ div[data-check="true"] {
   padding: 5px;
   border-radius: 100px;
 }
+
+// ハート、コメントのカウント
+.counts{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tags{
+  padding: 15px;
+}
+
+.tag{
+  background-color: gray;
+  color: white;
+  padding: 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+}

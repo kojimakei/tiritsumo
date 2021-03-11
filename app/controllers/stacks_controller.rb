@@ -4,6 +4,7 @@ class StacksController < ApplicationController
 
   def index
     @stacks = Stack.includes(:user).order('created_at DESC')
+    @tag_lists = Tag.all
     @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
   end
 
@@ -25,7 +26,7 @@ class StacksController < ApplicationController
   def create
     @stack_tag = StacksTag.new(stack_params)
     tag_list = params[:stack][:name].split(',')
-    if @stack_tag.valid? 
+    if @stack_tag.valid?
       @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
       flash[:success] = '投稿しました！'
@@ -37,7 +38,7 @@ class StacksController < ApplicationController
 
   def update
     @stack_tag = StacksTag.new(stack_params, stack: @stack)
-    tag_list = params[:stack][:name].split(",")
+    tag_list = params[:stack][:name].split(',')
     if @stack_tag.valid?
       @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
@@ -66,15 +67,22 @@ class StacksController < ApplicationController
   end
 
   def search
-    return nil if params[:keyword] == ""
-    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
-    render json:{ keyword: tag }
+    return nil if params[:keyword] == ''
+
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
+  end
+
+  def tag_search
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    @stacks = @tag.stacks.all           #クリックしたタグに紐付けられた投稿を全て表示
   end
 
   private
 
   def stack_params
-    params.require(:stack).permit(:text, :date, :work_time_id, :achieved, :name,:tag_id).merge(user_id: current_user.id)
+    params.require(:stack).permit(:text, :date, :work_time_id, :achieved, :name, :tag_id).merge(user_id: current_user.id)
   end
 
   def set_stacks

@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :chats
 
   def already_liked?(stack)
-    likes.where(stack_id: stack.id).exists?
+    likes.exists?(stack_id: stack.id)
   end
 
   def already_joined?(room)
