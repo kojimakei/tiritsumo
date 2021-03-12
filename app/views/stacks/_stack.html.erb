@@ -15,12 +15,19 @@
         </div>
       </div>
       <%# ちりつも内容 %>
-      <%= link_to stack_path(stack.id) do%>
-        <h4 class="text-center" style="color:black"><%=stack.text %></h4>
+      <%= link_to stack_path(stack.id) do %>
+        <h4 class="text-center border-bottom pb-5" style="color:black"><%=stack.text %></h4>
       <%end%>
-        <div class="text-right">
+        <div class="text-right">       
           <%# いいねをしているときの処理    %>
           <div class="counts">
+            <div class="pt-1">
+              <%stack.tags.each do |tag|%>
+                <a class="taglist" href="<%=tag_stacks_path(tag_id: tag.id)%>">
+                  <%="##{tag.name}"%>
+                </a>
+              <%end%>
+            </div>   
             <div class="like-count">
               <p id="likes_<%= stack.id %>">
                 <% if user_signed_in? && current_user.already_liked?(stack) %>
@@ -41,14 +48,7 @@
             </div>
             <span class="comment-count">
               <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).size %></i>
-            </span>
-          </div>
-          <div class="tags">
-            <%stack.tags.each do |tag|%>
-              <a class="tag" href="<%=tag_stacks_path(tag_id: tag.id)%>">
-                <%="##{tag.name}"%>
-              </a>
-            <%end%>
+            </span>          
           </div>
             <p>
               <%=time_ago_in_words(stack.created_at)%>前のちりつも      

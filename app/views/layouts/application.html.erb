@@ -30,9 +30,16 @@
           <div class="collapse navbar-collapse justify-content-end" id="responsiveMenu">
             <ul class="navbar-nav">
               <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to 'ルームを見る', rooms_path, class: "nav-link" %></li> 
-                <li class="nav-item">目標: <%= current_user.goal%></li>
-                <li class="nav-item">残り: <%= (current_user.deadline.to_date - Date.today).to_i %>日</li>    
+                <li class="nav-item"><%= link_to tags_path, class: "nav-link" do%>
+                  <i class="fas fa-tag header-icons"></i><span>タグ</span>
+                </li>               
+                <%end%>
+                <li class="nav-item"><%= link_to rooms_path, class: "nav-link" do%>
+                  <i class="fas fa-door-open"></i><span>ルームを見る</span>
+                </li> 
+                <%end%>
+                <li class="nav-item"style="color:red">目標: <%= current_user.goal%></li>
+                <li class="nav-item" style="color:red">残り: <%= (current_user.deadline.to_date - Date.today).to_i %>日</li>    
                 <%# ユーザーアイコンの有無でドロップダウンリスト表記変更%>
                 <% if current_user.image.attached? %>
                 <li class="nav-item dropdown">

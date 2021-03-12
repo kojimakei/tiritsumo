@@ -9,7 +9,7 @@ class StacksController < ApplicationController
       format.js
     end
     @tag_lists = Tag.all
-    @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
+    @all_ranks = User.find(Stack.where(achieved: '1').group(:user_id).order('count(user_id) desc').pluck(:user_id))
   end
 
   def new

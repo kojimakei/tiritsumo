@@ -1,6 +1,6 @@
 <div class="card mb-3" id="room_<%= room.id %>">
-  <div class="card-title border-bottom pb-3 ">
-    <h3><%= link_to room.name, room_path(room.id), class: "link" %></h3>
+  <div class="card-title">
+    <h3 class="card-title text-center border-bottom pb-3 pt-3"><%= link_to room.name, room_path(room.id), class: "link" %></h3>
   </div>
   <div class="row no-gutters">
     <%# ルーム画像の可否によってビューを分岐 %>
