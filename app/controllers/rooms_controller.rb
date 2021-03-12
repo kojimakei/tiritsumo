@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rooms = Room.all.order('created_at DESC')
+    @rooms = Room.all.order('created_at DESC').page(params[:page]).per(5)
     @user_rooms = UserRoom.all
     @room = Room.new
   end

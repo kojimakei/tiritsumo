@@ -3,7 +3,11 @@ class StacksController < ApplicationController
   before_action :set_stacks, only: [:show, :edit, :update, :destroy]
 
   def index
-    @stacks = Stack.includes(:user).order('created_at DESC')
+    @stacks = Stack.includes(:user).order('created_at DESC').page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
     @tag_lists = Tag.all
     @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
   end
