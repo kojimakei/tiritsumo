@@ -3,7 +3,11 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @rooms = Room.all.order('created_at DESC')
+    @rooms = Room.all.order('created_at DESC').page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
     @user_rooms = UserRoom.all
     @room = Room.new
   end
@@ -11,7 +15,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      current_user.user_rooms.create(user_id:current_user.id, room_id: @room.id)
+      current_user.user_rooms.create(user_id: current_user.id, room_id: @room.id)
     else
       render 'error'
     end
@@ -38,7 +42,7 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy if current_user.id == @room.user_id
     respond_to do |format|
-      format.html { redirect_to rooms_path}
+      format.html { redirect_to rooms_path }
       format.js
     end
   end
@@ -56,7 +60,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :image,:habit).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, :image, :habit).merge(user_id: current_user.id)
   end
 
   def set_stacks

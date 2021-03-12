@@ -14,29 +14,45 @@
           <%end%>
         </div>
       </div>
-      <h4 class="text-center"><%=stack.text %></h4>
+      <%# ちりつも内容 %>
+      <%= link_to stack_path(stack.id) do%>
+        <h4 class="text-center" style="color:black"><%=stack.text %></h4>
+      <%end%>
         <div class="text-right">
-          <p><%= link_to '詳細', stack_path(stack.id), class: "btn btn-success" %></p>   
-          <p id="likes_<%= stack.id %>">
-            <% if user_signed_in? && current_user.already_liked?(stack) %>
-              <%= link_to stack_likes_path(id: stack.id, stack_id: stack.id), method: :delete, remote: true do %>
-                <i class="fas fa-heart unlike-btn"></i>
-                <%= stack.likes.size %>
+          <%# いいねをしているときの処理    %>
+          <div class="counts">
+            <div class="like-count">
+              <p id="likes_<%= stack.id %>">
+                <% if user_signed_in? && current_user.already_liked?(stack) %>
+                  <%= link_to stack_likes_path(id: stack.id, stack_id: stack.id), method: :delete, remote: true do %>
+                    <i class="fas fa-heart unlike-btn"></i>
+                    <%= stack.likes.size %>
+                  <%end%>
+              </p>
+              <%# いいねをしていない場合の処理 %>
+              <p id="likes_<%= stack.id %>">            
+              <% else %>
+                <%= link_to stack_likes_path(id: stack.id, stack_id: stack.id), method: :post, remote: true do %>
+                  <i class="far fa-heart like-btn"></i>
+                  <%= stack.likes.size %>
+                <%end%>
+              <% end %>
+              </p>
+            </div>
+            <span class="comment-count">
+              <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).size %></i>
+            </span>
+          </div>
+          <div class="tags">
+            <%stack.tags.each do |tag|%>
+              <a class="tag" href="<%=tag_stacks_path(tag_id: tag.id)%>">
+                <%="##{tag.name}"%>
+              </a>
             <%end%>
-          </p>
-
-            <%# いいねをしていない場合の処理 %>
-            <p id="likes_<%= stack.id %>">            
-            <% else %>
-              <%= link_to stack_likes_path(id: stack.id, stack_id: stack.id), method: :post, remote: true do %>
-                <i class="far fa-heart like-btn"></i>
-                <%= stack.likes.size %>
-              <%end%>
-            <% end %>
-            </p>
-            <i class="far fa-comment-alt fa-lgfo"><%= Comment.where(stack_id: stack.id).size %></i>
-            <%=time_ago_in_words(stack.created_at)%>前のちりつも      
-          </p>             
+          </div>
+            <p>
+              <%=time_ago_in_words(stack.created_at)%>前のちりつも      
+            </p>             
         </div>
     </div>
   </div>

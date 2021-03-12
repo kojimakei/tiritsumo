@@ -1,4 +1,4 @@
-<div class="container" id="pagenate">
+<div class="container">
   <div class="row">
     <div class="col-md-5">
       <div class="card mb-5">
@@ -42,16 +42,15 @@
         </p>
       </div>         
     </div>
-    <%# 画面右側のちりつも一覧 %>
-    <div class="col-md-7">  
-      <% if @stacks.exists?%>
-        <%= render partial: 'stack',collection: @stacks %>
-      <%end%>
-    </div>
+
+
+  <div class="col-md-7">  
+  <%# 積み上げの投稿を1つづつに分ける %>
+  <% if @stacks.exists?%>
+    <%= render partial: 'stack',collection: @stacks %>
+    <%end%>
   </div>
   <div class="paginate-bottom">
     <%= paginate @stacks,remote: true %>
   </div>
 </div>
-
-

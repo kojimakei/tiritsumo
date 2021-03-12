@@ -24,8 +24,13 @@
           <div class="card-text">
             <div class="col-lg-2, text-right">
               <div id="likes_<%= @stack.id %>">
-                <%= render partial: 'likes/likes', locals: { stack: @stack} %>                
+                <%= render partial: 'likes/likes',stack: @stack %>                
               </div>
+              <div>
+              <%@stack.tags.each do |tag|%>
+                <span class="tag">#<%=tag.name%></span>
+              <%end%>
+              </div>              
               <p><%=time_ago_in_words(@stack.created_at)%>前のちりつも</p>  
               <div class="text-right"> 
                 <% if user_signed_in? && (current_user.id == @stack.user_id) %>
@@ -56,10 +61,10 @@
               <%= render 'shared/error_messages', model: f.object %>
             </div>
             <form>
-              <div class="form-group">
+              <div class="form-group col-md-10 mx-auto">
                 <%= f.text_field :text, placeholder: "内容", class: 'form-control' %>
               </div>
-              <div>
+              <div class="col-md-3 mx-auto mb-5">
                 <%= f.submit "送信", class:"btn btn-success btn-block"%>   
               </div>         
             </form>

@@ -12,7 +12,7 @@
           <div>
             <p class="text-right">
               <i class="fas fa-trash-alt" style="font-size: 20px"></i> 
-              <%= link_to "削除", room_path(@room.id),local: true,method: :delete %> 
+              <%= link_to "削除", room_path(@room.id),local: true,method: :delete,data:{ confirm: "本当に削除しますか？" } %> 
             </p>   
             <p class="text-right"> 
               <i class="fas fa-edit" style="font-size: 20px"></i> 

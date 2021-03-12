@@ -5,7 +5,7 @@ RSpec.describe 'ルームの作成機能', type: :system do
     @user_room = FactoryBot.create(:user_room)
   end
 
-  it '部屋作成が可能', js: true do 
+  it '部屋作成が可能', js: true do
     # サインインする
     sign_in(@user_room.user)
 
@@ -17,10 +17,10 @@ RSpec.describe 'ルームの作成機能', type: :system do
     fill_in 'room_habit', with: 'habit'
 
     # 部屋作成をクリックすると、ルームモデルのカウントが1上がる
-      click_button "ルーム作成"
-      wait_for_ajax do
-        change(Room, :count).by(1)
-      end  
+    click_button 'ルーム作成'
+    wait_for_ajax do
+      change(Room, :count).by(1)
+    end
     # トップページに遷移していることを確認する
     expect(current_path).to eq(rooms_path)
   end
@@ -35,12 +35,12 @@ RSpec.describe 'ルームの作成機能', type: :system do
     # 部屋情報を空白で送信
     fill_in 'room_name', with: ''
     fill_in 'room_habit', with: ''
-    
+
     # 部屋作成をクリックすると、ルームモデルのカウントは変化なし
-    click_button "ルーム作成"
+    click_button 'ルーム作成'
     wait_for_ajax do
       change(Room, :count).by(0)
-    end      
+    end
     # トップページに遷移していることを確認する
     expect(current_path).to eq(rooms_path)
   end

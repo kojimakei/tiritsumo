@@ -1,4 +1,3 @@
-
 <%# ログインしているかつ、投稿にいいねをしている場合の処理 %>
 <% if user_signed_in? && current_user.already_liked?(@stack) %>
   <%= link_to stack_likes_path(@stack), method: :delete, remote: true do %>

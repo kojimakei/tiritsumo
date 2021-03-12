@@ -6,10 +6,6 @@
   margin-bottom: 20px;
 }
 
-.m{
-  margin-top: 10px;
-}
-
 .tasks{
   height: 500px;
   border: solid 0.001px #DCDCDC	;
@@ -77,3 +73,29 @@ div[data-check="true"] {
   border-radius: 100px;
 }
 
+// ハート、コメントのカウント
+.counts{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tags{
+  padding: 15px;
+}
+
+.tag{
+  background-color: gray;
+  color: white;
+  padding: 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+}
+
+.paginate-bottom{
+  margin: auto;
+  width: 12em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}

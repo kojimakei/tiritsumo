@@ -3,12 +3,17 @@ class StacksController < ApplicationController
   before_action :set_stacks, only: [:show, :edit, :update, :destroy]
 
   def index
-    @stacks = Stack.includes(:user).order('created_at DESC')
+    @stacks = Stack.includes(:user).order('created_at DESC').page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    @tag_lists = Tag.all
     @all_ranks = User.find(Stack.group(:user_id).order('count(user_id) desc').limit(3).pluck(:user_id))
   end
 
   def new
-    @stack = Stack.new
+    @stack_tag = StacksTag.new
   end
 
   def show
@@ -19,11 +24,14 @@ class StacksController < ApplicationController
 
   def edit
     redirect_to user_path(@stack.user_id) unless current_user.id == @stack.user_id
+    @stack_tag = StacksTag.new(stack: @stack)
   end
 
   def create
-    @stack = Stack.new(stack_params)
-    if @stack.save
+    @stack_tag = StacksTag.new(stack_params)
+    tag_list = params[:stack][:name].split(',')
+    if @stack_tag.valid?
+      @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
       flash[:success] = '投稿しました！'
     else
@@ -33,7 +41,10 @@ class StacksController < ApplicationController
   end
 
   def update
-    if @stack.update(stack_params)
+    @stack_tag = StacksTag.new(stack_params, stack: @stack)
+    tag_list = params[:stack][:name].split(',')
+    if @stack_tag.valid?
+      @stack_tag.save(tag_list)
       redirect_to user_path(current_user.id)
       flash[:success] = '更新しました！'
     else
@@ -59,10 +70,23 @@ class StacksController < ApplicationController
     render json: { stack: item }
   end
 
+  def search
+    return nil if params[:keyword] == ''
+
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
+  end
+
+  def tag_search
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    @stacks = @tag.stacks.all           #クリックしたタグに紐付けられた投稿を全て表示
+  end
+
   private
 
   def stack_params
-    params.require(:stack).permit(:text, :date, :work_time_id, :achieved).merge(user_id: current_user.id)
+    params.require(:stack).permit(:text, :date, :work_time_id, :achieved, :name, :tag_id).merge(user_id: current_user.id)
   end
 
   def set_stacks

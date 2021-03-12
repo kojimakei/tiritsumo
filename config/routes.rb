@@ -11,8 +11,15 @@ Rails.application.routes.draw do
     member do
       get 'achieved'
     end
+    collection do
+      get 'search'
+    end
     resources :comments, only: %i[create destroy]
     resource :likes, only: %i[create destroy]
+  end
+  #タグによって絞り込んだ投稿を表示するアクションへのルーティング
+  resources :tags do
+    get 'stacks', to: 'stacks#tag_search'
   end
 
   resources :users, only: [:edit, :show, :update] do
