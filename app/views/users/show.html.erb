@@ -13,18 +13,18 @@
         <div class="card-content">
           <div class="text-center"> 
             <%= image_tag(@user.image.variant(resize_to_fill: [70, 70]), class: 'user-image') if @user.image.attached? %>
-            <p class="border-bottom"><%=@user.nickname %></p>
+            <p class="border-bottom mb-4 pb-4"><%=@user.nickname %></p>
           </div>
 
           <div class="profile-parts">
             <% if @user.category_id.present? %>
-              <span>ジャンル :</span><span><%= @user.category.name %></span></p>
+              <span>●ジャンル :</span><span><%= @user.category.name %></span></p>
             <% end %>
             <% if @user.goal.present? %>
-              <span>目標 :</span><span><%= @user.goal %></span></p>
+              <span>●目標 :</span><span><%= @user.goal %></span></p>
             <% end %>
             <% if @user.deadline.present? %>
-              <span>期日 :</span><span><%= @user.deadline.strftime('%Y年 %m月 %d日') %>（残り<%= (@user.deadline.to_date - Date.today).to_i %>日）</span></p>
+              <span>●期日 :</span><span><%= @user.deadline.strftime('%Y年 %m月 %d日') %>（残り<%= (@user.deadline.to_date - Date.today).to_i %>日）</span></p>
             <% end %>     
             <div class="text-right">
               <% if user_signed_in? && current_user == @user %>
@@ -40,7 +40,7 @@
       <div class="card mb-3 p-3">
       <%# 過去のちりつも %>
         <div class="card-content">
-          <h3 class="border-bottom">過去のちりつも</h3>
+          <h3 class="border-bottom mb-4 pb-4">過去のちりつも</h3>
             <p>●計画したちりつも：<%=@total_stacks%>件</p>
             <p>●達成したちりつも：<%=@achieved_stacks.size%>件</p>
             <p>●達成率：<%=@stack_rate%>％</p>
@@ -51,25 +51,13 @@
 
     <%# ちりつも合計時間チャート %>
       <div class="card mb-3 p-3">
-        <%# カードヘッダータブ %>
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a href="#chart1" class="nav-link active" data-toggle="tab">今月のちりつも</a>
-          </li>
-          <li class="nav-item">
-            <a href="#chart2" class="nav-link" data-toggle="tab">今年のちりつも</a>
-          </li>
-        </ul>
-        <%# カードコンテント（チャート） %>
-        <div class="tab-content">
-          <div id="chart1" class="tab-pane active">
+        <div class="card-content">
+          <h3 class="border-bottom mb-4 pb-4">今月のちりつも</h3>
+          <div class="chart">
             <%= column_chart @achieved_stacks.group_by_day_of_month(:date, format: "%d").size, xtitle: "日付", ytitle: "ちりつも成功数", min: 0, max: 10%> 
-          </div>
-          <div id="chart2" class="tab-pane">
-            <%= column_chart @achieved_stacks.group_by_month_of_year(:date, format: "%d").size, xtitle: "月", ytitle: "ちりつも成功数",min: 0, max: 100 %> 
-          </div>          
-        </div>
-      </div>      
+          </div>       
+        </div>     
+      </div>
     </div>
 
     <%# 画面右側のカード %>
@@ -77,7 +65,7 @@
       <%# 今日のちりつも %>
       <%if @today_stacks.exists?%>
       <div class="card mb-3 p-3">
-        <h3 class="border-bottom">今日のちりつも</h3>
+        <h3 class="border-bottom mb-3 pb-4">今日のちりつも</h3>
         <table width="100%">
           <thead>
             <tr>
@@ -121,7 +109,7 @@
       </div>   
       <%else%>
       <div class="card mb-3 p-3" style="height: 180px">
-        <h3 class="border-bottom">今日のちりつも</h3>
+        <h3 class="border-bottom pb-4">今日のちりつも</h3>
           <div class="text-center">今日のちりつも予定はありません</div>
           <div class="text-center">今すぐ右下のアイコンからちりつもしよう！</div>
       </div>

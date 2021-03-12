@@ -80,7 +80,7 @@ div[data-check="true"] {
 }
 
 .tags{
-  padding: 15px;
+  margin: 15px;
 }
 
 .tag{
@@ -98,4 +98,18 @@ div[data-check="true"] {
   align-items: center;
   justify-content: center;
   
+}
+
+.heart-tag{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.taglist{
+  background-color: gray;
+  color: white;
+  padding: 7px;
+  border-radius: 20px;
 }

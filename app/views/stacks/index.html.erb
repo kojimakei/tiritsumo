@@ -3,19 +3,24 @@
     <div class="col-md-5">
       <div class="card mb-5">
         <div class="card-content">
-          <h3>#人気タグ</h3>
-          <div class="tags">
-            <% @tag_lists.each do |list|%>
-              <a class="tag" href="<%=tag_stacks_path(tag_id: list.id)%>">
-                <%="##{list.name}"%><span class="tag-count">(<%= list.stacks.count%>件)</span>
-              </a>
-            <%end%>
-          </div>
+          <h4 class="card-title text-center border-bottom pb-3 pt-3">
+            人気のタグ
+          </h4>  
         </div>
-      </div>       
+        <div class="divider"></div>
+        <div class="card-content row flex">
+          <% @tag_lists.each do |list|%>
+          <div class="tags">
+            <a class="tag" href="<%= tag_stacks_path(tag_id: list.id) %>">
+              <%= "##{list.name}" %><span class="tag-count">(<%= list.stacks.count %>件)</span>
+            </a>
+          </div>
+          <% end %>
+        </div>
+      </div>      
       <div class="card">
         <div class="card-content">
-          <h3>ちりつも数ランキング</h3>
+          <h4 class="card-title text-center border-bottom pb-3 pt-3">ちりつもランキング</h4>
           <% @all_ranks.each.with_index(1) do |user, index| %>
             <li id="rank<%= index %>" class="slider-item" style="list-style-type: none">
               <h4>
@@ -32,7 +37,7 @@
                 （<%= user.category.name%>）
               </p>
               <p>
-                ちりつも数合計：<%= user.stacks.where(achieved: 1 ).size %>
+                成功数：<%= user.stacks.where(achieved: 1 ).size %>
               </p>
             </li>
           <% end %>     
@@ -53,5 +58,5 @@
     <%= paginate @stacks,remote: true %>
   </div>
 </div>
-
+<%=@success_parson%>
 
