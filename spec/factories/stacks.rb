@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :stack do
-    text              { Faker::Lorem.sentence(5) }
+    text              { Faker::Internet.password(min_length: 6) }
     date              { '2000-01-01 15:00:00' }
     work_time_id      { 2 }
     achieved          { 1 }

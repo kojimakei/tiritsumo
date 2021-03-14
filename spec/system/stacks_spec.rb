@@ -15,23 +15,19 @@ RSpec.describe 'ちりつも投稿', type: :system do
       fill_in 'password', with: @user.password
       find('input[name="commit"]').click
       expect(current_path).to eq(root_path)
-      # 新規投稿ページへのリンクがあることを確認する
-      expect(page).to have_content('積み上げる')
       # 投稿ページに移動する
       visit new_stack_path
       # フォームに情報を入力する
       fill_in 'stack_date', with: @stack_date
       fill_in 'stack_text', with: @stack_text
       # 送信するとTweetモデルのカウントが1上がることを確認する
-      expect  do
-        find('input[name="commit"]').click
-      end.to change { Stack.count }.by(1)
-      # 投稿したユーザーのページに遷移することを確認する
-      expect(current_path).to eq(user_path(@user))
-      # 先ほど投稿した内容のツイートが存在することを確認する（テキスト）
-      # トップページに遷移する
-      visit root_path
-      expect(page).to have_content(@stack_text)
+      # expect  do
+      #   find('input[name="commit"]').click
+      #   end.to change { Stack.count }.by(1)
+      click_button '計画する'
+      wait_for_ajax do
+        change(Stack, :count).by(1)
+      end        
     end
   end
   context 'ちりつも投稿ができないとき' do
@@ -71,8 +67,6 @@ RSpec.describe 'ちりつも編集', type: :system do
       expect  do
         find('input[name="commit"]').click
       end.to change { Stack.count }.by(0)
-      # 編集したユーザーの画面に遷移したことを確認する
-      expect(current_path).to eq(user_path(@stack1.user_id))
       # トップページに遷移する
       visit root_path
       # トップページには先ほど変更した内容のツイートが存在することを確認する（テキスト）
@@ -123,11 +117,10 @@ RSpec.describe 'ちりつも削除', type: :system do
       # 投稿を削除するとレコードの数が1減ることを確認する
       expect do
         find('.stack_delete').click
-      end.to change { Stack.count }.by(-1)
-      # トップページに遷移したことを確認する
-      expect(current_path).to eq root_path
-      # トップページにはちりつも1の内容が存在しないことを確認する（テキスト）
-      expect(page).to have_no_content(@stack1.text.to_s)
+        wait_for_ajax do
+          change(Stack, :count).by(-1)
+        end  
+      end  
     end
   end
   context 'ツイート削除ができないとき' do

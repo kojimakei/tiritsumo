@@ -23,12 +23,12 @@ RSpec.describe Stack, type: :model do
       it 'テキストが空では投稿できない' do
         @stack.text = ''
         @stack.valid?
-        expect(@stack.errors.full_messages).to include('Textを入力してください')
+        expect(@stack.errors.full_messages).to include('Textが入力されていません。')
       end
       it '日付が空では投稿できない' do
         @stack.date = ''
         @stack.valid?
-        expect(@stack.errors.full_messages).to include('Dateを入力してください')
+        expect(@stack.errors.full_messages).to include('Dateが入力されていません。')
       end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @stack.user = nil
@@ -43,7 +43,7 @@ RSpec.describe Stack, type: :model do
       it 'テキストは20文字以下でなければ投稿できない' do
         @stack.text = 'aaaaaaaaaaaaaaaaaaaaa'
         @stack.valid?
-        expect(@stack.errors.full_messages).to include('Textは20文字以内で入力してください')
+        expect(@stack.errors.full_messages).to include('Textは20文字以下に設定して下さい。')
       end
     end
   end
