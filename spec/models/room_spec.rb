@@ -18,12 +18,12 @@ RSpec.describe Room, type: :model do
     it 'nameが空では登録できないこと' do
       @room.name = ''
       @room.valid?
-      expect(@room.errors.full_messages).to include('Nameを入力してください')
+      expect(@room.errors.full_messages).to include('Nameが入力されていません。')
     end
     it 'habitが空では登録できないこと' do
       @room.habit = ''
       @room.valid?
-      expect(@room.errors.full_messages).to include('Habitを入力してください')
+      expect(@room.errors.full_messages).to include('Habitが入力されていません。')
     end
   end
 end

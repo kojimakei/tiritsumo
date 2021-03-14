@@ -5,6 +5,11 @@ class Stack < ApplicationRecord
   has_many :stack_tags, dependent: :destroy
   has_many :tags, through: :stack_tags
 
+  with_options presence: true do
+    validates :text, length: { maximum: 20 }
+    validates :date
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :work_time
 

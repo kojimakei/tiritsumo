@@ -67,6 +67,7 @@ RSpec.describe 'ちりつも削除', type: :system do
       expect(page).to have_content @comment1
       # 投稿を削除するとレコードの数が1減ることを確認する
       find('.comment_delete').click
+      page.driver.browser.switch_to.alert.accept
       wait_for_ajax do
         change(Comment, :count).by(-1)
       end
@@ -90,6 +91,7 @@ RSpec.describe 'ちりつも削除', type: :system do
         change(Comment, :count).by(1)
       end
       # アカウント切り替えのためログアウトする
+      find('.headernickname').click
       click_link 'ログアウト'
       # アカウント2でログインする
       sign_in(@stack2.user)

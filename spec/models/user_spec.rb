@@ -29,89 +29,89 @@ RSpec.describe User, type: :model do
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Nicknameを入力してください')
+        expect(@user.errors.full_messages).to include("Nicknameが入力されていません。")
       end
       it 'deadlineが空では登録できない' do
         @user.deadline = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Deadlineを入力してください')
+        expect(@user.errors.full_messages).to include("Deadlineが入力されていません。")
       end
       it 'goalが空では登録できない' do
         @user.goal = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Goalを入力してください')
+        expect(@user.errors.full_messages).to include("Goalが入力されていません。")
       end
       it 'emailが空では登録できない' do
         @user.email = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Emailを入力してください')
+        expect(@user.errors.full_messages).to include("Emailが入力されていません。")
       end
       it '重複したemailが存在する場合登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include('Emailはすでに存在します')
+        expect(another_user.errors.full_messages).to include("Emailは既に使用されています。")
       end
 
       it 'age_idが【1】だと登録できない' do
         @user.age_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include('Ageは1以外の値にしてください')
+        expect(@user.errors.full_messages).to include("Ageは1以外の値にしてください")
       end
       it 'category_idが【1】だと登録できない' do
         @user.category_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include('Categoryは1以外の値にしてください')
+        expect(@user.errors.full_messages).to include("Categoryは1以外の値にしてください")
       end
       it 'occupation_idが【1】だと登録できない' do
         @user.occupation_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include('Occupationは1以外の値にしてください')
+        expect(@user.errors.full_messages).to include("Occupationは1以外の値にしてください")
       end
 
       it 'passwordが空では登録できない' do
         @user.password = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordを入力してください')
+        expect(@user.errors.full_messages).to include("Passwordが入力されていません。")
       end
       it 'passwordが5文字以下であれば登録できない' do
         @user.password = '00000'
         @user.password_confirmation = '00000'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは6文字以上で入力してください')
+        expect(@user.errors.full_messages).to include("Passwordは6文字以上に設定して下さい。", "Passwordは有効でありません。")
       end
 
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
         @user.password_confirmation = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password confirmationとPasswordの入力が一致しません')
+        expect(@user.errors.full_messages).to include("Password confirmationが内容とあっていません。")
       end
 
       it 'passwordが数字のみの場合は登録できない' do
         @user.password = '000000'
         @user.password_confirmation = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは不正な値です')
+        expect(@user.errors.full_messages).to include("Passwordは有効でありません。")
       end
       it 'passwordがローマ字のみの場合は登録できない' do
         @user.password = 'abcdef'
         @user.password_confirmation = 'abedef'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは不正な値です')
+        expect(@user.errors.full_messages).to include("Password confirmationが内容とあっていません。", "Passwordは有効でありません。")
       end
 
       it 'passwordが全角の場合は登録できない' do
         @user.password = 'あいうえお'
         @user.password_confirmation = 'abedef'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Passwordは不正な値です')
+        expect(@user.errors.full_messages).to include("Password confirmationが内容とあっていません。", "Passwordは6文字以上に設定して下さい。", "Passwordは有効でありません。")
       end
 
       it 'deadlineが過去の日付では登録できない' do
         @user.deadline = '1000-01-01 15:00:00'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Deadlineは今日以降のものを選択してください')
+        expect(@user.errors.full_messages).to include("Deadlineは今日以降のものを選択してください")
       end
       # 新規登録/ユーザー情報のテスト終わり
     end

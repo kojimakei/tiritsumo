@@ -15,7 +15,7 @@ RSpec.describe Chat, type: :model do
       it 'messageが空では保存できないこと' do
         @chat.message = ''
         @chat.valid?
-        expect(@chat.errors.full_messages).to include('Messageを入力してください')
+        expect(@chat.errors.full_messages).to include('Messageが入力されていません。')
       end
       it 'roomが紐付いていないと保存できないこと' do
         @chat.room = nil
