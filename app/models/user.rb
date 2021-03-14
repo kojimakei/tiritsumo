@@ -5,10 +5,17 @@ class User < ApplicationRecord
   has_many :stacks
   has_many :comments
   has_many :likes, dependent: :destroy
-  # has_many :liked_stacks, through: :likes, source: :stack
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
   has_many :chats
+  # フォローしている
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # フォローされてる
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  #フォローしている人
+  has_many :follower_user, through: :followed, source: :follower
+  #フォローされている人
+  has_many :following_user, through: :follower, source: :followed  
 
   def already_liked?(stack)
     likes.exists?(stack_id: stack.id)
@@ -58,4 +65,19 @@ class User < ApplicationRecord
       user.goal = '10キロ痩せる'
     end
   end
+
+  # 1. followメソッド＝フォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+   end
+ 
+   # 2. unfollowメソッド＝フォローを外す
+   def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
+   end
+ 
+   # 3. followingメソッド＝既にフォローしているかの確認
+   def following?(user)
+    following_user.include?(user)
+   end
 end
