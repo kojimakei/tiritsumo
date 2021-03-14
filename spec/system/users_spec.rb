@@ -28,11 +28,6 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       end.to change { User.count }.by(1)
       # トップページへ遷移することを確認する
       expect(current_path).to eq(root_path)
-      # ログアウトボタンが表示されることを確認する
-      expect(page).to have_content('ログアウト')
-      # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
-      expect(page).to have_no_content('新規登録')
-      expect(page).to have_no_content('ログイン')
     end
   end
   context 'ユーザー新規登録ができないとき' do
@@ -79,11 +74,6 @@ RSpec.describe 'ログイン', type: :system do
       find('input[name="commit"]').click
       # トップページへ遷移することを確認する
       expect(current_path).to eq(root_path)
-      # ログアウトボタンが表示されることを確認する
-      expect(page).to have_content('ログアウト')
-      # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
-      expect(page).to have_no_content('新規登録')
-      expect(page).to have_no_content('ログイン')
     end
   end
   context 'ログインができないとき' do
