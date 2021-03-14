@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :comment do
-    text { Faker::Lorem.sentence(5) }
+    text { Faker::Internet.password(min_length: 6) }
     association :user
     association :stack
   end
