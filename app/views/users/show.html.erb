@@ -7,33 +7,46 @@
     </div>  
 
   <%# 左側 ユーザー情報詳細、今日のちりつも、過去のちりつも %>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <div class="card  mb-3 p-3">
       <%#　ユーザー情報詳細 %>
         <div class="card-content">
           <div class="text-center"> 
             <%= image_tag(@user.image.variant(resize_to_fill: [70, 70]), class: 'user-image') if @user.image.attached? %>
-            <p class="border-bottom mb-4 pb-4"><%=@user.nickname %></p>
+            <p><%=@user.nickname %></p>      
           </div>
+          <div class="status">
+            <div class="mr-3">
+              <a href="<%= user_follows_path(@user) %>"  class="following">
+              <%= @user.follower.count %>フォロー</a>
+            </div>
+            <div>
+              <a href="<%= user_followers_path(@user) %>"  class="follower">
+              <%= @user.followed.count %>フォロワー</a>
+            </div>      
+          </div>  
 
-          <div class="profile-parts">
-            <% if @user.category_id.present? %>
-              <span>●ジャンル :</span><span><%= @user.category.name %></span></p>
-            <% end %>
-            <% if @user.goal.present? %>
-              <span>●目標 :</span><span><%= @user.goal %></span></p>
-            <% end %>
-            <% if @user.deadline.present? %>
-              <span>●期日 :</span><span><%= @user.deadline.strftime('%Y年 %m月 %d日') %>（残り<%= (@user.deadline.to_date - Date.today).to_i %>日）</span></p>
-            <% end %>     
-            <div class="text-right">
-              <% if user_signed_in? && current_user == @user %>
-                <%=link_to edit_user_path(@user) do %>
-                  <i class="fas fa-user-edit"></i>
-                <%end%>
+          <div class="border-bottom mb-4 pb-4"></div>       
+            <div class=profile-parts>
+              <p>●ジャンル :</p>
+              <p><%= @user.category.name %></p>
+            </div>
+            <div class=profile-parts>
+              <p>●目標 :</p>
+              <p><%= @user.goal %></p>
+            </div>
+            <div class=profile-parts>
+              <p>●期日 :</p>
+              <p><%= @user.deadline.strftime('%Y年 %m月 %d日') %></p>
+            </div>                 
+
+          <div class="text-right">
+            <% if user_signed_in? && current_user == @user %>
+              <%=link_to edit_user_path(@user) do %>
+                <i class="fas fa-user-edit"></i>
               <%end%>
-            </div>                     
-          </div>
+            <%end%>
+          </div>                    
         </div>
       </div>
 
@@ -41,10 +54,22 @@
       <%# 過去のちりつも %>
         <div class="card-content">
           <h3 class="border-bottom mb-4 pb-4">過去のちりつも</h3>
-            <p>●計画したちりつも：<%=@total_stacks%>件</p>
-            <p>●達成したちりつも：<%=@achieved_stacks.size%>件</p>
-            <p>●達成率：<%=@stack_rate%>％</p>
-            <p>●取り組み時間合計：<%=@stack_time%>時間</p>
+            <div class="achievement">
+              <p>●計画したちりつも：</p>
+              <p><%=@total_stacks%>件</p>
+            </div>
+            <div class="achievement">
+              <p>●達成したちりつも：</p>
+              <p><%=@achieved_stacks.size%>件</p>
+            </div>
+            <div class="achievement">
+              <p>●達成率：</p>
+              <p><%=@stack_rate%>％</p>
+            </div>
+            <div class="achievement">
+              <p>●取り組み時間合計：</p>
+              <p><%=@stack_time%>時間</p>
+            </div>
         </div>
       </div>
 

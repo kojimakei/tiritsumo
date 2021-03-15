@@ -11,11 +11,11 @@ class User < ApplicationRecord
   # フォローしている
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # フォローされてる
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy  
   #フォローしている人
   has_many :follower_user, through: :followed, source: :follower
   #フォローされている人
-  has_many :following_user, through: :follower, source: :followed  
+  has_many :following_user, through: :follower, source: :followed
 
   def already_liked?(stack)
     likes.exists?(stack_id: stack.id)

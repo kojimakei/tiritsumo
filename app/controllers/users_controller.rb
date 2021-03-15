@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :set_user, only: [:edit, :update, :show]
+  before_action :set_user, only: [:edit, :update, :show,]
+
+  def index
+    @users = User.all.page(params[:page]).per(5) 
+  end
 
   def show
     @stacks = @user.stacks

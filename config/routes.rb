@@ -22,10 +22,16 @@ Rails.application.routes.draw do
     get 'stacks', to: 'stacks#tag_search'
   end
 
-  resources :users, only: [:edit, :show, :update] do
+  resources :users, only: [:index, :edit, :show, :update] do
     collection do
       get 'ranking'
     end
+    collection do
+      get 'search'
+    end
+    resource :relationships, only:[:create, :destroy]
+    get 'follows' => 'relationships#follower'
+    get 'followers' => 'relationships#followed'
   end
 
   resources :rooms do
