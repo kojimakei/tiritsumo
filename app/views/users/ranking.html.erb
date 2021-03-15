@@ -5,8 +5,8 @@
         <div class="card-content">
           <h3 class="card-title text-center border-bottom pb-3 pt-3">ちりつも数ランキング</h3>
           <% @all_ranks.each.with_index(1) do |user, index| %>
-            <li class="p-3" id="rank<%= index %>" class="slider-item" style="list-style-type: none">
-              <h4>
+            <li class="p-3" id="rank<%= index %>" class="slider-item" style="list-style-type: none" >
+              <h4 class="ranking">
                 <% if index == 1 %>
                   <i class="fas fa-crown" style="color: #FFD700"></i><%= "第#{index}位" %>
                 <% elsif index == 2%>
@@ -17,17 +17,17 @@
                   <%= "第#{index}位" %>
                 <% end %>
               </h4>
-              <p>
-                <%= link_to image_tag(user.image.variant(resize_to_fill: [50, 50]), class: 'user-image'),user_path(user.id) if user.image.attached? %><%=user.nickname%>
-                （<%= user.category.name%>）
-              </p>
-              <p>
-                ちりつも数合計：<%= user.stacks.where(achieved: 1 ).size %>
-              </p>
+              <div class="ranking-user border-bottom pb-3 pt-3">
+                <p class="ranking-name">
+                  <%= link_to image_tag(user.image.variant(resize_to_fill: [50, 50]), class: 'user-image'),user_path(user.id) if user.image.attached? %><%=user.nickname%>
+                  （<%= user.category.name%>）
+                </p>
+                <p class="stack-num">ちりつも数合計：<%= user.stacks.where(achieved: 1 ).size %></p>
+              </div>
             </li>
           <% end %>     
-        </div>
         </div>
       </div>
     </div>
   </div>
+</div>
