@@ -24,11 +24,13 @@
           <div class="card-text">
             <div class="col-lg-2, text-right">
               <div class="heart-tag">
-                <div>
+                <div class="pt-1">
                   <%@stack.tags.each do |tag|%>
-                    <span class="taglist">#<%=tag.name%></span>
+                    <a class="taglist" href="<%=tag_stacks_path(tag_id: tag.id)%>">
+                      <%="##{tag.name}"%>
+                    </a>
                   <%end%>
-                </div>              
+                </div>             
                 <div id="likes_<%= @stack.id %>">
                   <%= render partial: 'likes/likes',stack: @stack %>                
                 </div>

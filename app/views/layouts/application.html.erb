@@ -30,6 +30,10 @@
           <div class="collapse navbar-collapse justify-content-end" id="responsiveMenu">
             <ul class="navbar-nav">
               <% if user_signed_in? %>
+                <li class="nav-item"><%= link_to users_path, class: "nav-link" do%>
+                  <i class="fas fa-user header-icons"></i><span>ユーザー一覧</span>
+                </li>               
+                <%end%>              
                 <li class="nav-item"><%= link_to tags_path, class: "nav-link" do%>
                   <i class="fas fa-tag header-icons"></i><span>タグ</span>
                 </li>               

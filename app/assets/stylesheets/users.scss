@@ -16,3 +16,34 @@
     color: white;
   }
 }
+
+.user-info{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.follow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status{
+  display: flex;
+  justify-content: center;
+}
+
+.profile-parts {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.achievement{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20%;
+  padding-right: 20%;
+}
