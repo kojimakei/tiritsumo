@@ -8,7 +8,7 @@ require("@rails/ujs").start()
 //↑ブラウザバック問題解決のため
 require("@rails/activestorage").start()
 require("channels")
-require("../achieved")
+require("./achieved")
 require("./flash")
 require("./tag")
 require("chartkick")
