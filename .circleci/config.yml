@@ -20,7 +20,7 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE:  root
-          MYSQL_PASSWORD: password
+          MYSQL_PASSWORD: kojimaru
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
