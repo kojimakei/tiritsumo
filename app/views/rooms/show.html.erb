@@ -4,7 +4,7 @@
       <div class="card" style="background-color: #f2eef5">
         <h3><%= @room.name%></h3>
           <div class="text-center">
-            <p> メンバー : <%=@room.users.size%>人が参加中</p>   
+            <p> メンバー : <%=@room.members.size%>人が参加中</p>   
             <p>活動内容 : <%=@room.habit%></p>
           </div>           
         <%if current_user.id == @room.user_id%>

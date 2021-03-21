@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'コメント投稿', type: :system do
+RSpec.describe 'コメント投稿',js: true, type: :system do
   before do
     @stack = FactoryBot.create(:stack)
     @comment = Faker::Lorem.sentence
@@ -16,9 +16,7 @@ RSpec.describe 'コメント投稿', type: :system do
       fill_in 'comment_text', with: @comment
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
       click_button '送信'
-      wait_for_ajax do
-        change(Comment, :count).by(1)
-      end
+      change(Comment, :count).by(1)
       # 詳細ページ上に先ほどのコメント内容が含まれていることを確認する
       expect(page).to have_content @comment
     end
@@ -33,9 +31,8 @@ RSpec.describe 'コメント投稿', type: :system do
       fill_in 'comment_text', with: ''
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
       click_button '送信'
-      wait_for_ajax do
-        change(Comment, :count).by(0)
-      end
+      change(Comment, :count).by(0)
+      
       # 詳細ページ上に先ほどのコメント内容が含まれていることを確認する
       expect(page).to have_no_content @comment
     end
@@ -43,7 +40,7 @@ RSpec.describe 'コメント投稿', type: :system do
 end
 
 # -------------------------削除--------------------------------------
-RSpec.describe 'ちりつも削除', type: :system do
+RSpec.describe 'ちりつも削除',js: true, type: :system do
   before do
     @stack1 = FactoryBot.create(:stack)
     @stack2 = FactoryBot.create(:stack)
@@ -68,9 +65,8 @@ RSpec.describe 'ちりつも削除', type: :system do
       # 投稿を削除するとレコードの数が1減ることを確認する
       find('.comment_delete').click
       page.driver.browser.switch_to.alert.accept
-      wait_for_ajax do
-        change(Comment, :count).by(-1)
-      end
+      change(Comment, :count).by(-1)
+
       # トップページに遷移したことを確認する
       expect(current_path).to eq stack_path(@stack1)
       # トップページにはちりつも1の内容が存在しないことを確認する（テキスト）
@@ -86,15 +82,14 @@ RSpec.describe 'ちりつも削除', type: :system do
       # フォームに情報を入力する
       fill_in 'comment_text', with: @comment1
       # コメントを送信すると、Commentモデルのカウントが1上がることを確認する
+      expect do
       click_button '送信'
-      wait_for_ajax do
-        change(Comment, :count).by(1)
+      change(Comment, :count).by(1)
       end
+      
       # アカウント切り替えのためログアウトする
-      find('.headernickname').click
-      click_link 'ログアウト'
+      destroy_user_session_path
       # アカウント2でログインする
-      sign_in(@stack2.user)
       # 異なるユーザーが投稿した詳細ページに遷移する
       visit stack_path(@stack1)
       #  コメント削除アイコンがないことを確認する

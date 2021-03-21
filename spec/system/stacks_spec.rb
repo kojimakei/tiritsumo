@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ちりつも投稿', type: :system do
+RSpec.describe 'ちりつも投稿',js: true, type: :system do
   before do
     @user = FactoryBot.create(:user)
     @stack_text = Faker::Lorem.sentence
@@ -25,9 +25,7 @@ RSpec.describe 'ちりつも投稿', type: :system do
       #   find('input[name="commit"]').click
       #   end.to change { Stack.count }.by(1)
       click_button '計画する'
-      wait_for_ajax do
-        change(Stack, :count).by(1)
-      end        
+      change(Stack, :count).by(1)       
     end
   end
   context 'ちりつも投稿ができないとき' do
@@ -98,7 +96,7 @@ RSpec.describe 'ちりつも編集', type: :system do
 end
 
 # -------------------------削除--------------------------------------
-RSpec.describe 'ちりつも削除', type: :system do
+RSpec.describe 'ちりつも削除',js: true, type: :system do
   before do
     @stack1 = FactoryBot.create(:stack)
     @stack2 = FactoryBot.create(:stack)
@@ -117,10 +115,8 @@ RSpec.describe 'ちりつも削除', type: :system do
       # 投稿を削除するとレコードの数が1減ることを確認する
       expect do
         find('.stack_delete').click
-        wait_for_ajax do
-          change(Stack, :count).by(-1)
-        end  
-      end  
+        change(Stack, :count).by(-1)
+      end
     end
   end
   context 'ツイート削除ができないとき' do

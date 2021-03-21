@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ルームの作成機能', type: :system do
+RSpec.describe 'ルームの作成機能',js: true, type: :system do
   before do
     @user_room = FactoryBot.create(:user_room)
   end
@@ -18,9 +18,7 @@ RSpec.describe 'ルームの作成機能', type: :system do
 
     # 部屋作成をクリックすると、ルームモデルのカウントが1上がる
     click_button 'ルーム作成'
-    wait_for_ajax do
-      change(Room, :count).by(1)
-    end
+    change(Room, :count).by(1)
     # トップページに遷移していることを確認する
     expect(current_path).to eq(rooms_path)
   end
@@ -38,9 +36,7 @@ RSpec.describe 'ルームの作成機能', type: :system do
 
     # 部屋作成をクリックすると、ルームモデルのカウントは変化なし
     click_button 'ルーム作成'
-    wait_for_ajax do
-      change(Room, :count).by(0)
-    end
+    change(Room, :count).by(0)
     # トップページに遷移していることを確認する
     expect(current_path).to eq(rooms_path)
   end

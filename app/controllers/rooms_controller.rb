@@ -48,7 +48,7 @@ class RoomsController < ApplicationController
   end
 
   def join
-    @room.users << current_user
+    @room.members << current_user
     redirect_to room_path(@room)
   end
 
