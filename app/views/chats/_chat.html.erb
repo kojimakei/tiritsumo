@@ -13,6 +13,8 @@
           <%= image_tag(chat.user.image.variant(resize_to_fill: [50, 50]), class: 'user-image') %> 
           <%= chat.user.nickname %> 
         <%end%>
+      <%else%>
+          <%= chat.user.nickname %> 
       <%end%>
     </div>
     <div class="chatting">

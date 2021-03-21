@@ -22,6 +22,12 @@ services:
     stdin_open: true
     environment:
       - MYSQL_PASSWORD= password
-      - MYSQL_HOST= db    
+      - MYSQL_HOST= db 
+  selenium_chrome:     
+      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none      
 volumes:
   mysql-data:
