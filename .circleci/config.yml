@@ -10,7 +10,7 @@ jobs:
     working_directory: ~/tiritsumo
     steps:
       - checkout
-        path: ~/tiritsumo
+          path: ~/tiritsumo
       - ruby/install-deps
 
   test:
