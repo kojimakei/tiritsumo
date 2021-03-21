@@ -9,7 +9,7 @@ jobs:
       - image: circleci/ruby:2.6.3-stretch-node
     working_directory: ~/tiritsumo
     steps:
-      - checkout
+      - checkout:
           path: ~/tiritsumo
       - ruby/install-deps
 
