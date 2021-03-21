@@ -16,7 +16,7 @@ jobs:
   test:
     docker:
       - image: circleci/ruby:2.6.5
-      - image: circleci/mysql:5.5
+      - image: circleci/mysql:5.6.51
         environment:
           MYSQL_ROOT_PASSWORD: 
           MYSQL_DATABASE: tiritsumo_test
