@@ -51,7 +51,7 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['TIRITSUMO_DATABASE'] %>
-  username: <%= ENV['TIRITSUMO_DATABASE_USERNAME'] %>
-  password: <%= ENV['TIRITSUMO_DATABASE_PASSWORD'] %>
-  host    : <%= ENV['TIRITSUMO_DATABASE_HOST'] %>
+  database: 
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
