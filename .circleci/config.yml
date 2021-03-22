@@ -18,7 +18,7 @@ jobs:
       - image: circleci/ruby:2.6.5
       - image: circleci/mysql:5.6.51
         environment:
-          MYSQL_ROOT_PASSWORD: kojimaru
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE:  tiritsumo_test
     environment:
       BUNDLE_JOBS: "3"
@@ -51,13 +51,13 @@ jobs:
           command: heroku container:login
       - run:
           name: push docker image
-          command: heroku container:push web -a $HEROKU_APP_NAME
+          command: heroku container:push web -a $HEROKU_TIRITSUMO_NAME
       - run:
           name: release docker image
-          command: heroku container:release web -a $HEROKU_APP_NAME
+          command: heroku container:release web -a $HEROKU_TIRITSUMO_NAME
       - run:
           name: database setup
-          command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
+          command: heroku run bundle exec rake db:migrate -a $HEROKU_TIRITSUMO_NAME
 
 
 
