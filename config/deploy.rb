@@ -1,4 +1,4 @@
-lock '3.1.16'
+lock '3.16.0'
 
 set :application, 'tiritsumo'
 
