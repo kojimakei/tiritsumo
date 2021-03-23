@@ -1,10 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-  <%# 新規投稿ペン %>  
+  <%# 新規投稿ペン %>
+    <%if current_user.id == @user.id%>  
     <div class="article_form">
       <a href="<%= new_stack_path %>">
       <i class="fas fa-pen fa-4x pen"></i></a>
     </div>  
+    <%end%>
 
   <%# 左側 ユーザー情報詳細、今日のちりつも、過去のちりつも %>
     <div class="col-lg-4">
