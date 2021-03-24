@@ -15,7 +15,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: <%= ENV['MYSQL_PASSWORD'] || 'password' %>
+  password: password
   host: <%= ENV['MYSQL_HOST'] || 'localhost' %>
 
 
@@ -53,6 +53,6 @@ test:
 production:
   <<: *default
   database: tiritsumo_production
-  username: root
+  username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /var/lib/mysql/mysql.sock

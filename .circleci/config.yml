@@ -38,26 +38,26 @@ jobs:
           command: bundle exec rake test     
 
 
-  deploy:
-    docker:
-      - image: circleci/ruby:2.6.5
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 19.03.13
-      - heroku/install
-      - run:
-          name: heroku login
-          command: heroku container:login
-      - run:
-          name: push docker image
-          command: heroku container:push web -a $HEROKU_TIRITSUMO_NAME
-      - run:
-          name: release docker image
-          command: heroku container:release web -a $HEROKU_TIRITSUMO_NAME
-      - run:
-          name: database setup
-          command: heroku run bundle exec rake db:migrate -a $HEROKU_TIRITSUMO_NAME
+  # deploy:
+  #   docker:
+  #     - image: circleci/ruby:2.6.5
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         version: 19.03.13
+  #     - heroku/install
+  #     - run:
+  #         name: heroku login
+  #         command: heroku container:login
+  #     - run:
+  #         name: push docker image
+  #         command: heroku container:push web -a $HEROKU_TIRITSUMO_NAME
+  #     - run:
+  #         name: release docker image
+  #         command: heroku container:release web -a $HEROKU_TIRITSUMO_NAME
+  #     - run:
+  #         name: database setup
+  #         command: heroku run bundle exec rake db:migrate -a $HEROKU_TIRITSUMO_NAME
 
 
 
