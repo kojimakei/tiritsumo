@@ -40,8 +40,11 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
-        environment:
-          APP_BUNDLER_VERSION: 2.1.4      
+    working_directory: ~/tiritsumo
+    steps:
+      - checkout:
+          path: ~/tiritsumo
+      - ruby/install-deps 
     steps:
       - checkout
       - ruby/install-deps      
