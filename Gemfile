@@ -1,80 +1,64 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.2 
 
-ruby '2.6.5'
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.5
+    working_directory: ~/tiritsumo
+    steps:
+      - checkout:
+          path: ~/tiritsumo
+      - ruby/install-deps
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
-# Use mysql as the database for Active Record
-gem 'mysql2', '0.5.3'
-# Use Puma as the app server
-gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+  test:
+    docker:
+      - image: circleci/ruby:2.6.5
+      - image: circleci/mysql:5.6.51
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE:  tiritsumo_test
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      MYSQL_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/tiritsumo        
+    steps:
+      - checkout:
+          path: ~/tiritsumo
+      - ruby/install-deps
+      - run:
+          name: Database setup
+          command: bundle exec rails db:migrate
+      - run:
+          name: test
+          command: bundle exec rake test     
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
 
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - 7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62
+      - run: ssh -p $SSH_PORT $USER_NAME@$HOST_NAME "/home/ec2-user/tiritsumo/deploy-me.sh"
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 4.0.0'
-  gem 'factory_bot_rails'
-  gem 'capistrano'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'
-end
 
-group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', require: false
-end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-end
-
-group :production do
-  gem 'unicorn', '5.4.1'
-end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'pry-rails'
-gem 'simple_calendar', '~> 2.0'
-gem 'momentjs-rails'
-gem 'devise'
-gem 'faker'
-gem 'active_hash'
-gem 'rails-i18n'
-gem 'fullcalendar-rails'
-gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
-gem "chartkick"
-gem 'groupdate'
-gem 'kaminari'
-gem "aws-sdk-s3", require: false
+workflows:
+  version: 2
+  build_test_and_deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
