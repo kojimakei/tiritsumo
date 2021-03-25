@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.2 
-  heroku: circleci/heroku@1.2.3
 
 jobs:
   build:
@@ -18,7 +17,7 @@ jobs:
       - image: circleci/ruby:2.6.5
       - image: circleci/mysql:5.6.51
         environment:
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password 
           MYSQL_DATABASE:  tiritsumo_test
     environment:
       BUNDLE_JOBS: "3"
@@ -38,31 +37,24 @@ jobs:
           command: bundle exec rake test     
 
 
-  # deploy:
-  #   docker:
-  #     - image: circleci/ruby:2.6.5
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker:
-  #         version: 19.03.13
-  #     - heroku/install
-  #     - run:
-  #         name: heroku login
-  #         command: heroku container:login
-  #     - run:
-  #         name: push docker image
-  #         command: heroku container:push web -a $HEROKU_TIRITSUMO_NAME
-  #     - run:
-  #         name: release docker image
-  #         command: heroku container:release web -a $HEROKU_TIRITSUMO_NAME
-  #     - run:
-  #         name: database setup
-  #         command: heroku run bundle exec rake db:migrate -a $HEROKU_TIRITSUMO_NAME
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.1.4      
+    steps:
+      - checkout
+      - ruby/install-deps      
+      - add_ssh_keys:
+          fingerprints: "7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62"
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
 
 
 
 workflows:
-  version: 2
+  version: 2.1
   build_test_and_deploy:
     jobs:
       - build
