@@ -44,10 +44,7 @@ jobs:
     steps:
       - checkout:
           path: ~/tiritsumo
-      - ruby/install-deps 
-    steps:
-      - checkout
-      - ruby/install-deps      
+      - ruby/install-deps   
       - add_ssh_keys:
           fingerprints: "7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62"
       - deploy:
