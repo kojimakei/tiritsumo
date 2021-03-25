@@ -46,9 +46,10 @@ jobs:
           path: ~/tiritsumo
       - ruby/install-deps   
       - add_ssh_keys:
-          fingerprints: 
-            - "7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62"
-      - run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "/var/www/tiritsumo/deploy.sh"
+          fingerprints: "7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62"
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
 
 
 
