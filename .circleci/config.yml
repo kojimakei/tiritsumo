@@ -40,6 +40,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
+    working_directory: ~/tiritsumo
     steps:
       - checkout:
           path: ~/tiritsumo
