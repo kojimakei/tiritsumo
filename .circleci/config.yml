@@ -38,15 +38,11 @@ jobs:
 
 
   deploy:
-    docker:
-      - image: circleci/ruby:2.6.5-node-browsers
-    working_directory: ~/tiritsumo
+    machine:
+      enabled: true
     steps:
-      - checkout:
-          path: ~/tiritsumo
-      - ruby/install-deps   
       - add_ssh_keys:
-          fingerprints: 
+          fingerprints:
             - 7c:42:54:83:59:4b:4d:76:18:a4:3f:4a:63:8a:11:62
       - run: ssh ${USER_NAME}@${HOST_NAME} "cd /var/www/tiritsumo && git pull && bundle install --path vendor/bundle --without test development && bundle exec rails assets:precompile RAILS_ENV=production"
 
