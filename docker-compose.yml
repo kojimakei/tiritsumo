@@ -24,6 +24,8 @@ services:
     environment:
       - MYSQL_PASSWORD= password
       - MYSQL_HOST= db 
+      - AWS_ACCESS_KEY_ID= ${AWS_ACCESS_KEY_ID:-default}
+      - AWS_SECRET_ACCESS_KEY= ${AWS_SECRET_ACCESS_KEY:-default}      
   selenium_chrome:     
       - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
   selenium_chrome:
