@@ -1,4 +1,4 @@
-app_path = File.expand_path('var/www/tiritsumo') 
+app_path = File.expand_path('../../../', __FILE__) 
 
 worker_processes 1
 
