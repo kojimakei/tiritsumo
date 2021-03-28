@@ -5,10 +5,10 @@ set :application, 'tiritsumo'
 set :repo_url,  'git@github.com:kojimakei/tiritsumo.git'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/tiritsumo"
+# set :deploy_to, "/var/www/tiritsumo"
 
-# secret_base_keyを読み込ませるため追記
-set :linked_files, %w[config/master.key]
+# # secret_base_keyを読み込ませるため追記
+# set :linked_files, %w[config/master.key]
 
 # シンボリックリンクをはるファイル。
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/settings.yml', '.env')
