@@ -18,8 +18,10 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.5'
 
-set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['~/.ssh/tiritsumo.pem']
+set :ssh_options, {
+  keys: [ENV.fetch('PRODUCTION_SSH_KEY').to_s],
+  auth_methods: %w[publickey]
+}
 
 # プロセス番号を記載したファイルの場所
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
@@ -37,7 +39,7 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
-  
+
   desc 'upload master.key'
   task :upload do
     on roles(:app) do |_host|
