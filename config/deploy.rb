@@ -51,6 +51,8 @@ namespace :deploy do
   end
 end
 
+before 'bundler:install', 'deploy:config_bundler'
+
 # set :log_level, :debug
 
 # namespace :deploy do
