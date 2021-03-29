@@ -32,6 +32,9 @@ jobs:
       - run:
           name: Database setup
           command: bundle exec rails db:migrate        
+      - run:  
+          name: Build assets
+          command: bundle exec rails assets:precompile          
       - run:
           name: test
           command: bundle exec rspec 
