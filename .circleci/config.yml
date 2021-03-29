@@ -30,11 +30,14 @@ jobs:
           path: ~/tiritsumo
       - ruby/install-deps
       - run:
+          name: yarn Install
+          command: yarn install
+      - run: bundle exec bin/webpack      
+      - run:
           name: Database setup
           command: bundle exec rails db:migrate
       - run:
           name: test
-          command: bundle exec bin/webpack
           command: docker-compose exec web bundle exec rspec 
 
   deploy:
