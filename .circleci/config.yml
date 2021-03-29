@@ -34,6 +34,7 @@ jobs:
           command: bundle exec rails db:migrate
       - run:
           name: test
+          command: bundle exec bin/webpack
           command: docker-compose exec web bundle exec rspec 
 
   deploy:
