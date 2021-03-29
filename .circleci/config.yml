@@ -28,17 +28,17 @@ jobs:
     steps:
       - checkout:
           path: ~/tiritsumo
-      - ruby/install-deps
-      - run:
-          name: yarn Install
-          command: yarn install
-      - run: bundle exec bin/webpack      
+      - ruby/install-deps    
       - run:
           name: Database setup
           command: bundle exec rails db:migrate
       - run:
+          name: yarn Install
+          command: yarn install
+      - run: bundle exec bin/webpack            
+      - run:
           name: test
-          command: docker-compose exec web bundle exec rspec 
+          command: bundle exec rspec 
 
   deploy:
     docker:
