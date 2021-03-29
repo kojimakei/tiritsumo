@@ -13,9 +13,9 @@ module Tiritsumo
     config.i18n.default_locale = :ja
     config.time_zone = 'Asia/Tokyo'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]    
-    Groupdate.time_zone = "Tokyo"
+    Groupdate.time_zone = "UTC"
     # ↓デフォルトで記載あったが削除。データベースのタイムゾーン↓
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
