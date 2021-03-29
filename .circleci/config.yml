@@ -46,9 +46,6 @@ jobs:
           RAILS_ENV: test
           MYSQL_ROOT_PASSWORD: password 
           MYSQL_DATABASE:  tiritsumo_test
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          MYSQL_ROOT_HOST: '%'
     steps:
       - checkout
       - ruby/install-deps
