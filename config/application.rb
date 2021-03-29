@@ -11,9 +11,9 @@ module Tiritsumo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.i18n.default_locale = :ja
-    # config.time_zone = 'Asia/Tokyo'
+    config.time_zone = 'Asia/Tokyo'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]    
-    # Groupdate.time_zone = "Tokyo"
+    Groupdate.time_zone = "Tokyo"
     # ↓デフォルトで記載あったが削除。データベースのタイムゾーン↓
     # config.active_record.default_timezone = :local
     # Settings in config/environments/* take precedence over those specified here.
