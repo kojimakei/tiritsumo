@@ -15,10 +15,7 @@ jobs:
   test:
     docker:
       - image: circleci/ruby:2.6.5
-      - image: circleci/mysql:5.6.51
-      - image: selenium/standalone-chrome-debug
-        logging:
-          driver: none      
+      - image: circleci/mysql:5.6.51    
         environment:
           MYSQL_ROOT_PASSWORD: password 
           MYSQL_DATABASE:  tiritsumo_test   
@@ -32,6 +29,10 @@ jobs:
       - checkout:
           path: ~/tiritsumo
       - ruby/install-deps    
+      - run:
+          name: yarn Install
+          command: yarn install
+      - run: bundle exec bin/webpack      
       - run:
           name: Database setup
           command: bundle exec rails db:migrate        
