@@ -16,7 +16,7 @@ require("chart.js")
 require("bootstrap/dist/js/bootstrap")
 global.$ = jQuery;
 import 'bootstrap'  
-import '../stylesheets/application';
+import '../stylesheets/application.scss';
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
