@@ -62,7 +62,7 @@ class User < ApplicationRecord
       user.category_id = 4
       user.age_id = 5
       user.occupation_id = 10
-      user.deadline = '2021-03-31 00:00:00'
+      user.deadline = '2021-08-31 00:00:00'
       user.goal = '10キロ痩せる'
     end
   end
