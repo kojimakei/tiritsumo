@@ -113,3 +113,108 @@ div[data-check="true"] {
   padding: 7px;
   border-radius: 20px;
 }
+
+.nav-item{
+  margin-left: 100px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.card{
+background-color: #fffffe;
+}
+
+header {
+ margin-bottom: 20px;
+ background-color: #2cb67d;
+}
+
+.user-image{
+  border-radius: 50%;  
+}
+
+.maxWidth {
+max-width:1170px;
+}
+
+h3 {
+  text-align: center;
+}
+.icon::before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900;
+  content: "\f007";
+}
+
+// 背景イメージ
+body {
+  background-color:#eff0f3;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height:100vh ;
+  position: relative;
+  padding-bottom:50px;
+  box-sizing:border-box;
+  }
+
+// バリデーションエラー
+.error-message{
+  color: green;
+}
+
+.alert {
+  text-align: center;
+  color: #546E6A;
+}
+.alert-success {
+  background-color: #3da9fc;
+}
+
+.alert-notice {
+  background-color: #ffd803;
+}
+
+.alert-danger {
+  background-color:#f45d48;
+}
+
+.nav-link{
+  text-align: center;
+}
+
+/*ページネーション自体のデザイン*/
+.pagination>li>a {          
+border: none;     /*枠線をなくす*/
+color: #696969;   /*文字の色を変える*/
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {     
+background: #2cb67d;     /*背景の色を変える*/
+border-radius: 15px;     /*角を丸くする*/
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {        
+border-radius: 15px;    /*角を丸くする*/
+}
+
+footer{
+width: 100%;
+height:50px;
+position: absolute;/*←親要素に対して、絶対位置を決める*/
+bottom: 0; /*ページの下端からの距離が0の位置*/
+}
+
+a{
+color: #546E6A;
+}
+
+body{
+color:#546E6A;
+}
+
+.link{
+color: #546E6A;
+}
