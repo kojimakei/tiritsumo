@@ -112,6 +112,6 @@ Rails.application.configure do
 
   # Herokuを用いてデプロイする場合にのみ必要な設定
   ActionCable.server.config.disable_request_forgery_protection = true
-  config.action_cable.url = "wss://tiritsumo.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = ['https://tiritsumo.herokuapp.com', 'http://tiritsumo.herokuapp.com']
+  config.action_cable.url = 'ws://52.199.151.77/cable'
+  config.action_cable.allowed_request_origins = [ 'http://52.199.151.77' ]  
 end
