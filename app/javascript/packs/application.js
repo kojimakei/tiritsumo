@@ -15,7 +15,7 @@ require("chartkick")
 require("chart.js")
 require("bootstrap/dist/js/bootstrap")
 global.$ = jQuery;
-import 'bootstrap'  
+import 'bootstrap';
 import '../stylesheets/application';
 
 
