@@ -59,3 +59,4 @@ production:
   username: 'root'
   password: 'kojimaru'
   host: 'tiritsumo-production-rds.c2dxcsged2ui.ap-northeast-1.rds.amazonaws.com'
+  
