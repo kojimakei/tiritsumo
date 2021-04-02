@@ -22,8 +22,8 @@ default: &default
 development:
   <<: *default
   database: tiritsumo_development
-  username: <%= ENV['DATABASE_USERNAME' %>
-  password: <%= ENV['DATABASE_PASSWORD' %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['MYSQL_HOST'] %>
 
 # Warning: The database defined as "test" will be erased and
