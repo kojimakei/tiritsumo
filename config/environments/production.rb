@@ -27,6 +27,9 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
+  
+  # ↓本番環境で一部css反映されないため記載
+  config.assets.debug = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
