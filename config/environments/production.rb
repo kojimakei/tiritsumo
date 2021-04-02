@@ -31,7 +31,8 @@ Rails.application.configure do
   # ↓本番環境で一部css反映されないため記載
   config.assets.debug = false
   config.assets.css_compressor = :sass
-  config.public_file_server.enabled = true
+  config.assets.enabled = true
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
