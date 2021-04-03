@@ -11,7 +11,7 @@
         </div>
         <div class="form-group col-md-8 mx-auto">
           <%= f.label :画像 %><br />
-          <%= f.file_field :image, class: 'select-control' %>
+          <%= f.file_field :image, accept: "image/png, image/jpeg, image/gif", class: 'select-control' %>
         </div>
         <div class="form-group col-md-8 mx-auto">
           <%= f.label :目標 %><br />
