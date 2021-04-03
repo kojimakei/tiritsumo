@@ -42,11 +42,6 @@
   h3 {
     text-align: center;
   }
-  // .icon::before {
-  //   font-family: "Font Awesome 5 Free"; 
-  //   font-weight: 900;
-  //   content: "\f007";
-  // }
 
   // 背景イメージ
   body {
@@ -54,7 +49,7 @@
     background-size: cover;
     background-attachment: fixed;
     min-height:100vh ;
-    color:#546E6A;
+    color:#546E6A !important;
     position: relative;
     padding-bottom:50px;
     box-sizing:border-box;
