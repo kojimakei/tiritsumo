@@ -50,7 +50,7 @@
 
   // 背景イメージ
   body {
-    background-color:#eff0f3;
+    background-color:#eff0f3 !important;
     background-size: cover;
     background-attachment: fixed;
     min-height:100vh ;
@@ -110,6 +110,6 @@ footer{
 }
 
 a{
-  color: #546E6A;
+  color: #546E6A !important;
 }
 
