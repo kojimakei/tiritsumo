@@ -1,19 +1,19 @@
 <div class="container" id="pagenate">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-12">
     <%if @users.exists?%>
     <% @users.each do |user|%>
-    <div class="card mb-3" id="user_<%= user.id %>">
+    <div class="card mb-4" id="user_<%= user.id %>">
       <div class="row">
         <%# ユーザーアイコン %>
-        <div class="user-info col-4">
+        <div class="user-info col-3">
           <div class="info text-center">
             <p class="image"><%= link_to image_tag(user.image.variant(resize_to_fill: [70, 70]), class: 'user-image'),user_path(user.id) if user.image.attached? %></p>
             <p class="nickname"><%= link_to user.nickname,user_path(user.id) %></p>
           </div>
         </div>
         <%# ユーザーの目標など詳細 %>
-        <div class="col-8">
+        <div class="col-9">
           <div class="user-detail">
             <div class="border-bottom mb-3 pt-3 pb-3">・ジャンル :</span><span><%= user.category.name %></span></div>
             <div class="border-bottom mb-3 pb-3">・年齢 :</span><span><%= user.age.name%></span></div>

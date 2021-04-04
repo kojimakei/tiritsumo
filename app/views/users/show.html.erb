@@ -74,21 +74,10 @@
             </div>
         </div>
       </div>
-
-
-    <%# ちりつも合計時間チャート %>
-      <div class="card mb-3 p-3">
-        <div class="card-content">
-          <h3 class="border-bottom mb-4 pb-4">今月のちりつも</h3>
-          <div class="chart">
-            <%# <%= column_chart @achieved_stacks.group_by_day_of_month(:date, format: "%d").size, xtitle: "日付", ytitle: "ちりつも成功数", min: 0, max: 10%>  %>
-          </div>       
-        </div>     
-      </div>
     </div>
 
     <%# 画面右側のカード %>
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <%# 今日のちりつも %>
       <%if @today_stacks.exists?%>
       <div class="card mb-3 p-3">

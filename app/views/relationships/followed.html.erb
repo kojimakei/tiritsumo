@@ -1,6 +1,6 @@
 <div class="container" id="pagenate">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-12">
     <%if @users.exists?%>
     <% @users.each do |user|%>
     <div class="card mb-3" id="user_<%= user.id %>">
