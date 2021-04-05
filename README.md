@@ -71,6 +71,13 @@ https://tiritsumo.work/
 - CI/CDパイプライン（CircleCI, Capistrano）
 - 開発環境（MacOS, Git, GitHub, VScode, bash）
 
+# 今後の改良計画
+- Vuejsによる部分SPA化、UXの向上
+
+# インフラ構成図
+![名称未設定](https://user-images.githubusercontent.com/74762457/113556254-2c910000-9637-11eb-880c-6a08f5333141.png)
+
+
 # E-R図
 ![tiritsumo](https://user-images.githubusercontent.com/74762457/113401360-34a23300-93de-11eb-9afe-bf20d16e8bb3.png)
 
