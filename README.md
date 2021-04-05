@@ -4,6 +4,8 @@
 
 # URL
 https://tiritsumo.work/
+![image](https://user-images.githubusercontent.com/74762457/113528868-e323bf00-95fc-11eb-98fc-dcfeea24f980.png)
+
 
 # 制作背景
 私がこのアプリを作成しようとした理由は、**目標達成に向けた日々の努力の習慣化**を手助けしたいと考えたためです。
